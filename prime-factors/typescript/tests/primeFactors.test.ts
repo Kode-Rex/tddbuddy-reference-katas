@@ -20,4 +20,8 @@ describe('Prime Factors', () => {
   it('6 factors into two and three', () => {
     expect(generate(6)).toEqual([2, 3]);
   });
+
+  it('8 factors into three twos', () => {
+    expect(generate(8)).toEqual([2, 2, 2]);
+  });
 });
