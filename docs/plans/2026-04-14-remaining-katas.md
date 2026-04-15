@@ -2,115 +2,163 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development` (recommended) to implement this plan one kata at a time. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Produce C#/TypeScript/Python reference implementations for the 71 remaining TDD Buddy katas, following the patterns set by `gilded-rose/` (low gear) and `bank-account/` (middle gear), and link each from the astro-site kata page.
+**Goal:** Produce C#/TypeScript/Python reference implementations for the 71 remaining TDD Buddy katas in three distinct **teaching modes** (Pedagogy / Specification / Agent Full-Bake), following the patterns established by `gilded-rose/` (Specification mode) and `bank-account/` (Agent Full-Bake mode), and link each from the astro-site kata page.
 
-**Architecture:** Each kata follows the same directory shape: `<kata>/{README.md, SCENARIOS.md, csharp/, typescript/, python/}`. Per-kata effort is scoped by **gear** (low/middle/high) and **builder-worthiness** — not every kata warrants the full test-data-builder treatment. Classification lives in this plan. Subagents implement one kata end-to-end per dispatch.
+**Architecture:** Three teaching modes live side-by-side in the same repo. Five **Pedagogy** katas show the red→green→reflect→refactor arc and gear shifts across many small commits — for humans learning TDD. One **Specification** kata (Gilded Rose, already done) shows commit-per-scenario as executable spec — for teams adopting builders+ubiquitous language. The remaining ~65 **Agent Full-Bake** katas ship as one commit per language with a design-rationale walkthrough — for demonstrating what AI-assisted TDD produces at quality.
 
-**Tech Stack (per language, identical across katas):**
+**Tech Stack (identical across all katas and modes):**
 - **C#** — .NET 8, xUnit, FluentAssertions 6.12.0
 - **TypeScript** — Node 20, Vitest 1.6, TypeScript 5 strict
-- **Python** — Python 3.11, pytest, dataclasses, `src/<snake_name>/` layout with `pyproject.toml`
+- **Python** — 3.11, pytest, dataclasses, `src/<snake_name>/` layout with `pyproject.toml`
 
 ---
 
 ## How To Use This Plan
 
 1. Pick a kata from the Classification Table below.
-2. Read the kata's spec at `astro-site/src/content/katas/<kata>.md`.
-3. Apply the **Template** that matches its tier (A, B, C, or D).
-4. Dispatch a subagent with the template's task list + the kata spec + the tier-appropriate reference implementation (`gilded-rose/` for low gear, `bank-account/` for middle gear).
+2. Read its spec at `astro-site/src/content/katas/<kata>.md`.
+3. Apply the **Template** that matches its mode (P / S / F).
+4. Dispatch a subagent with the template's task list + the kata spec + the mode-appropriate reference implementation.
 5. Review subagent output, commit, push, move to next kata.
 
-**Do not skip the Classification Table.** Gear + builder choice drives the template. A low-gear kata run through the middle-gear template is wasted effort; a middle-gear kata run through the low-gear template loses the teaching point.
+**Do not skip the Classification Table.** The mode dictates commit shape and walkthrough style. A Pedagogy kata shipped as Full-Bake loses the teaching arc; a Full-Bake kata written as Pedagogy bloats the log with theatre.
+
+---
+
+## The Three Teaching Modes
+
+### Mode P — Pedagogy (5 katas)
+
+**Audience:** humans learning TDD.
+
+**Shape:** commits follow the red→green→reflect→refactor cycle, one per step. Gears visibly shift as the solver's confidence grows — early commits are triangulations (fake-it, obvious implementation), later ones collapse scenarios together once the pattern is clear. Walkthrough narrates the reasoning at each commit, including the moments where the solver **chose to shift gears** and why.
+
+**When to use:** a kata whose canonical TDD arc is itself the teaching point (Kent Beck's String Calculator, Uncle Bob's Prime Factors, Bowling Game).
+
+**Included katas:**
+1. **string-calculator** — Beck's canonical kata. Starts with "empty string returns 0", triangulates through single/two/many numbers, then custom delimiters, then negatives, then >1000 filter. Classic low-to-high gear progression.
+2. **prime-factors** — Martin's 7-line masterpiece. Shows the shift from "write a test, hack it green" to "the algorithm emerges from pure triangulation".
+3. **bowling-game** — Martin's Bowling Game. Frame/roll shape emerges through refactor, not up-front design.
+4. **tennis-score** — State-machine refactoring of an if/else score tracker. Middle-gear refactor as cleanup is the pedagogy.
+5. **roman-numerals** — Triangulation across expanding cases; the subtraction rule (IV, IX) is the "gear-shift" moment.
+
+### Mode S — Specification (1 kata, done)
+
+**Audience:** teams adopting "tests as spec".
+
+**Shape:** one commit per scenario, builders and ubiquitous language from scenario one, no visible refactor noise. Walkthrough is a commit table.
+
+**Included katas:**
+1. **gilded-rose** — Already complete.
+
+Mode S is not a template subagents execute — it's here for context. Future specification-mode katas require a dedicated plan.
+
+### Mode F — Agent Full-Bake (~65 katas)
+
+**Audience:** "what does TDD-done-well by AI look like?"
+
+**Shape:** one commit per language, full domain design landing together. Walkthrough reads as design rationale — *why* `Money` is a type, *why* `Clock` is injected, *why* this builder returns a tuple. The test file maps 1:1 to scenarios; the commit log does not pretend to be the journey.
+
+**Most remaining katas go here.** Builder-worthiness still matters (see the tier split below) — a pure algorithm kata does not need builders even in full-bake mode.
+
+**Sub-tiers within Mode F** (determines builder depth, not commit shape):
+- **F1** — No builders. Pure algorithms / string transforms. Tests read the kata's inputs and outputs directly. *(25 katas)*
+- **F2** — Light builder. One primary entity; a 10–30 line builder earns its keep. *(13 katas)*
+- **F3** — Full builders. Rich domain: multiple builders, domain value types, collaborator interfaces, object mothers. *(27 katas)*
 
 ---
 
 ## Classification Table
 
-**Tier 1 — Low gear, no builders** (pure algorithms / string transforms, ≤10 tests typical, one file each)
+### Mode P — Pedagogy (5)
 
-| Kata | Why Tier 1 |
-|------|-----------|
+| Kata | Gear Arc | Teaching Point |
+|------|----------|----------------|
+| string-calculator | Low → Middle → High | Triangulation expanding to regex-parsed delimiters |
+| prime-factors | Low → High | Algorithm emerges from fake-it progression |
+| bowling-game | Low → Middle | Frame/roll design emerges through refactor |
+| tennis-score | Low → Middle | State machine refactored from conditionals |
+| roman-numerals | Low → High | Subtraction rule is the gear shift |
+
+### Mode F1 — Full-Bake, no builders (25)
+
+| Kata | Why F1 |
+|------|--------|
 | 100-doors | Pure math iteration |
 | anagram-detector | String comparison |
 | balanced-brackets | Stack algorithm |
-| change-maker | Coin change, array of ints |
-| conways-sequence | Look-and-say, single function |
-| diamond | ASCII art, single function |
+| change-maker | Coin change over int array |
+| conways-sequence | Look-and-say single function |
+| diamond | ASCII-art generation |
 | end-of-line-trim | String trim |
 | fizz-buzz-whiz | Classic; no domain object |
 | greeting | String formatting |
 | ip-validator | Regex/parsing |
 | last-sunday | Date math |
 | leap-year | Three rules, boolean |
-| linked-list | Data structure; its own type, but tests exercise operations not variations |
+| linked-list | Data structure; tests exercise operations |
 | metric-converter | Conversion table |
 | numbers-to-words | Number → string |
-| prime-factors | Classic; integer → list |
 | recipe-calculator | Scaling arithmetic |
 | rock-paper-scissors | Three-way switch |
-| roman-numerals | Classic |
-| string-calculator | Kent Beck's canonical TDD kata |
 | text-justification | String algorithm |
 | time-zone-converter | Timezone arithmetic |
 | url-parts | URL parsing |
 | url-shortener | Map + hash |
 | word-wrap | String algorithm |
-
-**Tier 2 — Low gear, light builder** (one primary entity, a few meaningful variations; a small builder helps but not the whole cathedral)
-
-| Kata | Primary Entity / Builder |
-|------|--------------------------|
-| age-calculator | `PersonBuilder(birthdate, referenceDate)` |
-| bowling-game | `GameBuilder().WithRoll(n).WithStrike().WithSpare()` |
-| calc-refactor | Refactoring kata — characterization tests first, no builder |
-| character-copy | Streaming; `Source`/`Dest` mocks |
-| code-breaker | `SecretBuilder`/`GuessBuilder` |
 | fluent-calc | Fluent API is the SUT; no builder needed |
+| character-copy | Streaming; Source/Dest are mocks not builders |
+| age-calculator | Date delta; no entity worth building |
+
+### Mode F2 — Full-Bake, light builder (13)
+
+| Kata | Builder |
+|------|---------|
+| calc-refactor | `CalculatorBuilder` (refactoring kata: characterize first) |
+| code-breaker | `SecretBuilder` / `GuessBuilder` |
 | password | `PolicyBuilder(minLength, requiresDigit, requiresSymbol, ...)` |
 | pagination | `PageRequestBuilder(page, size, total)` |
 | string-transformer | `PipelineBuilder` |
-| tennis-score | `GameBuilder().WithPointsFor("player1", n)` |
-| tic-tac-toe | `BoardBuilder().WithXAt(r, c).WithOAt(r, c)` |
+| tic-tac-toe | `BoardBuilder().WithXAt(r,c).WithOAt(r,c)` |
 | timesheet-calc | `TimesheetBuilder().WithEntry(day, hours)` |
 | todo-list | `TaskBuilder(title, due, done)` |
+| bingo | `CardBuilder` |
+| clam-card | `CardBuilder`, `RideBuilder` |
+| kata-potter | `BasketBuilder().WithBook(series, count)` |
+| mars-rover | `RoverBuilder`, `CommandBuilder` |
+| tennis-refactoring | Characterization test set only |
 
-**Tier 3 — Middle gear, full builders** (rich domain; full ubiquitous language + test data builders + object mothers where useful)
+### Mode F3 — Full-Bake, full builders (27)
 
 | Kata | Key Builders / Entities |
 |------|-------------------------|
 | bank-ocr | `DigitBuilder`, `AccountNumberBuilder` |
-| bingo | `CardBuilder`, `DrawerBuilder` |
 | blog-web-app | `PostBuilder`, `UserBuilder`, `CommentBuilder` |
 | circuit-breaker | `BreakerBuilder(threshold, timeout, state)` |
-| clam-card | `CardBuilder`, `RideBuilder` |
 | csv-query | `RowBuilder`, `QueryBuilder` |
-| event-sourcing | `EventBuilder`, aggregate rebuild from event stream |
-| expense-report | `EmployeeBuilder`, `ExpenseBuilder` (refactoring kata: characterize first) |
+| event-sourcing | `EventBuilder`, aggregate rebuild from stream |
+| expense-report | `EmployeeBuilder`, `ExpenseBuilder` (characterize first) |
 | game-of-life | `GridBuilder().WithLivingCellsAt(...)` |
 | heavy-metal-bake-sale | `ProductBuilder`, `OrderBuilder` |
 | jelly-vs-tower | `TowerBuilder`, `BlockBuilder` |
-| kata-potter | `BasketBuilder().WithBook(series, count)` |
 | laundry-reservation | `ReservationBuilder(slot, service, customer)` |
-| library-management | `BookBuilder`, `MemberBuilder`, `LoanBuilder` (SCENARIOS.md already exists) |
+| library-management | `BookBuilder`, `MemberBuilder`, `LoanBuilder` *(SCENARIOS.md exists)* |
 | markdown-parser | `DocumentBuilder`, node builders |
-| mars-rover | `RoverBuilder`, `GridBuilder`, `CommandBuilder` |
 | maze-walker | `MazeBuilder`, `WalkerBuilder` |
 | memory-cache | `CacheBuilder(capacity, ttl, clock)` |
 | parking-lot | `LotBuilder`, `VehicleBuilder`, `TicketBuilder` |
-| poker-hands | `CardBuilder`, `HandBuilder` (SCENARIOS.md already exists) |
+| poker-hands | `CardBuilder`, `HandBuilder` *(SCENARIOS.md exists)* |
 | rate-limiter | `LimiterBuilder(rule, clock)` |
 | robot-factory | `RobotBuilder`, `OrderBuilder` |
-| shopping-cart | `ProductBuilder`, `LineItemBuilder`, `CartBuilder` (SCENARIOS.md already exists) |
+| shopping-cart | `ProductBuilder`, `LineItemBuilder`, `CartBuilder` *(SCENARIOS.md exists)* |
 | snake-game | `BoardBuilder`, `SnakeBuilder` |
 | social-network | `UserBuilder`, `PostBuilder`, `NetworkBuilder` |
 | supermarket-pricing | `ProductBuilder`, `PricingRulesBuilder` |
-| tennis-refactoring | Refactoring kata — characterization tests first |
-| video-club-rental | `UserBuilder`, `TitleBuilder`, `RentalBuilder` (SCENARIOS.md already exists) |
+| video-club-rental | `UserBuilder`, `TitleBuilder`, `RentalBuilder` *(SCENARIOS.md exists)* |
 | weather-station | `ReadingBuilder`, `StationBuilder` |
 | zombie-survivor | `SurvivorBuilder`, `HistoryBuilder` |
 
-**Tier 4 — Special** (meta/concurrency; each needs its own sub-plan)
+### Tier 4 — Special (3, out of scope for this plan)
 
 | Kata | Why Special |
 |------|-------------|
@@ -118,7 +166,7 @@
 | roll-your-own-mock-framework | Meta-kata: the SUT *is* a mock framework |
 | roll-your-own-test-framework | Meta-kata: the SUT *is* a test framework |
 
-**Tier 4 plans are out of scope for this document.** Each warrants a dedicated brainstorming session before implementation.
+Each warrants a dedicated brainstorming session.
 
 ---
 
@@ -126,225 +174,188 @@
 
 ```
 <kata>/
-├── README.md           — what the kata teaches + which patterns it showcases
+├── README.md           — teaches + patterns + teaching mode
 ├── SCENARIOS.md        — shared spec all three languages satisfy
 ├── csharp/
 │   ├── README.md       — build & run
-│   ├── WALKTHROUGH.md  — design rationale (middle gear) or commit tour (low gear)
+│   ├── WALKTHROUGH.md  — style depends on mode (see below)
 │   ├── .gitignore
 │   ├── <Solution>.sln
 │   ├── src/<Project>/…
 │   └── tests/<Project>.Tests/…
-├── typescript/
-│   ├── README.md
-│   ├── WALKTHROUGH.md
-│   ├── .gitignore
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── vitest.config.ts
-│   ├── src/…
-│   └── tests/…
-└── python/
-    ├── README.md
-    ├── WALKTHROUGH.md
-    ├── .gitignore
-    ├── pyproject.toml
-    ├── src/<snake_name>/…
-    └── tests/…
+├── typescript/  (parallel layout)
+└── python/      (parallel layout)
 ```
 
-Additionally, each kata updates `astro-site/src/content/katas/<kata>.md`:
-- Frontmatter gets `solutionsCSharp`, `solutionsTypeScript`, `solutionsPython` URLs
-- Body gets a `## Reference Walkthrough` section linking all three walkthroughs
+Plus `astro-site/src/content/katas/<kata>.md` updates: frontmatter `solutionsCSharp/TypeScript/Python` + body `## Reference Walkthrough` section.
+
+**Walkthrough styles by mode:**
+- **Mode P** — Commit-by-commit narrative; names the gear at each step; flags the red/green/refactor moments and the gear shifts.
+- **Mode S** — Commit table; one row per scenario with SHA and link.
+- **Mode F** — Design rationale; explains *why* types/builders/collaborators exist.
 
 ---
 
 ## Templates
 
-### Template A — Tier 1 (Low gear, no builders)
+### Template P — Pedagogy (5 katas)
 
-**Goal:** pure-algorithm kata as three thin language implementations. One source file per language, one test file, no builders, no domain types beyond the primitive inputs/outputs the algorithm operates on.
+**Reference model:** *This template has no prior example in the repo yet.* String Calculator will be the first one built; once it lands, other Pedagogy katas mirror its shape.
 
-**Reference:** there is no prior Tier-1 example in this repo yet — this template stands on its own. Follow the Tier-2/3 stack conventions; just omit builders.
+**Goal:** show the TDD arc as it actually unfolds, including the reflection step. Commits are small enough that a reader can walk them chronologically and absorb the rhythm.
 
-**Tasks:**
+**Commit shape per language (typical):**
+```
+scaffold
+red: empty input returns zero
+green: fake it — return 0
+red: single number returns itself
+green: parse one int
+red: two numbers return sum
+green: split on comma
+refactor: extract parse+sum helper           ← reflect/refactor step
+red: arbitrary count of numbers
+green: (already works — delete the test? add the test anyway for spec coverage)
+reflect: note that triangulation is complete; shift to middle gear
+red+green: custom delimiters                 ← combined now — middle gear
+red+green: negative numbers throw
+refactor: extract DelimiterParser            ← design emerges
+red+green: ignore > 1000
+red+green: any-length delimiters
+```
 
-- [ ] **1. Draft shared spec**
-
-  Create `<kata>/README.md` (short — what it teaches, what it doesn't: "algorithmic kata, no builders — showcases clean test naming in domain language").
-
-  Create `<kata>/SCENARIOS.md` with a numbered scenario list (typically 6–12 scenarios). Scenario titles must be full sentences that will map 1:1 to test names.
-
-- [ ] **2. C# implementation**
-
-  Scaffold:
-  ```bash
-  cd <kata>/csharp
-  dotnet new sln -n <Kata>
-  dotnet new classlib -n <Kata> -o src/<Kata> -f net8.0
-  dotnet new xunit -n <Kata>.Tests -o tests/<Kata>.Tests -f net8.0
-  dotnet sln add src/<Kata>/<Kata>.csproj tests/<Kata>.Tests/<Kata>.Tests.csproj
-  dotnet add tests/<Kata>.Tests/<Kata>.Tests.csproj reference src/<Kata>/<Kata>.csproj
-  dotnet add tests/<Kata>.Tests/<Kata>.Tests.csproj package FluentAssertions --version 6.12.0
-  rm src/<Kata>/Class1.cs tests/<Kata>.Tests/UnitTest1.cs
-  ```
-  Add `.gitignore` with `bin/ obj/ *.user .vs/`.
-
-  Implement the single class or static method in `src/<Kata>/`.
-  Write one `[Fact]` per scenario in `tests/<Kata>.Tests/<Kata>Tests.cs`.
-  Test names use `Snake_case_full_sentence_matching_scenario_title`.
-  Verify: `dotnet test` — all scenarios green.
-
-  Write `csharp/README.md` and `csharp/WALKTHROUGH.md`. For Tier 1, the walkthrough is short: "Algorithmic kata. No domain builders — the algorithm inputs/outputs are the domain. See `src/<Kata>/` for the one function, `tests/<Kata>.Tests/` for scenario-per-test mapping."
-
-- [ ] **3. TypeScript implementation**
-
-  Scaffold:
-  ```bash
-  cd <kata>/typescript
-  npm init -y
-  npm pkg set type=module
-  npm pkg set scripts.test="vitest run"
-  npm install -D typescript vitest@^1.6.0 @types/node
-  ```
-  Add `tsconfig.json` (strict, ES2022 module, `src/**/*`, `tests/**/*`).
-  Add `vitest.config.ts` (`test: { globals: true, include: ['tests/**/*.test.ts'] }`).
-  Add `.gitignore` (`node_modules/ dist/ coverage/ *.log`).
-
-  Implement in `src/<camelName>.ts` (or a small set of files if the algorithm naturally decomposes).
-  Tests in `tests/<camelName>.test.ts`, one `it(...)` per scenario, titles matching `SCENARIOS.md` verbatim.
-  Verify: `npx vitest run` — all green.
-
-  Write `typescript/README.md` and `typescript/WALKTHROUGH.md`.
-
-- [ ] **4. Python implementation**
-
-  Scaffold:
-  ```bash
-  mkdir -p <kata>/python/src/<snake_name> <kata>/python/tests
-  ```
-  Create `pyproject.toml` with `[project] name="<kata>"`, `requires-python=">=3.11"`, `[project.optional-dependencies] dev=["pytest>=7.4"]`, `[tool.setuptools.packages.find] where=["src"]`, `[tool.pytest.ini_options] testpaths=["tests"] pythonpath=["src"]`.
-  Add `.gitignore` (`__pycache__/ *.pyc .pytest_cache/ .venv/ *.egg-info/ dist/ build/`).
-
-  Implement in `src/<snake_name>/<module>.py`, export from `__init__.py`.
-  Tests in `tests/test_<module>.py` (plus `tests/__init__.py` empty).
-  Verify:
-  ```bash
-  cd <kata>/python && python3 -m venv .venv && .venv/bin/pip install -q pytest && .venv/bin/pytest
-  ```
-  All green.
-
-  Write `python/README.md` and `python/WALKTHROUGH.md`.
-
-- [ ] **5. Wire astro-site page**
-
-  Edit `astro-site/src/content/katas/<kata>.md`:
-  - Frontmatter: add `solutionsCSharp/TypeScript/Python` URLs pointing to the three language folders on `https://github.com/Kode-Rex/tddbuddy-reference-katas/tree/main/<kata>/...`
-  - End of body: add `## Reference Walkthrough` section matching the shape of `bank-account.md`'s section.
-
-  Verify astro-site builds: `npx astro build`.
-
-- [ ] **6. Update top-level README**
-
-  Edit `README.md` Kata Status table: add a row for this kata with ✅/✅/✅ and gear `Low`.
-
-- [ ] **7. Commit & push**
-
-  Two commits:
-  - Reference-katas: `<kata>: reference implementations across C#, TypeScript, Python` (one commit is fine at this gear for a Tier-1 kata — the implementations are small; splitting per language is optional).
-  - Astro-site: `<Kata Title>: link reference solutions + walkthrough`.
-
-  Push both.
-
----
-
-### Template B — Tier 2 (Low gear, light builder)
-
-**Difference from Template A:** add a small builder in the test project for the one primary entity. The builder is 10–30 lines. No object mothers. No value types unless the domain genuinely has one (e.g. `Hand` in tennis-score is just a pair of counts — a builder is warranted, `Score` value type is not).
-
-**Commit granularity:** one commit per language, as with Template A. The builder ships with the tests, not as a separate commit.
-
-Otherwise follow Template A's tasks 1–7. In Task 1, the `README.md` names the single builder. In the per-language implementation, the test folder contains `<Entity>Builder.<ext>` alongside the test file.
-
----
-
-### Template C — Tier 3 (Middle gear, full builders)
-
-**Reference implementation:** `bank-account/` (start here), then `gilded-rose/` (for category-switched domain logic).
-
-**Difference from Template B:** multiple builders, domain value types (`Money`, `Quantity`, `SKU` as appropriate), collaborator interfaces for time/notification/external effects (`Clock`, `Notifier`). Object mothers where a named canonical instance reads clearly (`UserMother.AdultMember`).
+For a 10-scenario pedagogy kata, expect **~20 commits per language** (roughly 2x scenarios to account for refactor/reflection commits). That's ~60 commits per Pedagogy kata across three languages, ~300 total for the Pedagogy Five.
 
 **Tasks:**
 
 - [ ] **1. Draft shared spec**
 
-  `<kata>/README.md` — which builders, which collaborators, which teaching patterns showcase this kata.
+  `<kata>/README.md` — declare mode P, name the teaching arc ("Start from empty input, triangulate to two numbers, then custom delimiters, then negatives..."), point to the Gears section of the repo README.
 
-  `<kata>/SCENARIOS.md` — follows the Gilded Rose / Bank Account template:
+  `<kata>/SCENARIOS.md` — numbered scenario list. For Pedagogy katas, order matters — the list **is** the curriculum.
+
+- [ ] **2. Build a reference arc plan**
+
+  Before coding any language, draft a `<kata>/ARC.md` that lists the intended commit sequence: for each scenario, what gear it lands at, whether it's a pure red+green or a red+green+refactor, and any reflection notes the walkthrough should capture.
+
+  This plan is the contract all three language implementations follow. They don't have to match commit-for-commit — language idioms differ — but they share the arc.
+
+- [ ] **3. C# implementation**
+
+  Follow the Gilded Rose scaffold pattern (see `gilded-rose/csharp/` for reference, even though Gilded Rose is Mode S — the scaffolding is identical).
+
+  Execute the arc commit-by-commit. Each commit message:
+  - `red: <scenario>` / `green: <scenario>` / `refactor: <what>` / `reflect: <note>` as the first word.
+  - One-line body naming the insight if any.
+
+  Verify `dotnet test` at each green and refactor commit.
+
+- [ ] **4. TypeScript implementation**
+
+  Mirror step 3. The arc is the same; the TS-specific idioms are documented as they arise (destructuring, discriminated unions if they help).
+
+- [ ] **5. Python implementation**
+
+  Mirror step 3 in Python idiom.
+
+- [ ] **6. Walkthroughs**
+
+  `<kata>/<lang>/WALKTHROUGH.md` for each language: a commit-by-commit narrative. For each commit, explain the *decision* — why this step, what was learned, when the gear shifted. Include commit SHAs and GitHub commit links.
+
+  Use `gilded-rose/csharp/WALKTHROUGH.md` as format reference (table of commits), but expand with a "why this step" column specific to Pedagogy mode.
+
+- [ ] **7. Wire astro-site page**
+
+  Frontmatter: three solution URLs.
+  Body: `## Reference Walkthrough` section linking all three language walkthroughs, with a one-line note that this is a **Pedagogy mode** kata and the walkthroughs are the curriculum.
+
+- [ ] **8. Update top-level README**
+
+  Mark Kata Status row ✅ ✅ ✅ with Mode = Pedagogy, Gear = `Low→...` reflecting the arc.
+
+- [ ] **9. Push both repos**
+
+---
+
+### Template F1 — Full-Bake, no builders (25 katas)
+
+**Reference model:** no pre-existing F1 kata yet. Scaffolding follows Tier-3 conventions (see Bank Account) — just omit the builder.
+
+**Commit shape:** one commit per language. Implementation, tests, and walkthrough can all be in that single commit.
+
+**Tasks:**
+
+- [ ] **1. Draft shared spec** — `README.md` (one paragraph: "algorithmic kata, no builders — showcases clean test naming in domain language") + `SCENARIOS.md` (6–12 scenarios).
+
+- [ ] **2. C# implementation** — Scaffold (`dotnet new sln/classlib/xunit`, add FluentAssertions). Implement in `src/<Kata>/`. One `[Fact]` per scenario in `tests/<Kata>.Tests/`. Test names `Snake_case_matching_scenario`. Verify `dotnet test` green. Write short `README.md` + `WALKTHROUGH.md` (walkthrough is a single paragraph explaining "algorithmic — no domain builders — the inputs/outputs are the domain"). Commit.
+
+- [ ] **3. TypeScript implementation** — Scaffold (`npm init`, Vitest). Implement in `src/<camelName>.ts`. Tests in `tests/<camelName>.test.ts`, one `it()` per scenario. Verify `npx vitest run` green. Short README + walkthrough. Commit.
+
+- [ ] **4. Python implementation** — Scaffold (`pyproject.toml`, `src/<snake_name>/`). Implement + tests. Verify `.venv/bin/pytest` green. Short README + walkthrough. Commit.
+
+- [ ] **5. Wire astro-site page** — frontmatter URLs + walkthrough section.
+
+- [ ] **6. Update top-level README** — row with ✅/✅/✅, Mode F, Gear High.
+
+- [ ] **7. Push both repos.**
+
+---
+
+### Template F2 — Full-Bake, light builder (13 katas)
+
+**Reference model:** no pre-existing F2 yet.
+
+**Difference from F1:** add a small test-folder builder for the one primary entity (10–30 lines). No object mothers, no value types beyond primitives unless the domain clearly calls for them.
+
+Otherwise follow F1's tasks 1–7. The builder ships with the tests in the same commit.
+
+---
+
+### Template F3 — Full-Bake, full builders (27 katas)
+
+**Reference model:** `bank-account/` — read this before starting any F3 kata. `gilded-rose/` is Mode S but uses the same builder techniques at Tier-3 depth; worth a look too.
+
+**Tasks:**
+
+- [ ] **1. Draft shared spec**
+
+  `<kata>/README.md` — name the builders, collaborators, and teaching patterns this kata showcases.
+
+  `<kata>/SCENARIOS.md` — full structure:
   - `## Ubiquitous Vocabulary` table
   - `## Domain Rules` section
-  - `## Test Scenarios` with subsections and numbered scenarios (typically 18–25)
+  - `## Test Scenarios` with subsections and 18–25 numbered scenarios
 
 - [ ] **2. C# implementation**
 
-  Scaffold as in Template A. Additionally:
-  - Domain types in `src/<Kata>/` — value types as `readonly record struct` where they're pure data (e.g. `Money`, `Quantity`), classes where they have identity (e.g. `Account`, `Cart`).
-  - Collaborator interfaces for external effects (`IClock`, `INotifier`).
-  - In `tests/`:
-    - `<Collaborator>Fake.cs` for each interface (e.g. `FixedClock`, `RecordingNotifier`).
-    - `<Entity>Builder.cs` for each builder — fluent, returning tuples if the builder needs to expose multiple objects (e.g. account + clock).
-  - Tests use builders + fakes for setup. Assertions use FluentAssertions.
+  Scaffold. Domain types in `src/<Kata>/`:
+  - `readonly record struct` for pure value types (Money, Quantity)
+  - Classes for entities with identity (Account, Cart)
+  - Interfaces for collaborators (IClock, INotifier)
 
-  Verify: `dotnet test` green.
+  In `tests/`:
+  - `<Collaborator>Fake.cs` per interface (FixedClock, RecordingNotifier)
+  - `<Entity>Builder.cs` per builder, fluent, returning tuples when needed
 
-  Write `csharp/README.md` and `csharp/WALKTHROUGH.md`. Walkthrough is **design rationale** in the style of `bank-account/csharp/WALKTHROUGH.md`: why is X a type, why is Y an interface, why do the builders return tuples, etc. Not a commit tour.
+  Tests use builders + fakes. Assertions via FluentAssertions.
 
-- [ ] **3. TypeScript implementation**
+  Verify `dotnet test` green.
 
-  Mirror the C# design:
-  - Classes for entities; `readonly` fields; `Protocol`-like structural interfaces for collaborators.
-  - Use `Date` carefully — `new Date(Date.UTC(y, m, d))` in tests to avoid timezone drift.
-  - Builders in `tests/<Entity>Builder.ts`.
-  - Fakes in `tests/<Collaborator>Fake.ts`.
+  Write `csharp/README.md` + `csharp/WALKTHROUGH.md`. Walkthrough is **design rationale** (like `bank-account/csharp/WALKTHROUGH.md`) — not a commit tour.
 
-  Verify: `npx vitest run` green.
+  Commit.
 
-  Walkthrough is a **delta** from the C# walkthrough: "Same design; here's what's idiomatic to TypeScript."
+- [ ] **3. TypeScript implementation** — mirror C# design. `Date` with UTC discipline. Builders in `tests/<Entity>Builder.ts`. Walkthrough is a **delta** from the C# walkthrough ("same design, here's what's idiomatic to TS"). Commit.
 
-- [ ] **4. Python implementation**
+- [ ] **4. Python implementation** — mirror C# design. `@dataclass(frozen=True)` for values, `Protocol` for collaborators, `Decimal` for money. Re-export via `src/<snake_name>/__init__.py`. Commit.
 
-  Mirror the C# design:
-  - `@dataclass(frozen=True)` for value types; regular classes for entities.
-  - `Protocol` for collaborators.
-  - `Decimal` for money.
-  - Builders in `tests/<entity>_builder.py`.
-  - Fakes in `tests/<collaborator>_fake.py`.
-  - Re-export public surface via `src/<snake_name>/__init__.py`.
+- [ ] **5. Wire astro-site page** — frontmatter + walkthrough section. Verify `npx astro build`.
 
-  Verify: `.venv/bin/pytest` green.
+- [ ] **6. Update top-level README** — Mode = Agent Full-Bake, Gear = Middle.
 
-  Walkthrough is a delta from C#.
+- [ ] **7. Commit walkthroughs if not already in language commits; push both repos.**
 
-- [ ] **5. Wire astro-site page** (same as Template A Task 5)
-
-- [ ] **6. Update top-level README** — gear `Middle` (or `Low` if the kata was driven commit-per-scenario for teaching).
-
-- [ ] **7. Commit & push**
-
-  Four commits per kata (one per language + one for walkthroughs/README + one astro-site):
-  - `<kata>: C# reference implementation`
-  - `<kata>: TypeScript reference implementation`
-  - `<kata>: Python reference implementation`
-  - `<kata>: walkthroughs` (and top-level README row update)
-  - (astro-site) `<Kata Title>: link reference solutions + walkthrough`
-
-  Push both repos.
-
----
-
-### Template D — Tier 4 (Special)
-
-Out of scope for this plan. Each Tier-4 kata needs its own brainstorming → plan → execution cycle. Do not dispatch subagents against Tier-4 katas with templates A/B/C — the domains genuinely differ.
+Per-kata F3 commit count: **4 commits** in reference-katas (C#, TS, Py, walkthroughs) + **1 commit** in astro-site.
 
 ---
 
@@ -352,76 +363,71 @@ Out of scope for this plan. Each Tier-4 kata needs its own brainstorming → pla
 
 **One subagent per kata.** A subagent takes a single kata and executes the full template (all three languages + astro-site + commits + push) in isolation.
 
-**Do not parallelize languages within a kata.** The three language implementations share the SCENARIOS.md spec and the walkthroughs cross-reference each other; sequencing is cheap, parallelism introduces merge friction.
+**Do not parallelize languages within a kata.** The three language implementations share the SCENARIOS.md spec and walkthroughs cross-reference each other.
 
-**Do parallelize katas.** Multiple katas are genuinely independent. Batch size 3–5 subagents at a time is safe (three separate kata folders, no shared files except `README.md` and astro-site `src/content/katas/` entries, which are trivial merge-at-end).
+**Parallelize katas** — batch 3–5 subagents at a time. Each kata folder is independent; the only shared files are `README.md` (Kata Status row) and `astro-site/src/content/katas/` (different files per kata). Append-friendly.
 
-**Review between batches.** After each batch of subagents completes:
-1. Run the full test matrix in each touched kata (`dotnet test`, `npx vitest run`, `.venv/bin/pytest`) — don't trust the subagent's report.
+**Review between batches:**
+1. Run the full test matrix in each touched kata — don't trust subagent reports.
 2. Skim each WALKTHROUGH.md for accuracy.
-3. Build astro-site once with `npx astro build` after each batch.
+3. `npx astro build` after each batch.
 
-**Subagent prompt skeleton (copy per dispatch):**
+**Subagent prompt skeleton:**
 
 ```
 Implement the <kata-name> reference kata across C#, TypeScript, and Python
 in /Users/travisfrisinger/Documents/projects/tddbuddy/tddbuddy-reference-katas.
 
 Spec: astro-site/src/content/katas/<kata-name>.md
-Template: docs/plans/2026-04-14-remaining-katas.md § Template <A|B|C>
-Tier: <1|2|3>
+Template: docs/plans/2026-04-14-remaining-katas.md § Template <P|F1|F2|F3>
+Mode: <Pedagogy | Full-Bake F1 | Full-Bake F2 | Full-Bake F3>
+
 Reference implementations to mirror in shape and style:
-  - bank-account/  (middle gear, Tier 3 if C)
-  - gilded-rose/   (low gear, commit-per-scenario if you want to see that cadence)
+  - bank-account/  (Mode F, full-bake middle-gear reference)
+  - gilded-rose/   (Mode S, commit-per-scenario reference; useful for builder depth)
 
 Deliver:
   - <kata>/README.md + SCENARIOS.md
   - Three language implementations (all tests green)
-  - Three WALKTHROUGH.md files
-  - astro-site/src/content/katas/<kata>.md updated with solution URLs and walkthrough section
+  - Three WALKTHROUGH.md files (style per mode — see § Walkthrough styles)
+  - astro-site/src/content/katas/<kata>.md updated with solution URLs + walkthrough section
   - Row added to reference-katas README.md Kata Status table
-  - Commits in both repos with the commit-message shape from § Template <A|B|C> Task 7
+  - Commits per § Template <…> Task 7 commit shape
   - Both repos pushed to origin/main
 
-Do not skip the verification runs. Report test counts for each language.
+Do not skip verification runs. Report test counts per language.
 ```
+
+---
+
+## Recommended Order
+
+1. **Build one Pedagogy kata first** — `string-calculator`. It's the canonical teaching kata and becomes the reference for the other four Pedagogy katas.
+2. **Remaining four Pedagogy katas** (`prime-factors`, `bowling-game`, `tennis-score`, `roman-numerals`) — can be dispatched in parallel once string-calculator lands.
+3. **The four F3 katas that already have SCENARIOS.md** (`video-club-rental`, `shopping-cart`, `library-management`, `poker-hands`) — highest teaching value after the Pedagogy Five; specs are written.
+4. **Remaining F3 katas** (23 katas).
+5. **F2 katas** (13 katas).
+6. **F1 katas** (25 katas).
+7. **Tier 4 specials** (3 katas) — separate plan.
 
 ---
 
 ## Acceptance Criteria (per kata)
 
 - [ ] `<kata>/SCENARIOS.md` enumerates every behavior from the kata spec
-- [ ] Each language folder has: source, tests, README, WALKTHROUGH, scaffold files, `.gitignore`
-- [ ] All three language test suites green, count matches SCENARIOS.md scenario count
-- [ ] `astro-site/src/content/katas/<kata>.md` frontmatter has three solution URLs
-- [ ] `astro-site/src/content/katas/<kata>.md` body has a Reference Walkthrough section
+- [ ] Each language folder has source, tests, README, WALKTHROUGH, scaffold files, `.gitignore`
+- [ ] All three language test suites green; count matches SCENARIOS.md
+- [ ] Walkthrough style matches the kata's mode (pedagogy narrative / specification table / design rationale)
+- [ ] `astro-site/src/content/katas/<kata>.md` has three solution URLs + walkthrough section
 - [ ] `npx astro build` succeeds
-- [ ] Top-level `README.md` Kata Status row updated with ✅/✅/✅
+- [ ] Top-level `README.md` Kata Status row updated (✅/✅/✅ + Mode + Gear)
 - [ ] Both repos pushed; HEAD advanced on origin/main
-
----
-
-## Order of Execution (recommended)
-
-Start with the remaining three **Tier 3** katas that already have `SCENARIOS.md` drafted, since they are the highest-value teaching artifacts and their specs are written:
-
-1. `video-club-rental` — already has SCENARIOS.md
-2. `shopping-cart` — already has SCENARIOS.md
-3. `library-management` — already has SCENARIOS.md
-4. `poker-hands` — already has SCENARIOS.md
-
-Then Tier 3 katas without scenarios (bulk of remaining Tier 3 — 26 katas).
-
-Then Tier 2 (13 katas). Fast dispatch — each is ~30 minutes of subagent work.
-
-Then Tier 1 (25 katas). Fastest — each is ~15 minutes.
-
-Tier 4 (3 katas) gets its own plan later.
 
 ---
 
 ## Self-Review Notes
 
-- **Spec coverage:** every kata in `astro-site/src/content/katas/` (minus gilded-rose + bank-account + tier-4 trio) is in the Classification Table above.
-- **Placeholder scan:** no TODO/TBD/placeholder text in the templates — every step either shows the command or references a concrete reference implementation.
-- **Type consistency:** templates reference entities generically (`<Kata>`, `<Entity>`, `<Collaborator>`); per-kata subagents resolve these from the spec.
+- **Spec coverage:** every kata in `astro-site/src/content/katas/` (minus gilded-rose, bank-account, tier-4 trio) is classified above.
+- **Placeholder scan:** templates contain concrete commands; modes-specific walkthrough styles are named, not vague.
+- **Type consistency:** templates reference entities generically (`<Kata>`, `<Entity>`); per-kata subagents resolve from the spec.
+- **Pedagogy claim verification:** the Pedagogy Five are all established canonical TDD teaching katas with published reference arcs (Beck/Martin). Subagents implementing them can cross-reference those external sources in the walkthrough.

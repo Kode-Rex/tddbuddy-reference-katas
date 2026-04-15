@@ -23,14 +23,39 @@ Kent Beck's framing: you **shift gears** based on confidence.
 
 **This is where TDD meets BDD.** BDD asks you to write executable specifications at the level of *behavior*, not *branches*. That's middle/high gear. It doesn't replace TDD — it's the gear you shift into once the domain is understood well enough that each scenario *is* a single step.
 
-Every kata in this repo shows both:
-
-- The **Gilded Rose** walkthrough is deliberately in low gear — one commit per scenario, red verified before green — so the TDD cycle is visible. Read it to see the rhythm.
-- Later katas are shipped in higher gear — the domain design is already understood, so a full implementation plus its tests land together, with the walkthrough explaining *why the design came out that shape*. Read those for how the techniques scale.
-
 **The techniques don't change between gears.** Test data builders, ubiquitous language, domain types, mocks-as-specifications — all apply identically at every tempo. What changes is how many scenarios you take in one stride.
 
 Picking the wrong gear is its own failure mode. Low gear on a solved problem is theatre. High gear on an unfamiliar domain is reckless. The skill is knowing when to shift.
+
+## Three Teaching Modes
+
+This repo answers three different questions, and each kata is written in the mode that fits:
+
+### 1. Pedagogy — learn the TDD rhythm
+
+For humans who want to **feel** the TDD cycle: red → green → reflect → refactor, with gears visibly shifting as understanding accrues. Commits land one per cycle, not one per scenario. Walkthroughs narrate *why* each step was taken and when the gear shifted up.
+
+These are the classic TDD teaching katas — small enough that the whole arc fits in the reader's head, rich enough that real design choices emerge.
+
+**Included:** `string-calculator`, `prime-factors`, `bowling-game`, `tennis-score`, `roman-numerals` (five-kata pedagogy set).
+
+### 2. Specification — tests as the system's surface
+
+For teams who want to see **what tests look like when they are the spec**: one commit per scenario, test names are domain sentences, builders and ubiquitous language from scenario one. No visible refactor churn — the design is already understood; each commit adds one behavior.
+
+This is what a mature team's tests read like after the design has settled. It's also what an AI agent operating against your tests should experience.
+
+**Included:** `gilded-rose` (low gear, commit-per-scenario).
+
+### 3. Agent Full-Bake — how we do it with AI
+
+For the question "what does TDD-done-well-by-an-AI look like?": one commit per language, full domain design landing together, walkthrough explaining the design rationale. The tests are still the spec — but the commit history doesn't pretend to be the learning journey.
+
+This is the honest shape of AI-assisted TDD: the agent understands the domain from the kata brief, writes the whole thing to the quality bar, and documents *why* it came out that shape. The commit log is a delivery log, not a learning log.
+
+**Included:** `bank-account`, and the vast majority of remaining katas.
+
+**You can tell which mode a kata is in by its walkthrough.** Pedagogy walkthroughs step through cycles and show gear shifts. Specification walkthroughs table-of-commits. Full-bake walkthroughs read as design rationale.
 
 ## Why This Repo Exists
 
@@ -97,14 +122,22 @@ The walkthrough doc links each named step to its commit so the reader can check 
 
 ## Katas Included (Growing Over Time)
 
-| Kata | C# | TypeScript | Python | Gear | Notes |
-|------|----|-----------|--------|------|-------|
-| [Gilded Rose](gilded-rose/) | ✅ | ✅ | ✅ | Low | Classic refactoring + rich domain rules; one commit per scenario |
-| [Bank Account](bank-account/) | ✅ | ✅ | ✅ | Middle | State + invariants; scenarios shipped together with design |
-| [Video Club Rental](video-club-rental/) | 🚧 | 🚧 | 🚧 | — | Rich domain, multiple collaborators |
-| [Shopping Cart](shopping-cart/) | 🚧 | 🚧 | 🚧 | — | Cart + line items + pricing strategies |
-| [Library Management](library-management/) | 🚧 | 🚧 | 🚧 | — | Multi-entity domain, reservation queues |
-| [Poker Hands](poker-hands/) | 🚧 | 🚧 | 🚧 | — | Ranking + comparison; builders make hand literals readable |
+Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
+
+| Kata | C# | TS | Py | Mode | Gear | Notes |
+|------|----|----|----|------|------|-------|
+| [Gilded Rose](gilded-rose/) | ✅ | ✅ | ✅ | Specification | Low | Commit-per-scenario; builders from day one; legacy-style domain rules |
+| [Bank Account](bank-account/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Money value type, injected clock, AccountBuilder |
+| [String Calculator](string-calculator/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→High | Kent Beck's canonical TDD teaching kata |
+| [Prime Factors](prime-factors/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→High | Uncle Bob's triangulation masterclass |
+| [Bowling Game](bowling-game/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→Middle | Frames emerge through refactor |
+| [Tennis Score](tennis-score/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→Middle | State machine refactored from if/else chain |
+| [Roman Numerals](roman-numerals/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→High | Triangulation across expanding cases |
+| [Video Club Rental](video-club-rental/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Rich domain, multiple collaborators |
+| [Shopping Cart](shopping-cart/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Cart + line items + pricing strategies |
+| [Library Management](library-management/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Multi-entity domain, reservation queues |
+| [Poker Hands](poker-hands/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Ranking + comparison; builders make hand literals readable |
+| *(60+ more)* | — | — | — | Agent Full-Bake | Middle/High | See [`docs/plans/2026-04-14-remaining-katas.md`](docs/plans/2026-04-14-remaining-katas.md) |
 
 More katas will be added as the reference set grows. Not every kata in the TDD Buddy catalog will get this treatment — only those where scenario-heavy, domain-rich design makes builders and ubiquitous language genuinely pay off. Algorithmic katas (FizzBuzz, Prime Factors, Roman Numerals) are covered by the main [tddbuddy-solutions](https://github.com/Kode-Rex/tddbuddy-solutions) repo as straightforward solutions.
 
