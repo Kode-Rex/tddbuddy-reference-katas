@@ -27,4 +27,10 @@ public class RomanTests
     {
         Roman.ToRoman(5).Should().Be("V");
     }
+
+    [Fact]
+    public void Four_is_IV()
+    {
+        Roman.ToRoman(4).Should().Be("IV");
+    }
 }
