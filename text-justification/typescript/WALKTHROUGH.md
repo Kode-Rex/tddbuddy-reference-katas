@@ -1,0 +1,11 @@
+# Text Justification — TypeScript Walkthrough
+
+This is an **algorithmic string-transform kata**: the input is a string plus a numeric width, the output is a `readonly string[]`, and there are no aggregates, value types, or collaborators — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/textJustifier.ts` exports `justify(text: string, width: number): readonly string[]`. A greedy line-packer accumulates words until the next word would push the line past `width`, then calls `justifyLine` to distribute the padding. The last line is emitted via `lineWords.join(' ')` — left-aligned, single-spaced, not right-padded. `tests/textJustifier.test.ts` has one `it()` per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec.
+
+**Padding distribution — integer division, left-heavy remainder.** The spec pads gaps evenly with the remainder landing on the left. `Math.floor(padding / gaps)` plus `padding % gaps` produces the base-and-extras split; the first `extras` gaps each take one additional space. This is the standard LeetCode-68 shape; naming the two quantities makes the rule legible without introducing a helper type.
+
+**Tokenization via `text.split(/\s+/).filter((w) => w.length > 0)`.** `/\s+/` matches any run of whitespace, but a leading whitespace run produces an empty leading token — hence the explicit `filter`. With `noUncheckedIndexedAccess` on, `lineWords[0]` is typed `string | undefined`, so the single-word branch uses the non-null assertion `lineWords[0]!` once we know the length is one.
+
+**Single-word lines and oversize words.** `justifyLine` branches once on `lineWords.length === 1`: if the word is shorter than `width` it right-pads with `' '.repeat(width - only.length)`; if it meets or exceeds `width` it is emitted unmodified, allowed to overflow rather than being split mid-word. The branch is expressed inline because it is the rule.
+
+**Inline literals — deliberate.** The whitespace set is delegated to the regex `\s+`, and the space character used for padding is `' '` inline in `' '.repeat(...)` and `lineWords.join(' ')`. Naming `SPACE = ' '` would substitute a constant name for a character that *is* the rule. F1 katas treat the literal rules as the rule itself.
