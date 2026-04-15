@@ -14,7 +14,8 @@ class GildedRoseInn:
                 gain = 2 if item.sell_in <= 0 else 1
                 item.quality = min(50, item.quality + gain)
             elif item.category == Category.BACKSTAGE_PASS:
-                item.quality = min(50, item.quality + 1)
+                gain = 2 if item.sell_in <= 10 else 1
+                item.quality = min(50, item.quality + gain)
             else:
                 degrade = 2 if item.sell_in <= 0 else 1
                 item.quality = max(0, item.quality - degrade)
