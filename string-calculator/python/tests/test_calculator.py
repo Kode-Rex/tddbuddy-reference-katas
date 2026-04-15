@@ -39,3 +39,7 @@ def test_multiple_negatives_are_all_listed_in_the_message():
 
 def test_numbers_greater_than_1000_are_ignored():
     assert add("2,1001") == 2
+
+
+def test_delimiter_may_be_any_length_in_bracketed_header():
+    assert add("//[***]\n1***2***3") == 6

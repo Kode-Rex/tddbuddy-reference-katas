@@ -17,4 +17,11 @@ def parse(raw: str) -> ParsedInput:
     header_end = raw.index("\n")
     header = raw[2:header_end]
     body = raw[header_end + 1:]
-    return ParsedInput(re.escape(header), body)
+
+    if header.startswith("["):
+        literals = re.findall(r"\[([^\]]+)\]", header)
+    else:
+        literals = [header]
+
+    pattern = "|".join(re.escape(literal) for literal in literals)
+    return ParsedInput(pattern, body)
