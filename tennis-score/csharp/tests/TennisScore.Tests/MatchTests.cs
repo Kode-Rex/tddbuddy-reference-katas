@@ -9,4 +9,12 @@ public class MatchTests
     {
         new Match().Score().Should().Be("Love-Love");
     }
+
+    [Fact]
+    public void One_point_to_player_one_reads_fifteen_love()
+    {
+        var match = new Match();
+        match.PointWonBy(1);
+        match.Score().Should().Be("15-Love");
+    }
 }
