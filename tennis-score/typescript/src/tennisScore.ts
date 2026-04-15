@@ -8,6 +8,7 @@ export class Match {
   }
 
   score(): string {
+    if (this.p1Points === 3 && this.p2Points === 3) return 'Deuce';
     return `${scoreWord(this.p1Points)}-${scoreWord(this.p2Points)}`;
   }
 }
