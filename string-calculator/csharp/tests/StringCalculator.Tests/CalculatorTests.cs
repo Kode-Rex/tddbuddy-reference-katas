@@ -21,4 +21,10 @@ public class CalculatorTests
     {
         Calculator.Add("1,2").Should().Be(3);
     }
+
+    [Fact]
+    public void Many_numbers_returns_their_sum()
+    {
+        Calculator.Add("1,2,3,4").Should().Be(10);
+    }
 }
