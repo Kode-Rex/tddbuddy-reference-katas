@@ -11,5 +11,9 @@ public class GildedRoseInn
 
     public void UpdateInventory()
     {
+        foreach (var item in Inventory.Items)
+        {
+            item.Quality -= 1;
+        }
     }
 }
