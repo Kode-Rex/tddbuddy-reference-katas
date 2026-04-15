@@ -15,3 +15,7 @@ def test_three_is_its_own_only_prime_factor():
 
 def test_four_factors_into_two_twos():
     assert generate(4) == [2, 2]
+
+
+def test_six_factors_into_two_and_three():
+    assert generate(6) == [2, 3]
