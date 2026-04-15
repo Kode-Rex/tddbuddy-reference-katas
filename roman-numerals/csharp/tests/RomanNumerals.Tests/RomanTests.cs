@@ -57,4 +57,10 @@ public class RomanTests
     {
         Roman.ToRoman(90).Should().Be("XC");
     }
+
+    [Fact]
+    public void FourHundred_is_CD()
+    {
+        Roman.ToRoman(400).Should().Be("CD");
+    }
 }
