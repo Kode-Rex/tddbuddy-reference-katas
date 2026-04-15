@@ -30,4 +30,13 @@ describe('Standard items', () => {
 
     expect(item.quality).toBe(0);
   });
+
+  it('sell-in decreases by one each day', () => {
+    const item = new ItemBuilder().standard().withQuality(10).withSellIn(5).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.sellIn).toBe(4);
+  });
 });
