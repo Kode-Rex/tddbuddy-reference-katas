@@ -8,6 +8,8 @@ class GildedRoseInn:
 
     def update_inventory(self) -> None:
         for item in self.inventory.items:
+            if item.category == Category.LEGENDARY:
+                continue
             if item.category == Category.AGED:
                 gain = 2 if item.sell_in <= 0 else 1
                 item.quality = min(50, item.quality + gain)
