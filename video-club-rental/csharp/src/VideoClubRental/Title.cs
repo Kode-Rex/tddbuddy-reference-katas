@@ -22,7 +22,7 @@ public class Title
 
     internal void CheckOut()
     {
-        if (AvailableCopies <= 0) throw new InvalidOperationException($"No copies of '{Name}' available");
+        if (AvailableCopies <= 0) throw new NoCopiesAvailableException($"No copies of '{Name}' available");
         AvailableCopies--;
     }
 

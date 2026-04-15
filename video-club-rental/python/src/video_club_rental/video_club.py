@@ -2,6 +2,13 @@ from __future__ import annotations
 
 from .age import Age, AGE_ADULT_MINIMUM
 from .clock import Clock
+from .exceptions import (
+    NoActiveRentalError,
+    OverdueRentalError,
+    RegistrationRejectedError,
+    TitleNotInCatalogError,
+    UnauthorizedError,
+)
 from .money import Money
 from .notifier import Notifier
 from . import pricing_policy
@@ -43,7 +50,7 @@ class VideoClub:
 
     def register(self, name: str, email: str, age: Age) -> User:
         if not age.is_adult:
-            raise ValueError(f"User must be at least {AGE_ADULT_MINIMUM} to register")
+            raise RegistrationRejectedError(f"User must be at least {AGE_ADULT_MINIMUM} to register")
         user = User(name, email, age)
         self._users[email.lower()] = user
         self._notifier.send(user, _WELCOME_MESSAGE)
@@ -51,7 +58,7 @@ class VideoClub:
 
     def create_user(self, admin: User, name: str, email: str, age: Age) -> User:
         if not admin.is_admin:
-            raise PermissionError("Only admin users may create other users")
+            raise UnauthorizedError("Only admin users may create other users")
         return self.register(name, email, age)
 
     def seed_user(self, user: User) -> None:
@@ -63,7 +70,7 @@ class VideoClub:
 
     def rent(self, user: User, title_name: str) -> Money:
         if user.has_overdue:
-            raise RuntimeError("User has an overdue rental and cannot rent")
+            raise OverdueRentalError("User has an overdue rental and cannot rent")
         title = self._require_title(title_name)
         existing = len(self._active_rentals_for(user))
         cost = pricing_policy.calculate(new_rental_count=1, existing_rental_count=existing)
@@ -80,7 +87,7 @@ class VideoClub:
             None,
         )
         if rental is None:
-            raise RuntimeError(f"User has no active rental of '{title_name}'")
+            raise NoActiveRentalError(f"User has no active rental of '{title_name}'")
 
         today = self._clock.today()
         self._rentals.remove(rental)
@@ -123,7 +130,7 @@ class VideoClub:
     def _require_title(self, title_name: str) -> Title:
         title = self._titles.get(title_name.lower())
         if title is None:
-            raise RuntimeError(f"Title '{title_name}' is not in the catalog")
+            raise TitleNotInCatalogError(f"Title '{title_name}' is not in the catalog")
         return title
 
     def _active_rentals_for(self, user: User) -> list[Rental]:

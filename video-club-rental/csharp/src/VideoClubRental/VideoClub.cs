@@ -29,7 +29,7 @@ public class VideoClub
     public User Register(string name, string email, Age age)
     {
         if (!age.IsAdult)
-            throw new InvalidOperationException($"User must be at least {Age.AdultMinimum} to register");
+            throw new RegistrationRejectedException($"User must be at least {Age.AdultMinimum} to register");
 
         var user = new User(name, email, age);
         _users[email] = user;
@@ -40,7 +40,7 @@ public class VideoClub
     public User CreateUser(User admin, string name, string email, Age age)
     {
         if (!admin.IsAdmin)
-            throw new InvalidOperationException("Only admin users may create other users");
+            throw new UnauthorizedException("Only admin users may create other users");
         return Register(name, email, age);
     }
 
@@ -55,7 +55,7 @@ public class VideoClub
     public Money Rent(User user, string titleName)
     {
         if (user.HasOverdue)
-            throw new InvalidOperationException("User has an overdue rental and cannot rent");
+            throw new OverdueRentalException("User has an overdue rental and cannot rent");
 
         var title = RequireTitle(titleName);
         var existingRentals = ActiveRentalsFor(user).Count;
@@ -70,7 +70,7 @@ public class VideoClub
     {
         var rental = ActiveRentalsFor(user).FirstOrDefault(r =>
             string.Equals(r.Title.Name, titleName, StringComparison.OrdinalIgnoreCase))
-            ?? throw new InvalidOperationException($"User has no active rental of '{titleName}'");
+            ?? throw new NoActiveRentalException($"User has no active rental of '{titleName}'");
 
         var today = _clock.Today();
         _rentals.Remove(rental);
@@ -117,7 +117,7 @@ public class VideoClub
     private Title RequireTitle(string titleName) =>
         _titles.TryGetValue(titleName, out var title)
             ? title
-            : throw new InvalidOperationException($"Title '{titleName}' is not in the catalog");
+            : throw new TitleNotInCatalogException($"Title '{titleName}' is not in the catalog");
 
     private List<Rental> ActiveRentalsFor(User user) =>
         _rentals.Where(r => ReferenceEquals(r.User, user)).ToList();

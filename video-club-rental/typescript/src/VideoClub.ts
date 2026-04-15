@@ -1,5 +1,12 @@
 import { Age, AGE_ADULT_MINIMUM } from './Age.js';
 import type { Clock } from './Clock.js';
+import {
+  NoActiveRentalError,
+  OverdueRentalError,
+  RegistrationRejectedError,
+  TitleNotInCatalogError,
+  UnauthorizedError,
+} from './errors.js';
 import { Money } from './Money.js';
 import type { Notifier } from './Notifier.js';
 import * as PricingPolicy from './PricingPolicy.js';
@@ -28,7 +35,7 @@ export class VideoClub {
 
   register(name: string, email: string, age: Age): User {
     if (!age.isAdult) {
-      throw new Error(`User must be at least ${AGE_ADULT_MINIMUM} to register`);
+      throw new RegistrationRejectedError(`User must be at least ${AGE_ADULT_MINIMUM} to register`);
     }
     const user = new User(name, email, age);
     this._users.set(email.toLowerCase(), user);
@@ -37,7 +44,7 @@ export class VideoClub {
   }
 
   createUser(admin: User, name: string, email: string, age: Age): User {
-    if (!admin.isAdmin) throw new Error('Only admin users may create other users');
+    if (!admin.isAdmin) throw new UnauthorizedError('Only admin users may create other users');
     return this.register(name, email, age);
   }
 
@@ -51,7 +58,7 @@ export class VideoClub {
   }
 
   rent(user: User, titleName: string): Money {
-    if (user.hasOverdue) throw new Error('User has an overdue rental and cannot rent');
+    if (user.hasOverdue) throw new OverdueRentalError('User has an overdue rental and cannot rent');
     const title = this.requireTitle(titleName);
     const existing = this.activeRentalsFor(user).length;
     const cost = PricingPolicy.calculate(1, existing);
@@ -64,7 +71,7 @@ export class VideoClub {
     const idx = this._rentals.findIndex(
       (r) => r.user === user && r.title.name.toLowerCase() === titleName.toLowerCase(),
     );
-    if (idx === -1) throw new Error(`User has no active rental of '${titleName}'`);
+    if (idx === -1) throw new NoActiveRentalError(`User has no active rental of '${titleName}'`);
     const rental = this._rentals[idx]!;
     this._rentals.splice(idx, 1);
     rental.title.checkIn();
@@ -114,7 +121,7 @@ export class VideoClub {
 
   private requireTitle(titleName: string): Title {
     const title = this._titles.get(titleName.toLowerCase());
-    if (!title) throw new Error(`Title '${titleName}' is not in the catalog`);
+    if (!title) throw new TitleNotInCatalogError(`Title '${titleName}' is not in the catalog`);
     return title;
   }
 

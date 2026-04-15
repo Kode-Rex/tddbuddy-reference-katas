@@ -1,3 +1,5 @@
+import { NoCopiesAvailableError } from './errors.js';
+
 export class Title {
   private _totalCopies: number;
   private _availableCopies: number;
@@ -16,7 +18,7 @@ export class Title {
     this._availableCopies++;
   }
   checkOut(): void {
-    if (this._availableCopies <= 0) throw new Error(`No copies of '${this.name}' available`);
+    if (this._availableCopies <= 0) throw new NoCopiesAvailableError(`No copies of '${this.name}' available`);
     this._availableCopies--;
   }
   checkIn(): void { this._availableCopies++; }

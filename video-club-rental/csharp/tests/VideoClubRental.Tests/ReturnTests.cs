@@ -66,7 +66,7 @@ public class ReturnTests
         club.MarkOverdueRentals();
 
         var act = () => club.Rent(user, "Casablanca");
-        act.Should().Throw<InvalidOperationException>();
+        act.Should().Throw<OverdueRentalException>();
     }
 
     [Fact]

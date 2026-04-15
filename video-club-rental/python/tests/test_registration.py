@@ -1,6 +1,6 @@
 import pytest
 
-from video_club_rental import Age
+from video_club_rental import Age, RegistrationRejectedError, UnauthorizedError
 
 from .user_builder import UserBuilder
 from .video_club_builder import VideoClubBuilder
@@ -15,7 +15,7 @@ def test_user_aged_eighteen_registers_successfully():
 
 def test_user_aged_seventeen_is_rejected_as_too_young():
     club, _, _ = VideoClubBuilder().build()
-    with pytest.raises(ValueError):
+    with pytest.raises(RegistrationRejectedError):
         club.register("Seventeen", "seventeen@example.com", Age(17))
 
 
@@ -37,5 +37,5 @@ def test_admin_creates_another_user_successfully():
 def test_non_admin_attempting_to_create_a_user_is_rejected():
     regular = UserBuilder().build()
     club, _, _ = VideoClubBuilder().with_user(regular).build()
-    with pytest.raises(PermissionError):
+    with pytest.raises(UnauthorizedError):
         club.create_user(regular, "New Hire", "new@example.com", Age(22))

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from .exceptions import NoCopiesAvailableError
+
 
 class Title:
     def __init__(self, name: str, total_copies: int) -> None:
@@ -23,7 +25,7 @@ class Title:
 
     def check_out(self) -> None:
         if self._available_copies <= 0:
-            raise RuntimeError(f"No copies of '{self.name}' available")
+            raise NoCopiesAvailableError(f"No copies of '{self.name}' available")
         self._available_copies -= 1
 
     def check_in(self) -> None:

@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from video_club_rental import Money, RENTAL_PERIOD_DAYS
+from video_club_rental import Money, OverdueRentalError, RENTAL_PERIOD_DAYS
 
 from .title_builder import TitleBuilder
 from .user_builder import UserBuilder
@@ -59,7 +59,7 @@ def test_user_with_an_overdue_rental_cannot_rent_another_title():
     club.rent(user, "Jaws")
     clock.advance_days(RENTAL_PERIOD_DAYS + 1)
     club.mark_overdue_rentals()
-    with pytest.raises(RuntimeError):
+    with pytest.raises(OverdueRentalError):
         club.rent(user, "Casablanca")
 
 

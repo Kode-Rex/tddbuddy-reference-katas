@@ -23,7 +23,7 @@ public class RegistrationTests
 
         var act = () => club.Register("Seventeen", "seventeen@example.com", new Age(17));
 
-        act.Should().Throw<InvalidOperationException>();
+        act.Should().Throw<RegistrationRejectedException>();
     }
 
     [Fact]
@@ -56,6 +56,6 @@ public class RegistrationTests
 
         var act = () => club.CreateUser(regular, "New Hire", "new@example.com", new Age(22));
 
-        act.Should().Throw<InvalidOperationException>();
+        act.Should().Throw<UnauthorizedException>();
     }
 }
