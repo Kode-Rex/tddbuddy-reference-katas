@@ -10,7 +10,7 @@ class GildedRoseInn:
         for item in self.inventory.items:
             if item.category == Category.AGED:
                 gain = 2 if item.sell_in <= 0 else 1
-                item.quality += gain
+                item.quality = min(50, item.quality + gain)
             else:
                 degrade = 2 if item.sell_in <= 0 else 1
                 item.quality = max(0, item.quality - degrade)
