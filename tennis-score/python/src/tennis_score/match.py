@@ -1,3 +1,13 @@
+def _score_word(points: int) -> str:
+    if points == 0:
+        return "Love"
+    if points == 1:
+        return "15"
+    if points == 2:
+        return "30"
+    return "40"
+
+
 class Match:
     def __init__(self) -> None:
         self._p1_points = 0
@@ -10,22 +20,4 @@ class Match:
             self._p2_points += 1
 
     def score(self) -> str:
-        if self._p1_points == 0:
-            p1_word = "Love"
-        elif self._p1_points == 1:
-            p1_word = "15"
-        elif self._p1_points == 2:
-            p1_word = "30"
-        else:
-            p1_word = "40"
-
-        if self._p2_points == 0:
-            p2_word = "Love"
-        elif self._p2_points == 1:
-            p2_word = "15"
-        elif self._p2_points == 2:
-            p2_word = "30"
-        else:
-            p2_word = "40"
-
-        return f"{p1_word}-{p2_word}"
+        return f"{_score_word(self._p1_points)}-{_score_word(self._p2_points)}"
