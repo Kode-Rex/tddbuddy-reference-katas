@@ -12,7 +12,8 @@ export class GildedRoseInn {
         const gain = item.sellIn <= 0 ? 2 : 1;
         item.quality = Math.min(50, item.quality + gain);
       } else if (item.category === 'backstagePass') {
-        item.quality = Math.min(50, item.quality + 1);
+        const gain = item.sellIn <= 10 ? 2 : 1;
+        item.quality = Math.min(50, item.quality + gain);
       } else {
         const degrade = item.sellIn <= 0 ? 2 : 1;
         item.quality = Math.max(0, item.quality - degrade);
