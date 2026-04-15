@@ -15,17 +15,17 @@ Legend: **R** red, **G** green, **F** refactor, **Ref** reflect (empty commit), 
 | 7 | R | low | `4` returns `[2, 2]`. |
 | 8 | G | low | Divide-out-2 loop: pull 2s into a list while `n % 2 == 0`, then append remaining `n` if `> 1`. |
 | 9 | Ref | low | Empty commit. Pattern is forming — a loop is peeking through. |
-| 10 | R | low → middle | `6` returns `[2, 3]` — the key triangulation. Forces a divisor other than 2. |
-| 11 | G | middle | Outer loop over `divisor`, starting at 2: while `n % divisor == 0` pull the factor, then `divisor += 1`. The algorithm is now complete. |
-| 12 | Ref | middle | Empty commit. The hinge — the algorithm has generalized. Remaining scenarios should pass on arrival. |
-| 13 | S | middle | `8` returns `[2, 2, 2]` — honest pass. |
-| 14 | S | middle | `9` returns `[3, 3]` — honest pass. |
+| 10 | S | low | `6` returns `[2, 3]` — passes on arrival; divide-out-2 leaves `n=3`, which the trailing `> 1` append handles. |
+| 11 | S | low | `8` returns `[2, 2, 2]` — passes on arrival; the loop keeps pulling 2s. |
+| 12 | R | low → middle | `9` returns `[3, 3]` — the real triangulation hinge. Divide-out-2 leaves `9`, which gets appended whole — wrong. |
+| 13 | G | middle | Outer loop over `divisor`, starting at 2: while `n % divisor == 0` pull the factor, then `divisor += 1`. The algorithm is now complete. |
+| 14 | Ref | middle | Empty commit. The hinge — the algorithm has generalized. Remaining scenarios should pass on arrival. |
 | 15 | S | middle | `12` returns `[2, 2, 3]` — honest pass. |
 | 16 | S | middle | `15` returns `[3, 5]` — honest pass. |
 | 17 | S | high | `100` returns `[2, 2, 5, 5]` — honest pass. |
 | 18 | S | high | `30030` returns `[2, 3, 5, 7, 11, 13]` — honest pass; proof the algorithm handles the first six primes without further code. |
 
-Roughly 18 commits per language. The gear column is the teaching point — but this kata's real teaching point is the **run of six `spec —` commits at the end**. That sequence is what distinguishes Prime Factors from every other triangulation kata: *the algorithm outran the test list*, and the commit log says so explicitly.
+Roughly 18 commits per language. The gear column is the teaching point — but this kata's real teaching point is the **chain of seven `spec —` commits** (3, 6, 8 in the early run; 12, 15, 100, 30030 after the hinge). That distribution is what distinguishes Prime Factors from every other triangulation kata: *the algorithm outran the test list twice*, with one genuine triangulation (`9`) splitting the chain into a "before the loop" and "after the loop" half. The commit log says so explicitly.
 
 ## Notes per phase
 
