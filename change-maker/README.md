@@ -1,0 +1,7 @@
+# Change Maker
+
+Given a change `amount` (in whole cents) and a set of coin `denominations` (in descending order by value), return the list of coins that makes the amount using the **greedy algorithm**: at each step take the largest denomination that does not exceed the remaining amount.
+
+This kata ships in **Agent Full-Bake** mode at the F1 tier: an algorithmic kata with **no builders**. The inputs are an integer amount and an array of denominations; the output is an array of coins — the inputs and outputs *are* the domain. The teaching point is that scenario-as-test naming still carries when the domain is this thin: each test reads as one line from the spec, naming the currency (US cents, British pence, Norwegian øre) rather than hiding behind anonymous `int` arrays.
+
+**Greedy caveat.** The greedy algorithm is correct for *canonical* coin systems like the US, UK, and Norwegian denominations listed in [`SCENARIOS.md`](SCENARIOS.md) — systems where each denomination is at least double the previous one, or otherwise structured so the greedy step is always optimal. Greedy is **not** correct for arbitrary denomination sets (e.g. `{1, 3, 4}` making `6` greedy-picks `4+1+1` instead of the optimal `3+3`). This reference implementation covers the three canonical currencies the TDD Buddy prompt specifies; the bonus "fixed number of coins" variant and non-canonical systems are out of scope. See [`SCENARIOS.md`](SCENARIOS.md) for the shared specification.
