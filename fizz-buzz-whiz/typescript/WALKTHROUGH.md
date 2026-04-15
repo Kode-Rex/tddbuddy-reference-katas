@@ -1,0 +1,3 @@
+# Fizz Buzz Whiz — TypeScript Walkthrough
+
+This is an **algorithmic kata**: the input is a `number` and the output is a `string`, so there are no domain builders, no value types, and no collaborators to introduce — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/fizzBuzzWhiz.ts` exports a single `say(n: number): string` that checks divisibility by 15, then 3, then 5, and otherwise converts the number with `String(n)`. `tests/fizzBuzzWhiz.test.ts` has one `it()` per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec. The Whiz (prime) bonus from the TDD Buddy prompt is intentionally out of scope — see the kata [`README.md`](../README.md).
