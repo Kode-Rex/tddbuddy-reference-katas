@@ -9,4 +9,10 @@ public class GameTests
     {
         Game.Score(new int[20]).Should().Be(0);
     }
+
+    [Fact]
+    public void All_ones_scores_twenty()
+    {
+        Game.Score(Enumerable.Repeat(1, 20).ToArray()).Should().Be(20);
+    }
 }
