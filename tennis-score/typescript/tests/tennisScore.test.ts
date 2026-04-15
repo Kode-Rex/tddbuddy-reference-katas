@@ -19,4 +19,13 @@ describe('Tennis Score', () => {
     match.pointWonBy(2);
     expect(match.score()).toBe('30-30');
   });
+
+  it('three points each reads Deuce', () => {
+    const match = new Match();
+    for (let i = 0; i < 3; i++) {
+      match.pointWonBy(1);
+      match.pointWonBy(2);
+    }
+    expect(match.score()).toBe('Deuce');
+  });
 });
