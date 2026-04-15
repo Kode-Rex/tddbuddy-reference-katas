@@ -1,3 +1,3 @@
 export function score(rolls: number[]): number {
-  return 0;
+  return rolls.reduce((total, pins) => total + pins, 0);
 }
