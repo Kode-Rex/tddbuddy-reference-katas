@@ -47,4 +47,12 @@ public class CalculatorTests
         act.Should().Throw<System.ArgumentException>()
             .WithMessage("negatives not allowed: -1");
     }
+
+    [Fact]
+    public void Multiple_negatives_are_all_listed_in_the_message()
+    {
+        var act = () => Calculator.Add("-1,-2,3");
+        act.Should().Throw<System.ArgumentException>()
+            .WithMessage("negatives not allowed: -1, -2");
+    }
 }
