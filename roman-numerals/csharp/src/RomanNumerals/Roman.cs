@@ -7,6 +7,9 @@ public static class Roman
 {
     private static readonly (int Value, string Symbol)[] Mapping = new[]
     {
+        (90, "XC"),
+        (50, "L"),
+        (40, "XL"),
         (10, "X"),
         (9, "IX"),
         (5, "V"),
