@@ -35,10 +35,16 @@ class Match:
         self._p2_points = 0
         self._p1_games = 0
         self._p2_games = 0
+        self._p1_sets = 0
+        self._p2_sets = 0
         self._game_just_won_by: int | None = None
         self._set_just_won_by: int | None = None
+        self._match_winner: int | None = None
 
     def point_won_by(self, player: int) -> None:
+        if self._match_winner is not None:
+            return
+
         self._game_just_won_by = None
         self._set_just_won_by = None
 
@@ -60,13 +66,30 @@ class Match:
             self._game_just_won_by = 2
 
         if self._p1_games >= 6 and self._p1_games - self._p2_games >= 2:
+            self._p1_sets += 1
+            self._p1_games = 0
+            self._p2_games = 0
             self._set_just_won_by = 1
             self._game_just_won_by = None
         elif self._p2_games >= 6 and self._p2_games - self._p1_games >= 2:
+            self._p2_sets += 1
+            self._p1_games = 0
+            self._p2_games = 0
             self._set_just_won_by = 2
             self._game_just_won_by = None
 
+        if self._p1_sets >= 2:
+            self._match_winner = 1
+            self._set_just_won_by = None
+        elif self._p2_sets >= 2:
+            self._match_winner = 2
+            self._set_just_won_by = None
+
     def score(self) -> str:
+        if self._match_winner == 1:
+            return "Match Player 1"
+        if self._match_winner == 2:
+            return "Match Player 2"
         if self._set_just_won_by == 1:
             return "Set Player 1"
         if self._set_just_won_by == 2:

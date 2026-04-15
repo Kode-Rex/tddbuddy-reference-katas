@@ -61,3 +61,21 @@ def test_six_four_in_games_reads_set_player_one():
     _play_game(match, 1)
     _play_game(match, 1)
     assert match.score() == "Set Player 1"
+
+
+def test_two_sets_to_player_one_reads_match_player_one():
+    match = Match()
+    # Set 1: 6-4
+    for _ in range(4):
+        _play_game(match, 1)
+        _play_game(match, 2)
+    _play_game(match, 1)
+    _play_game(match, 1)
+    # Set 2: 6-3
+    for _ in range(3):
+        _play_game(match, 1)
+        _play_game(match, 2)
+    _play_game(match, 1)
+    _play_game(match, 1)
+    _play_game(match, 1)
+    assert match.score() == "Match Player 1"
