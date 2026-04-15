@@ -1,0 +1,9 @@
+# End of Line Trim — C# Walkthrough
+
+This is an **algorithmic string-transform kata**: the input is a string, the output is a string, and there are no aggregates, value types, or collaborators — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/EndOfLineTrim/EndOfLineTrim.cs` exposes a static `EndOfLineTrim.Trim(string input)`. A single left-to-right scan walks the input, emits each line with its trailing space/tab run dropped, and preserves the original terminator (`\r\n` or `\n`) byte-for-byte. `tests/EndOfLineTrim.Tests/EndOfLineTrimTests.cs` has one `[Fact]` per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec.
+
+**Line-ending policy — CRLF and LF, not lone CR.** The spec calls out Windows `\r\n` and Unix `\n`. A lone `\r` is left as content, not treated as a terminator — matching the TDD Buddy spec literally rather than over-generalizing to old Mac OS line endings. When a `\r` appears, the scanner peeks ahead one character and only commits to a CRLF terminator if `\n` follows.
+
+**One pass, no allocations beyond the builder.** Using `StringBuilder` with the input's length as a capacity hint and `Append(string, start, count)` keeps the solution at O(n) without materializing intermediate substrings per line. `string.Split("\n")` would drop the `\r` side of CRLF and force a second pass to re-attach terminators correctly — the hand-rolled scan avoids that round-trip.
+
+**Inline literals — deliberate.** The whitespace set is `' '` and `'\t'`, named inline in the trailing-run loop. Extracting `private static bool IsTrailingWhitespace(char c) => c == ' ' || c == '\t';` would name a two-element set without adding meaning; the loop already reads as the rule. F1 katas treat the literal rules as the rule itself.
