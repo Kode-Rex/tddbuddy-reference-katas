@@ -24,6 +24,9 @@ class GildedRoseInn:
                     else:
                         gain = 1
                     item.quality = min(50, item.quality + gain)
+            elif item.category == Category.CONJURED:
+                degrade = 4 if item.sell_in <= 0 else 2
+                item.quality = max(0, item.quality - degrade)
             else:
                 degrade = 2 if item.sell_in <= 0 else 1
                 item.quality = max(0, item.quality - degrade)
