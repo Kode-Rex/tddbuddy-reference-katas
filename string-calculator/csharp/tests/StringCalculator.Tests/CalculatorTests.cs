@@ -27,4 +27,10 @@ public class CalculatorTests
     {
         Calculator.Add("1,2,3,4").Should().Be(10);
     }
+
+    [Fact]
+    public void Newline_is_also_a_delimiter()
+    {
+        Calculator.Add("1\n2,3").Should().Be(6);
+    }
 }
