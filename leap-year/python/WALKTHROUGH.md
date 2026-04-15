@@ -1,0 +1,5 @@
+# Leap Year — Python Walkthrough
+
+This is an **algorithmic kata**: the input is an `int` and the output is a `bool`, so there are no domain builders, no value types, and no collaborators to introduce — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/leap_year/leap_year.py` defines `is_leap_year(year: int) -> bool` that cascades the Gregorian rule from most-specific to most-general — divisible by `400` wins outright, divisible by `100` loses, otherwise divisible by `4` wins. The package `__init__.py` re-exports `is_leap_year` so tests import it as `from leap_year import is_leap_year`. `tests/test_leap_year.py` has one function per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec. Input validation concerns from the TDD Buddy prompt are intentionally out of scope — see the kata [`README.md`](../README.md).
+
+**Inline literals — deliberate.** The divisors `4`, `100`, `400` are kept inline rather than extracted as named constants. In F1 katas the function body fits on one screen and the divisors *are* the rule. F3 and larger modes prefer named constants; F1 deliberately doesn't.
