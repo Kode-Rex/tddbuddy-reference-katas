@@ -9,4 +9,10 @@ public class FactorsTests
     {
         Factors.Generate(1).Should().BeEmpty();
     }
+
+    [Fact]
+    public void Two_is_its_own_only_prime_factor()
+    {
+        Factors.Generate(2).Should().Equal(2);
+    }
 }
