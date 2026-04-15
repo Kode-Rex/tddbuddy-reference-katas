@@ -7,4 +7,5 @@ class GildedRoseInn:
 
     def update_inventory(self) -> None:
         for item in self.inventory.items:
-            item.quality -= 1
+            degrade = 2 if item.sell_in <= 0 else 1
+            item.quality -= degrade
