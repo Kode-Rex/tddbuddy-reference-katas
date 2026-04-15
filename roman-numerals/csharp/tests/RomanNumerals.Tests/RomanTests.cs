@@ -15,4 +15,10 @@ public class RomanTests
     {
         Roman.ToRoman(2).Should().Be("II");
     }
+
+    [Fact]
+    public void Three_is_III()
+    {
+        Roman.ToRoman(3).Should().Be("III");
+    }
 }
