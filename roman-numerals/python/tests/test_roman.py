@@ -11,3 +11,7 @@ def test_2_is_II():
 
 def test_3_is_III():
     assert to_roman(3) == "III"
+
+
+def test_5_is_V():
+    assert to_roman(5) == "V"
