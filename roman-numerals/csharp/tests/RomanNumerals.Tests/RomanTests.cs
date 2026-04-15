@@ -63,4 +63,10 @@ public class RomanTests
     {
         Roman.ToRoman(400).Should().Be("CD");
     }
+
+    [Fact]
+    public void NineHundred_is_CM()
+    {
+        Roman.ToRoman(900).Should().Be("CM");
+    }
 }
