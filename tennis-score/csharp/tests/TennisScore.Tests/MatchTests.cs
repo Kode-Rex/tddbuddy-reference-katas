@@ -53,4 +53,17 @@ public class MatchTests
         match.PointWonBy(1);
         match.Score().Should().Be("Advantage Player 1");
     }
+
+    [Fact]
+    public void Four_two_reads_game_player_one()
+    {
+        var match = new Match();
+        match.PointWonBy(1);
+        match.PointWonBy(1);
+        match.PointWonBy(2);
+        match.PointWonBy(1);
+        match.PointWonBy(2);
+        match.PointWonBy(1);
+        match.Score().Should().Be("Game Player 1");
+    }
 }
