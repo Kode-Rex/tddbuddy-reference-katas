@@ -318,9 +318,17 @@ For a 10-scenario pedagogy kata, expect **~20 commits per language** (roughly 2x
 
 ### Template F2 — Full-Bake, light builder (13 katas)
 
-**Reference model:** no pre-existing F2 yet.
+**Reference model:** `password/` (complete).
 
-**Difference from F1:** add a small test-folder builder for the one primary entity (10–30 lines). No object mothers, no value types beyond primitives unless the domain clearly calls for them.
+**Difference from F1:** add a small test-folder builder for the one primary entity. No object mothers, no collaborator interfaces.
+
+**F2-specific style conventions** (codified from password):
+
+- **Builder size target: ~20 lines C#, ~25 lines TS, ~40 lines Python.** The "10–30" original guideline is a C#/TS budget; Python's explicit `self` and type annotations push idiomatic builders to 30–40 lines. Don't golf down Python builders to fit a C# target — keep them idiomatic.
+- **Rich return types beat bool.** When validation can produce a list of failures, return a `ValidationResult` (or equivalent) and let tests assert on specific failures. The failure strings are part of the spec — identical across languages.
+- **Named constants for business numbers.** F2 is Full-Bake mode (unlike F1's inline-literals policy). `DefaultMinLength = 8` is named, not inline.
+- **TS may collapse multi-entity files.** C# and Python typically have one type per file; TS idiom is to colocate small related types in one module. Don't force TS to split — note the divergence in the walkthrough.
+- **Scope discipline:** if the kata spec describes an F3-shaped system (multiple collaborators, persistence, external services), scope the F2 reference to its pure-domain core and LOUDLY flag the out-of-scope features as stretch in the README, SCENARIOS, walkthroughs, AND astro-site page.
 
 Otherwise follow F1's tasks 1–7. The builder ships with the tests in the same commit.
 
