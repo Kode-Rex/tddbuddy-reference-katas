@@ -33,24 +33,54 @@ class Match:
     def __init__(self) -> None:
         self._p1_points = 0
         self._p2_points = 0
+        self._p1_games = 0
+        self._p2_games = 0
+        self._game_just_won_by: int | None = None
+        self._set_just_won_by: int | None = None
 
     def point_won_by(self, player: int) -> None:
+        self._game_just_won_by = None
+        self._set_just_won_by = None
+
         if player == 1:
             self._p1_points += 1
         else:
             self._p2_points += 1
 
-    def score(self) -> str:
         p1, p2 = self._score_states()
+        if p1 is Score.GAME:
+            self._p1_games += 1
+            self._p1_points = 0
+            self._p2_points = 0
+            self._game_just_won_by = 1
+        elif p2 is Score.GAME:
+            self._p2_games += 1
+            self._p1_points = 0
+            self._p2_points = 0
+            self._game_just_won_by = 2
 
+        if self._p1_games >= 6 and self._p1_games - self._p2_games >= 2:
+            self._set_just_won_by = 1
+            self._game_just_won_by = None
+        elif self._p2_games >= 6 and self._p2_games - self._p1_games >= 2:
+            self._set_just_won_by = 2
+            self._game_just_won_by = None
+
+    def score(self) -> str:
+        if self._set_just_won_by == 1:
+            return "Set Player 1"
+        if self._set_just_won_by == 2:
+            return "Set Player 2"
+        if self._game_just_won_by == 1:
+            return "Game Player 1"
+        if self._game_just_won_by == 2:
+            return "Game Player 2"
+
+        p1, p2 = self._score_states()
         if p1 is Score.ADVANTAGE:
             return "Advantage Player 1"
         if p2 is Score.ADVANTAGE:
             return "Advantage Player 2"
-        if p1 is Score.GAME:
-            return "Game Player 1"
-        if p2 is Score.GAME:
-            return "Game Player 2"
         if p1 is Score.DEUCE:
             return "Deuce"
         return f"{_WORDS[p1]}-{_WORDS[p2]}"

@@ -46,3 +46,18 @@ def test_four_two_reads_game_player_one():
     match.point_won_by(2)
     match.point_won_by(1)
     assert match.score() == "Game Player 1"
+
+
+def _play_game(match: Match, winner: int) -> None:
+    for _ in range(4):
+        match.point_won_by(winner)
+
+
+def test_six_four_in_games_reads_set_player_one():
+    match = Match()
+    for _ in range(4):
+        _play_game(match, 1)
+        _play_game(match, 2)
+    _play_game(match, 1)
+    _play_game(match, 1)
+    assert match.score() == "Set Player 1"
