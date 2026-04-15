@@ -21,4 +21,8 @@ describe('toRoman', () => {
   it('4 is IV', () => {
     expect(toRoman(4)).toBe('IV');
   });
+
+  it('10 is X', () => {
+    expect(toRoman(10)).toBe('X');
+  });
 });
