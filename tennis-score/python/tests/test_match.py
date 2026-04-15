@@ -35,3 +35,14 @@ def test_four_three_reads_advantage_player_one():
         match.point_won_by(2)
     match.point_won_by(1)
     assert match.score() == "Advantage Player 1"
+
+
+def test_four_two_reads_game_player_one():
+    match = Match()
+    match.point_won_by(1)
+    match.point_won_by(1)
+    match.point_won_by(2)
+    match.point_won_by(1)
+    match.point_won_by(2)
+    match.point_won_by(1)
+    assert match.score() == "Game Player 1"
