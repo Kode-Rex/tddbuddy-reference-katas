@@ -35,4 +35,10 @@ public class GameTests
     {
         Game.Score(Enumerable.Repeat(10, 12).ToArray()).Should().Be(300);
     }
+
+    [Fact]
+    public void All_spares_scores_one_hundred_fifty()
+    {
+        Game.Score(Enumerable.Repeat(5, 21).ToArray()).Should().Be(150);
+    }
 }
