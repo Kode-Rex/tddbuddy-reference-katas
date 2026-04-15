@@ -19,3 +19,7 @@ def test_many_numbers_returns_their_sum():
 
 def test_newline_is_also_a_delimiter():
     assert add("1\n2,3") == 6
+
+
+def test_custom_single_char_delimiter_is_declared_in_header():
+    assert add("//;\n1;2") == 3
