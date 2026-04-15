@@ -1,9 +1,10 @@
 export function generate(n: number): number[] {
   const factors: number[] = [];
-  while (n % 2 === 0) {
-    factors.push(2);
-    n /= 2;
+  for (let divisor = 2; n > 1; divisor++) {
+    while (n % divisor === 0) {
+      factors.push(divisor);
+      n /= divisor;
+    }
   }
-  if (n > 1) factors.push(n);
   return factors;
 }
