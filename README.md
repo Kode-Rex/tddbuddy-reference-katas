@@ -175,6 +175,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [Timesheet Calc](timesheet-calc/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Timesheet entries with overtime calculation |
 | [Calc Refactor](calc-refactor/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Refactoring kata; characterization tests + clean implementation |
 | [Tennis Refactoring](tennis-refactoring/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Characterization-test refactor of legacy tennis scorer |
+| [Memory Cache](memory-cache/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Bounded TTL cache with LRU eviction |
 | *(60+ more)* | — | — | — | Agent Full-Bake | Middle/High | See [`docs/plans/2026-04-14-remaining-katas.md`](docs/plans/2026-04-14-remaining-katas.md) |
 
 More katas will be added as the reference set grows. Algorithmic katas like Prime Factors and Roman Numerals appear here in **Pedagogy mode** — the algorithm-emerges-from-triangulation arc is itself the teaching point. Domain-heavy katas appear in **Agent Full-Bake mode** with builders and ubiquitous language. Straightforward one-liner solutions for every TDD Buddy kata in many languages live in the main [tddbuddy-solutions](https://github.com/Kode-Rex/tddbuddy-solutions) repo.
