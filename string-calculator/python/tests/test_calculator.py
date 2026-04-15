@@ -15,3 +15,7 @@ def test_two_numbers_return_their_sum():
 
 def test_many_numbers_returns_their_sum():
     assert add("1,2,3,4") == 10
+
+
+def test_newline_is_also_a_delimiter():
+    assert add("1\n2,3") == 6
