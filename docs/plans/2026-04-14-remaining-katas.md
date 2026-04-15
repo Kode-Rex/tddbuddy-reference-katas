@@ -321,7 +321,13 @@ Otherwise follow F1's tasks 1–7. The builder ships with the tests in the same 
 
 ### Template F3 — Full-Bake, full builders (27 katas)
 
-**Reference model:** `bank-account/` — read this before starting any F3 kata. `gilded-rose/` is Mode S but uses the same builder techniques at Tier-3 depth; worth a look too.
+**Reference model:** `bank-account/` — read this before starting any F3 kata. `gilded-rose/` is Mode S but uses the same builder techniques at Tier-3 depth; worth a look too. `video-club-rental/`, `shopping-cart/`, `library-management/` are also shipped F3 references.
+
+**F3-specific style conventions** (codified after the first three applied F3 katas):
+
+- **Domain-specific exception types** for invariant violations. Don't throw `InvalidOperationException` / `Error` / `RuntimeError` for "book not in catalog" or "no copies available" — name the exception (`BookNotInCatalogException`, `NoCopiesAvailableException`, `LineItemNotFoundException`). Tests can then catch the meaningful type, and a reader sees the domain in the stack trace. This is the opposite of throwing-as-validation; it's *naming the rejection*.
+- **Cross-language message strings should match byte-for-byte** even when exception types differ idiomatically per language.
+- **Explicit-sweep methods** (like `MarkOverdueRentals`, `ExpireReservations`) get a paragraph in the C# walkthrough explaining the design tradeoff. Tests drive the sweep before exercising blocked operations; this models the production caller's responsibility.
 
 **Tasks:**
 
