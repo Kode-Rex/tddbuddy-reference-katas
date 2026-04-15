@@ -29,4 +29,10 @@ public class GameTests
         var rolls = new[] { 10, 3, 4 }.Concat(new int[16]).ToArray();
         Game.Score(rolls).Should().Be(24);
     }
+
+    [Fact]
+    public void Perfect_game_scores_three_hundred()
+    {
+        Game.Score(Enumerable.Repeat(10, 12).ToArray()).Should().Be(300);
+    }
 }
