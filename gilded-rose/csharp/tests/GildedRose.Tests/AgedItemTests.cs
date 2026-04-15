@@ -8,7 +8,11 @@ public class AgedItemTests
     [Fact]
     public void Aged_items_gain_one_quality_per_day_while_fresh()
     {
-        var item = new ItemBuilder().Aged().WithQuality(10).WithSellIn(5).Build();
+        var item = new ItemBuilder()
+            .Aged()
+            .WithQuality(10)
+            .WithSellIn(5)
+            .Build();
         var inn = new GildedRoseInn(new Inventory(new[] { item }));
 
         inn.UpdateInventory();
@@ -19,7 +23,11 @@ public class AgedItemTests
     [Fact]
     public void Aged_items_gain_two_quality_per_day_after_the_sell_by_date()
     {
-        var item = new ItemBuilder().Aged().WithQuality(10).WithSellIn(0).Build();
+        var item = new ItemBuilder()
+            .Aged()
+            .WithQuality(10)
+            .WithSellIn(0)
+            .Build();
         var inn = new GildedRoseInn(new Inventory(new[] { item }));
 
         inn.UpdateInventory();
@@ -30,7 +38,11 @@ public class AgedItemTests
     [Fact]
     public void Aged_item_quality_never_exceeds_fifty()
     {
-        var item = new ItemBuilder().Aged().WithQuality(50).WithSellIn(5).Build();
+        var item = new ItemBuilder()
+            .Aged()
+            .WithQuality(50)
+            .WithSellIn(5)
+            .Build();
         var inn = new GildedRoseInn(new Inventory(new[] { item }));
 
         inn.UpdateInventory();
@@ -41,7 +53,11 @@ public class AgedItemTests
     [Fact]
     public void Aged_item_sell_in_decreases_by_one_each_day()
     {
-        var item = new ItemBuilder().Aged().WithQuality(10).WithSellIn(5).Build();
+        var item = new ItemBuilder()
+            .Aged()
+            .WithQuality(10)
+            .WithSellIn(5)
+            .Build();
         var inn = new GildedRoseInn(new Inventory(new[] { item }));
 
         inn.UpdateInventory();

@@ -8,7 +8,12 @@ public class LegendaryItemTests
     [Fact]
     public void Legendary_items_never_lose_quality()
     {
-        var item = new ItemBuilder().Legendary().Named("Sulfuras, Hand of Ragnaros").WithQuality(80).WithSellIn(5).Build();
+        var item = new ItemBuilder()
+            .Legendary()
+            .Named("Sulfuras, Hand of Ragnaros")
+            .WithQuality(80)
+            .WithSellIn(5)
+            .Build();
         var inn = new GildedRoseInn(new Inventory(new[] { item }));
 
         inn.UpdateInventory();
@@ -19,7 +24,12 @@ public class LegendaryItemTests
     [Fact]
     public void Legendary_item_sell_in_never_changes()
     {
-        var item = new ItemBuilder().Legendary().Named("Sulfuras, Hand of Ragnaros").WithQuality(80).WithSellIn(5).Build();
+        var item = new ItemBuilder()
+            .Legendary()
+            .Named("Sulfuras, Hand of Ragnaros")
+            .WithQuality(80)
+            .WithSellIn(5)
+            .Build();
         var inn = new GildedRoseInn(new Inventory(new[] { item }));
 
         inn.UpdateInventory();
@@ -30,7 +40,12 @@ public class LegendaryItemTests
     [Fact]
     public void Legendary_items_may_have_quality_above_fifty()
     {
-        var item = new ItemBuilder().Legendary().Named("Sulfuras, Hand of Ragnaros").WithQuality(80).WithSellIn(5).Build();
+        var item = new ItemBuilder()
+            .Legendary()
+            .Named("Sulfuras, Hand of Ragnaros")
+            .WithQuality(80)
+            .WithSellIn(5)
+            .Build();
         var inn = new GildedRoseInn(new Inventory(new[] { item }));
 
         inn.UpdateInventory();
