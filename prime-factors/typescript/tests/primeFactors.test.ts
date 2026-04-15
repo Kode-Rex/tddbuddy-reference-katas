@@ -8,4 +8,8 @@ describe('Prime Factors', () => {
   it('2 is its own only prime factor', () => {
     expect(generate(2)).toEqual([2]);
   });
+
+  it('3 is its own only prime factor', () => {
+    expect(generate(3)).toEqual([3]);
+  });
 });
