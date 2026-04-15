@@ -22,4 +22,11 @@ public class GameTests
         var rolls = new[] { 5, 5, 3, 0 }.Concat(new int[16]).ToArray();
         Game.Score(rolls).Should().Be(16);
     }
+
+    [Fact]
+    public void One_strike_scores_the_strike_bonus()
+    {
+        var rolls = new[] { 10, 3, 4 }.Concat(new int[16]).ToArray();
+        Game.Score(rolls).Should().Be(24);
+    }
 }
