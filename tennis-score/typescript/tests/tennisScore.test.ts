@@ -38,4 +38,15 @@ describe('Tennis Score', () => {
     match.pointWonBy(1);
     expect(match.score()).toBe('Advantage Player 1');
   });
+
+  it('4-2 reads Game Player 1', () => {
+    const match = new Match();
+    match.pointWonBy(1);
+    match.pointWonBy(1);
+    match.pointWonBy(2);
+    match.pointWonBy(1);
+    match.pointWonBy(2);
+    match.pointWonBy(1);
+    expect(match.score()).toBe('Game Player 1');
+  });
 });
