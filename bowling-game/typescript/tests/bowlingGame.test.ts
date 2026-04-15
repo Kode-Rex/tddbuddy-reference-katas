@@ -18,4 +18,8 @@ describe('Bowling Game', () => {
     const rolls = [10, 3, 4, ...new Array(16).fill(0)];
     expect(score(rolls)).toBe(24);
   });
+
+  it('perfect game scores 300', () => {
+    expect(score(new Array(12).fill(10))).toBe(300);
+  });
 });
