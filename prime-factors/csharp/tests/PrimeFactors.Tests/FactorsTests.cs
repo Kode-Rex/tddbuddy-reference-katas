@@ -27,4 +27,10 @@ public class FactorsTests
     {
         Factors.Generate(4).Should().Equal(2, 2);
     }
+
+    [Fact]
+    public void Six_factors_into_two_and_three()
+    {
+        Factors.Generate(6).Should().Equal(2, 3);
+    }
 }
