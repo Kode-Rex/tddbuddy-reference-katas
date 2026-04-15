@@ -149,6 +149,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [End of Line Trim](end-of-line-trim/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Per-line trailing whitespace removal |
 | [IP Validator](ip-validator/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | IPv4 dotted-quad validation |
 | [Last Sunday](last-sunday/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Last Sunday of month/year |
+| [Age Calculator](age-calculator/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Age from birthdate + reference date |
 | [Metric Converter](metric-converter/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Unit conversion with typed enums |
 | [Change Maker](change-maker/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Greedy change-making for canonical coins |
 | [Numbers to Words](numbers-to-words/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Integer → English word phrase |
