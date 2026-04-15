@@ -12,4 +12,13 @@ describe('Standard items', () => {
 
     expect(item.quality).toBe(9);
   });
+
+  it('lose two quality per day after the sell-by date', () => {
+    const item = new ItemBuilder().standard().withQuality(10).withSellIn(0).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.quality).toBe(8);
+  });
 });

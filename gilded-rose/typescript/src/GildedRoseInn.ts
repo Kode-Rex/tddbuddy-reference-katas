@@ -5,7 +5,8 @@ export class GildedRoseInn {
 
   updateInventory(): void {
     for (const item of this.inventory.items) {
-      item.quality -= 1;
+      const degrade = item.sellIn <= 0 ? 2 : 1;
+      item.quality -= degrade;
     }
   }
 }
