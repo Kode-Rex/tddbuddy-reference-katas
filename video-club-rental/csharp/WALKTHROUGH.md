@@ -87,6 +87,19 @@ The alternative — public setters or a god-like `User.ApplyEvent(...)` — leak
 
 After the return, the aggregate checks whether *any* of the user's remaining rentals are still late — if none are, the overdue block clears. This is what the scenario "returning the overdue title unblocks renting" asserts, and it's one line of LINQ because the data model is right.
 
+## Why `MarkOverdueRentals` Is an Explicit Sweep
+
+The overdue-block rule says "a user with an overdue rental cannot rent another title." There are two ways to wire that up:
+
+1. **Implicit sweep on every operation** — `Rent` opens by scanning the user's active rentals against `Clock.Today()`, sets a transient flag, then proceeds. Pure query, no persistent state, but every entry point pays the scan cost and the late-alert notification has to fire from `Rent` (an awkward seam).
+2. **Explicit sweep + persistent flag** — a separate `MarkOverdueRentals()` method scans the catalog, mutates `User.HasOverdue`, and dispatches late alerts. `Rent` then reads the flag and rejects.
+
+This implementation chose (2). The reason is that the late alert is a *notification side effect* — it should fire once when the rental crosses the boundary, not every time the user touches the system. Coupling the alert to `Rent` means a user who never tries to rent again never gets alerted; coupling it to a sweep makes the alert a real consequence of "today crossed the due date," not "today, the user happened to call Rent."
+
+The cost is that tests for the overdue-block scenarios have to advance the clock and then call `MarkOverdueRentals` before exercising `Rent`. Tests in `ReturnTests.cs` do this explicitly, which makes the coordination visible in the test rather than hidden inside `Rent`. That visibility is the point — the production caller should also drive this sweep on a schedule (a daily job, a login hook, whatever fits the deployment), and the tests model that exact shape.
+
+The persistent `HasOverdue` flag also lets the return flow clear it by rescanning remaining rentals — a one-line check that wouldn't exist if the flag didn't exist.
+
 ## Scenario Map
 
 The twenty-four scenarios in [`../SCENARIOS.md`](../SCENARIOS.md) live across six test files in `tests/VideoClubRental.Tests/`:
