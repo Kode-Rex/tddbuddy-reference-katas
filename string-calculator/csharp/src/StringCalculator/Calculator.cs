@@ -15,6 +15,6 @@ public static class Calculator
         {
             throw new ArgumentException("negatives not allowed: " + string.Join(", ", negatives));
         }
-        return parsed.Sum();
+        return parsed.Where(n => n <= 1000).Sum();
     }
 }

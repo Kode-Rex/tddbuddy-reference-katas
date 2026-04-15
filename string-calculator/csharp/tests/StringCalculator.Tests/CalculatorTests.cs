@@ -55,4 +55,10 @@ public class CalculatorTests
         act.Should().Throw<System.ArgumentException>()
             .WithMessage("negatives not allowed: -1, -2");
     }
+
+    [Fact]
+    public void Numbers_greater_than_1000_are_ignored()
+    {
+        Calculator.Add("2,1001").Should().Be(2);
+    }
 }
