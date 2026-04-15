@@ -5,7 +5,12 @@ import { ItemBuilder } from './ItemBuilder.js';
 
 describe('Legendary items', () => {
   it('never lose quality', () => {
-    const item = new ItemBuilder().legendary().named('Sulfuras, Hand of Ragnaros').withQuality(80).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .legendary()
+        .named('Sulfuras, Hand of Ragnaros')
+        .withQuality(80)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -14,7 +19,12 @@ describe('Legendary items', () => {
   });
 
   it('sell-in never changes', () => {
-    const item = new ItemBuilder().legendary().named('Sulfuras, Hand of Ragnaros').withQuality(80).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .legendary()
+        .named('Sulfuras, Hand of Ragnaros')
+        .withQuality(80)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -23,7 +33,12 @@ describe('Legendary items', () => {
   });
 
   it('may have quality above fifty', () => {
-    const item = new ItemBuilder().legendary().named('Sulfuras, Hand of Ragnaros').withQuality(80).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .legendary()
+        .named('Sulfuras, Hand of Ragnaros')
+        .withQuality(80)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();

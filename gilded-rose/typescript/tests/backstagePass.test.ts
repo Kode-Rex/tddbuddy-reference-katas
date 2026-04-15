@@ -5,7 +5,11 @@ import { ItemBuilder } from './ItemBuilder.js';
 
 describe('Backstage passes', () => {
   it('quality increases by one when concert is more than ten days away', () => {
-    const item = new ItemBuilder().backstagePass().withQuality(10).withSellIn(15).build();
+    const item = new ItemBuilder()
+        .backstagePass()
+        .withQuality(10)
+        .withSellIn(15)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -14,7 +18,11 @@ describe('Backstage passes', () => {
   });
 
   it('quality increases by two when concert is ten days or fewer away', () => {
-    const item = new ItemBuilder().backstagePass().withQuality(10).withSellIn(10).build();
+    const item = new ItemBuilder()
+        .backstagePass()
+        .withQuality(10)
+        .withSellIn(10)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -23,7 +31,11 @@ describe('Backstage passes', () => {
   });
 
   it('quality increases by three when concert is five days or fewer away', () => {
-    const item = new ItemBuilder().backstagePass().withQuality(10).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .backstagePass()
+        .withQuality(10)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -32,7 +44,11 @@ describe('Backstage passes', () => {
   });
 
   it('quality drops to zero after the concert', () => {
-    const item = new ItemBuilder().backstagePass().withQuality(20).withSellIn(0).build();
+    const item = new ItemBuilder()
+        .backstagePass()
+        .withQuality(20)
+        .withSellIn(0)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -41,7 +57,11 @@ describe('Backstage passes', () => {
   });
 
   it('quality never exceeds fifty before the concert', () => {
-    const item = new ItemBuilder().backstagePass().withQuality(49).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .backstagePass()
+        .withQuality(49)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();

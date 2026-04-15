@@ -5,7 +5,11 @@ import { ItemBuilder } from './ItemBuilder.js';
 
 describe('Aged items', () => {
   it('gain one quality per day while fresh', () => {
-    const item = new ItemBuilder().aged().withQuality(10).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .aged()
+        .withQuality(10)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -14,7 +18,11 @@ describe('Aged items', () => {
   });
 
   it('gain two quality per day after the sell-by date', () => {
-    const item = new ItemBuilder().aged().withQuality(10).withSellIn(0).build();
+    const item = new ItemBuilder()
+        .aged()
+        .withQuality(10)
+        .withSellIn(0)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -23,7 +31,11 @@ describe('Aged items', () => {
   });
 
   it('quality never exceeds fifty', () => {
-    const item = new ItemBuilder().aged().withQuality(50).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .aged()
+        .withQuality(50)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -32,7 +44,11 @@ describe('Aged items', () => {
   });
 
   it('sell-in decreases by one each day', () => {
-    const item = new ItemBuilder().aged().withQuality(10).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .aged()
+        .withQuality(10)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();

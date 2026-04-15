@@ -5,7 +5,11 @@ import { ItemBuilder } from './ItemBuilder.js';
 
 describe('Conjured items', () => {
   it('lose two quality per day while fresh', () => {
-    const item = new ItemBuilder().conjured().withQuality(10).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .conjured()
+        .withQuality(10)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -14,7 +18,11 @@ describe('Conjured items', () => {
   });
 
   it('lose four quality per day after the sell-by date', () => {
-    const item = new ItemBuilder().conjured().withQuality(10).withSellIn(0).build();
+    const item = new ItemBuilder()
+        .conjured()
+        .withQuality(10)
+        .withSellIn(0)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
@@ -23,7 +31,11 @@ describe('Conjured items', () => {
   });
 
   it('quality never goes below zero', () => {
-    const item = new ItemBuilder().conjured().withQuality(1).withSellIn(5).build();
+    const item = new ItemBuilder()
+        .conjured()
+        .withQuality(1)
+        .withSellIn(5)
+        .build();
     const inn = new GildedRoseInn(new Inventory([item]));
 
     inn.updateInventory();
