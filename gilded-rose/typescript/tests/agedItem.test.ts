@@ -21,4 +21,13 @@ describe('Aged items', () => {
 
     expect(item.quality).toBe(12);
   });
+
+  it('quality never exceeds fifty', () => {
+    const item = new ItemBuilder().aged().withQuality(50).withSellIn(5).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.quality).toBe(50);
+  });
 });
