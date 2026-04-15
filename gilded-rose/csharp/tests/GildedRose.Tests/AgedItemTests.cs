@@ -37,4 +37,15 @@ public class AgedItemTests
 
         item.Quality.Should().Be(50);
     }
+
+    [Fact]
+    public void Aged_item_sell_in_decreases_by_one_each_day()
+    {
+        var item = new ItemBuilder().Aged().WithQuality(10).WithSellIn(5).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.SellIn.Should().Be(4);
+    }
 }
