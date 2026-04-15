@@ -26,4 +26,15 @@ public class BackstagePassTests
 
         item.Quality.Should().Be(12);
     }
+
+    [Fact]
+    public void Backstage_pass_quality_increases_by_three_when_concert_is_five_days_or_fewer_away()
+    {
+        var item = new ItemBuilder().BackstagePass().WithQuality(10).WithSellIn(5).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(13);
+    }
 }
