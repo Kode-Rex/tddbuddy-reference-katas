@@ -15,7 +15,8 @@ public class GildedRoseInn
         {
             if (item.Category == Category.Aged)
             {
-                item.Quality += 1;
+                var gain = item.SellIn <= 0 ? 2 : 1;
+                item.Quality += gain;
             }
             else
             {

@@ -15,4 +15,15 @@ public class AgedItemTests
 
         item.Quality.Should().Be(11);
     }
+
+    [Fact]
+    public void Aged_items_gain_two_quality_per_day_after_the_sell_by_date()
+    {
+        var item = new ItemBuilder().Aged().WithQuality(10).WithSellIn(0).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(12);
+    }
 }
