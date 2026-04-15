@@ -23,3 +23,7 @@ def test_six_factors_into_two_and_three():
 
 def test_eight_factors_into_three_twos():
     assert generate(8) == [2, 2, 2]
+
+
+def test_nine_factors_into_two_threes():
+    assert generate(9) == [3, 3]
