@@ -35,3 +35,7 @@ def test_negative_number_is_rejected_with_listing_message():
 def test_multiple_negatives_are_all_listed_in_the_message():
     with pytest.raises(ValueError, match=r"negatives not allowed: -1, -2"):
         add("-1,-2,3")
+
+
+def test_numbers_greater_than_1000_are_ignored():
+    assert add("2,1001") == 2
