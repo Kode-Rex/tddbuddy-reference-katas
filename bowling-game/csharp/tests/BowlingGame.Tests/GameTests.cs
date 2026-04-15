@@ -15,4 +15,11 @@ public class GameTests
     {
         Game.Score(Enumerable.Repeat(1, 20).ToArray()).Should().Be(20);
     }
+
+    [Fact]
+    public void One_spare_scores_the_spare_bonus()
+    {
+        var rolls = new[] { 5, 5, 3, 0 }.Concat(new int[16]).ToArray();
+        Game.Score(rolls).Should().Be(16);
+    }
 }
