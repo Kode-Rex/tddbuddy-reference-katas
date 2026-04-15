@@ -28,4 +28,16 @@ public class MatchTests
         match.PointWonBy(2);
         match.Score().Should().Be("30-30");
     }
+
+    [Fact]
+    public void Three_points_each_reads_deuce()
+    {
+        var match = new Match();
+        for (var i = 0; i < 3; i++)
+        {
+            match.PointWonBy(1);
+            match.PointWonBy(2);
+        }
+        match.Score().Should().Be("Deuce");
+    }
 }
