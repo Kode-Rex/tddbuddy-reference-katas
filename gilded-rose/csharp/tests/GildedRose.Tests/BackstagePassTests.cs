@@ -48,4 +48,15 @@ public class BackstagePassTests
 
         item.Quality.Should().Be(0);
     }
+
+    [Fact]
+    public void Backstage_pass_quality_never_exceeds_fifty_before_the_concert()
+    {
+        var item = new ItemBuilder().BackstagePass().WithQuality(49).WithSellIn(5).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(50);
+    }
 }
