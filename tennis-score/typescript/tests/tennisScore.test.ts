@@ -58,6 +58,19 @@ describe('Tennis Score', () => {
     expect(match.score()).toBe('Set Player 1');
   });
 
+  it('6-4, 6-3 in sets reads Match Player 1', () => {
+    const match = new Match();
+    // Set 1: 6-4
+    for (let i = 0; i < 4; i++) { playGame(match, 1); playGame(match, 2); }
+    playGame(match, 1);
+    playGame(match, 1);
+    // Set 2: 6-3
+    for (let i = 0; i < 3; i++) { playGame(match, 1); playGame(match, 2); }
+    playGame(match, 1);
+    playGame(match, 1);
+    playGame(match, 1);
+    expect(match.score()).toBe('Match Player 1');
+  });
 });
 
 function playGame(match: Match, winner: 1 | 2): void {
