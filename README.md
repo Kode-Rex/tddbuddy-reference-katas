@@ -32,15 +32,18 @@ Each kata has:
 ├── csharp/
 │   ├── README.md      — how to build and run
 │   ├── WALKTHROUGH.md — commit-by-commit teaching walkthrough
-│   └── <solution/tests>
+│   ├── src/           — implementation project
+│   └── tests/         — test project
 ├── typescript/
 │   ├── README.md
 │   ├── WALKTHROUGH.md
-│   └── <src/tests>
+│   ├── src/
+│   └── tests/
 └── python/
     ├── README.md
     ├── WALKTHROUGH.md
-    └── <src/tests>
+    ├── src/
+    └── tests/
 ```
 
 **Same scenarios. Same vocabulary. Three idiomatic implementations.**
