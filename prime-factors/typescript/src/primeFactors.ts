@@ -1,4 +1,9 @@
 export function generate(n: number): number[] {
-  if (n > 1) return [n];
-  return [];
+  const factors: number[] = [];
+  while (n % 2 === 0) {
+    factors.push(2);
+    n /= 2;
+  }
+  if (n > 1) factors.push(n);
+  return factors;
 }
