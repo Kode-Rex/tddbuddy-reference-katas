@@ -13,8 +13,15 @@ public class GildedRoseInn
     {
         foreach (var item in Inventory.Items)
         {
-            var degrade = item.SellIn <= 0 ? 2 : 1;
-            item.Quality = Math.Max(0, item.Quality - degrade);
+            if (item.Category == Category.Aged)
+            {
+                item.Quality += 1;
+            }
+            else
+            {
+                var degrade = item.SellIn <= 0 ? 2 : 1;
+                item.Quality = Math.Max(0, item.Quality - degrade);
+            }
             item.SellIn -= 1;
         }
     }
