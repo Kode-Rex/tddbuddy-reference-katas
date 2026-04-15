@@ -6,7 +6,8 @@ export class GildedRoseInn {
   updateInventory(): void {
     for (const item of this.inventory.items) {
       if (item.category === 'aged') {
-        item.quality += 1;
+        const gain = item.sellIn <= 0 ? 2 : 1;
+        item.quality += gain;
       } else {
         const degrade = item.sellIn <= 0 ? 2 : 1;
         item.quality = Math.max(0, item.quality - degrade);

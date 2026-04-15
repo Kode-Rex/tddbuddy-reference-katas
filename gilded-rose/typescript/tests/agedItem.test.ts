@@ -12,4 +12,13 @@ describe('Aged items', () => {
 
     expect(item.quality).toBe(11);
   });
+
+  it('gain two quality per day after the sell-by date', () => {
+    const item = new ItemBuilder().aged().withQuality(10).withSellIn(0).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.quality).toBe(12);
+  });
 });
