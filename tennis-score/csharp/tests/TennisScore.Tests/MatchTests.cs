@@ -78,6 +78,22 @@ public class MatchTests
         match.Score().Should().Be("Set Player 1");
     }
 
+    [Fact]
+    public void Two_sets_to_player_one_reads_match_player_one()
+    {
+        var match = new Match();
+        // Set 1: 6-4
+        for (var i = 0; i < 4; i++) { PlayGame(match, 1); PlayGame(match, 2); }
+        PlayGame(match, 1);
+        PlayGame(match, 1);
+        // Set 2: 6-3
+        for (var i = 0; i < 3; i++) { PlayGame(match, 1); PlayGame(match, 2); }
+        PlayGame(match, 1);
+        PlayGame(match, 1);
+        PlayGame(match, 1);
+        match.Score().Should().Be("Match Player 1");
+    }
+
     private static void PlayGame(Match match, int winner)
     {
         for (var p = 0; p < 4; p++) match.PointWonBy(winner);

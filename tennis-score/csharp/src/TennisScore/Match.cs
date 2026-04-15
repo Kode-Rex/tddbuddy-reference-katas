@@ -6,11 +6,16 @@ public class Match
     private int _p2Points;
     private int _p1Games;
     private int _p2Games;
+    private int _p1Sets;
+    private int _p2Sets;
     private int? _gameJustWonBy;
     private int? _setJustWonBy;
+    private int? _matchWinner;
 
     public void PointWonBy(int player)
     {
+        if (_matchWinner.HasValue) return;
+
         _gameJustWonBy = null;
         _setJustWonBy = null;
 
@@ -21,12 +26,17 @@ public class Match
         if (p1 == ScoreState.Game) { _p1Games++; _p1Points = 0; _p2Points = 0; _gameJustWonBy = 1; }
         else if (p2 == ScoreState.Game) { _p2Games++; _p1Points = 0; _p2Points = 0; _gameJustWonBy = 2; }
 
-        if (_p1Games >= 6 && _p1Games - _p2Games >= 2) { _setJustWonBy = 1; _gameJustWonBy = null; }
-        else if (_p2Games >= 6 && _p2Games - _p1Games >= 2) { _setJustWonBy = 2; _gameJustWonBy = null; }
+        if (_p1Games >= 6 && _p1Games - _p2Games >= 2) { _p1Sets++; _p1Games = 0; _p2Games = 0; _setJustWonBy = 1; _gameJustWonBy = null; }
+        else if (_p2Games >= 6 && _p2Games - _p1Games >= 2) { _p2Sets++; _p1Games = 0; _p2Games = 0; _setJustWonBy = 2; _gameJustWonBy = null; }
+
+        if (_p1Sets >= 2) { _matchWinner = 1; _setJustWonBy = null; }
+        else if (_p2Sets >= 2) { _matchWinner = 2; _setJustWonBy = null; }
     }
 
     public string Score()
     {
+        if (_matchWinner == 1) return "Match Player 1";
+        if (_matchWinner == 2) return "Match Player 2";
         if (_setJustWonBy == 1) return "Set Player 1";
         if (_setJustWonBy == 2) return "Set Player 2";
         if (_gameJustWonBy == 1) return "Game Player 1";
