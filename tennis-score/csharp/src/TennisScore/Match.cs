@@ -11,7 +11,11 @@ public class Match
         else _p2Points++;
     }
 
-    public string Score() => $"{ScoreWord(_p1Points)}-{ScoreWord(_p2Points)}";
+    public string Score()
+    {
+        if (_p1Points == 3 && _p2Points == 3) return "Deuce";
+        return $"{ScoreWord(_p1Points)}-{ScoreWord(_p2Points)}";
+    }
 
     private static string ScoreWord(int points) => points switch
     {
