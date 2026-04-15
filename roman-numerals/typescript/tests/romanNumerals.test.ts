@@ -37,4 +37,8 @@ describe('toRoman', () => {
   it('90 is XC', () => {
     expect(toRoman(90)).toBe('XC');
   });
+
+  it('400 is CD', () => {
+    expect(toRoman(400)).toBe('CD');
+  });
 });
