@@ -21,7 +21,7 @@ Shared specification satisfied by the C#, TypeScript, and Python implementations
 5. **`"111221"` has three 1s, two 2s, one 1** → `"312211"`
 6. **`"2"` alone is one 2** → `"12"`
 7. **`"22"` is two 2s** → `"22"` (a fixed point)
-8. **`"3211"` has one 3, one 2, two 1s** → `"13112111"`
+8. **`"3211"` has one 3, one 2, two 1s** → `"131221"`
 9. **Ten consecutive 1s are described as ten 1s** → `"101"`
 
 ### `look_and_say(seed, n)`
