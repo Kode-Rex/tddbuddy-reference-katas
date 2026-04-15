@@ -30,4 +30,13 @@ describe('Aged items', () => {
 
     expect(item.quality).toBe(50);
   });
+
+  it('sell-in decreases by one each day', () => {
+    const item = new ItemBuilder().aged().withQuality(10).withSellIn(5).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.sellIn).toBe(4);
+  });
 });
