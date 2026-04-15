@@ -15,4 +15,15 @@ public class ConjuredItemTests
 
         item.Quality.Should().Be(8);
     }
+
+    [Fact]
+    public void Conjured_items_lose_four_quality_per_day_after_the_sell_by_date()
+    {
+        var item = new ItemBuilder().Conjured().WithQuality(10).WithSellIn(0).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(6);
+    }
 }
