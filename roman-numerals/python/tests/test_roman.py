@@ -23,3 +23,7 @@ def test_4_is_IV():
 
 def test_10_is_X():
     assert to_roman(10) == "X"
+
+
+def test_9_is_IX():
+    assert to_roman(9) == "IX"
