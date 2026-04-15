@@ -28,4 +28,8 @@ describe('Prime Factors', () => {
   it('9 factors into two threes', () => {
     expect(generate(9)).toEqual([3, 3]);
   });
+
+  it('12 factors into two, two, three', () => {
+    expect(generate(12)).toEqual([2, 2, 3]);
+  });
 });
