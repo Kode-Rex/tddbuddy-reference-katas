@@ -37,3 +37,12 @@ def test_backstage_pass_quality_drops_to_zero_after_the_concert():
     inn.update_inventory()
 
     assert item.quality == 0
+
+
+def test_backstage_pass_quality_never_exceeds_fifty_before_the_concert():
+    item = ItemBuilder().backstage_pass().with_quality(49).with_sell_in(5).build()
+    inn = GildedRoseInn(Inventory([item]))
+
+    inn.update_inventory()
+
+    assert item.quality == 50
