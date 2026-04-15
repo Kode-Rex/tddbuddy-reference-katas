@@ -200,7 +200,15 @@ Plus `astro-site/src/content/katas/<kata>.md` updates: frontmatter `solutionsCSh
 
 ### Template P — Pedagogy (5 katas)
 
-**Reference model:** *This template has no prior example in the repo yet.* String Calculator will be the first one built; once it lands, other Pedagogy katas mirror its shape.
+**Reference model:** `string-calculator/` (complete). Mirror its shape and conventions.
+
+**Pedagogy-mode style conventions** (established by string-calculator; apply to prime-factors, bowling-game, tennis-score, roman-numerals):
+
+- **Inline literals in the SUT when the walkthrough names them by value.** If the walkthrough row reads "Filter numbers greater than 1000 with `n <= 1000`", the code should show `n <= 1000` inline, not `n <= MaxAddend`. Pulling these into named constants hides the teaching moment. This is the opposite of the rule for Mode F — in a full-bake kata, named constants win.
+- **Parse-return shapes may differ per language.** C# may return a tuple of literal strings; TS may return a compiled RegExp; Python may return a NamedTuple with a regex pattern string. Each is idiomatic. Walkthroughs should acknowledge the divergence rather than claim "only idioms differ."
+- **Exception types are language-idiomatic.** C# `ArgumentException`, TS `Error`, Python `ValueError`. The message string is *byte-identical* across languages; the exception type is not.
+- **Reflect commits are empty** (`git commit --allow-empty`). Content-bearing reflect notes belong in the walkthrough's "what was learned" column, not in a `NOTES.md`.
+- **`spec —` commit prefix** labels tests that pass on arrival after a prior triangulation generalized correctly. Two or three per kata is the right cadence — they mark the honest moment the algorithm outran the test list.
 
 **Goal:** show the TDD arc as it actually unfolds, including the reflection step. Commits are small enough that a reader can walk them chronologically and absorb the rhythm.
 
