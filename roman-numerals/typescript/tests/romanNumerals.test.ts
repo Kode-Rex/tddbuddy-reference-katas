@@ -45,4 +45,8 @@ describe('toRoman', () => {
   it('900 is CM', () => {
     expect(toRoman(900)).toBe('CM');
   });
+
+  it('1000 is M', () => {
+    expect(toRoman(1000)).toBe('M');
+  });
 });
