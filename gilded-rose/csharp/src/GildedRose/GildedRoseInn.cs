@@ -13,6 +13,10 @@ public class GildedRoseInn
     {
         foreach (var item in Inventory.Items)
         {
+            if (item.Category == Category.Legendary)
+            {
+                continue;
+            }
             if (item.Category == Category.Aged)
             {
                 var gain = item.SellIn <= 0 ? 2 : 1;
