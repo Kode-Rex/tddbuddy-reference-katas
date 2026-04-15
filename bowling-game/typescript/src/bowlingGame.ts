@@ -1,13 +1,13 @@
 export function score(rolls: number[]): number {
   let total = 0;
-  let i = 0;
-  while (i < rolls.length - 1) {
-    if (rolls[i]! + rolls[i + 1]! === 10) {
-      total += 10 + rolls[i + 2]!;
+  let rollIndex = 0;
+  for (let frameIndex = 0; frameIndex < 10; frameIndex++) {
+    if (rolls[rollIndex]! + rolls[rollIndex + 1]! === 10) {
+      total += 10 + rolls[rollIndex + 2]!;
     } else {
-      total += rolls[i]! + rolls[i + 1]!;
+      total += rolls[rollIndex]! + rolls[rollIndex + 1]!;
     }
-    i += 2;
+    rollIndex += 2;
   }
   return total;
 }
