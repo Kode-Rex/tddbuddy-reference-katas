@@ -11,20 +11,13 @@ public class Match
         else _p2Points++;
     }
 
-    public string Score()
+    public string Score() => $"{ScoreWord(_p1Points)}-{ScoreWord(_p2Points)}";
+
+    private static string ScoreWord(int points) => points switch
     {
-        string p1Word;
-        if (_p1Points == 0) p1Word = "Love";
-        else if (_p1Points == 1) p1Word = "15";
-        else if (_p1Points == 2) p1Word = "30";
-        else p1Word = "40";
-
-        string p2Word;
-        if (_p2Points == 0) p2Word = "Love";
-        else if (_p2Points == 1) p2Word = "15";
-        else if (_p2Points == 2) p2Word = "30";
-        else p2Word = "40";
-
-        return $"{p1Word}-{p2Word}";
-    }
+        0 => "Love",
+        1 => "15",
+        2 => "30",
+        _ => "40",
+    };
 }
