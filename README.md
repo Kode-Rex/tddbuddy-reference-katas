@@ -150,6 +150,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [IP Validator](ip-validator/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | IPv4 dotted-quad validation |
 | [Last Sunday](last-sunday/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Last Sunday of month/year |
 | [Metric Converter](metric-converter/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Unit conversion with typed enums |
+| [Change Maker](change-maker/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Greedy change-making for canonical coins |
 | *(60+ more)* | — | — | — | Agent Full-Bake | Middle/High | See [`docs/plans/2026-04-14-remaining-katas.md`](docs/plans/2026-04-14-remaining-katas.md) |
 
 More katas will be added as the reference set grows. Algorithmic katas like Prime Factors and Roman Numerals appear here in **Pedagogy mode** — the algorithm-emerges-from-triangulation arc is itself the teaching point. Domain-heavy katas appear in **Agent Full-Bake mode** with builders and ubiquitous language. Straightforward one-liner solutions for every TDD Buddy kata in many languages live in the main [tddbuddy-solutions](https://github.com/Kode-Rex/tddbuddy-solutions) repo.
