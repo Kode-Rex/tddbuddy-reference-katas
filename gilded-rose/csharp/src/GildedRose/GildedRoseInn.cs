@@ -24,10 +24,17 @@ public class GildedRoseInn
             }
             else if (item.Category == Category.BackstagePass)
             {
-                var gain = item.SellIn <= 5 ? 3
-                    : item.SellIn <= 10 ? 2
-                    : 1;
-                item.Quality = Math.Min(50, item.Quality + gain);
+                if (item.SellIn <= 0)
+                {
+                    item.Quality = 0;
+                }
+                else
+                {
+                    var gain = item.SellIn <= 5 ? 3
+                        : item.SellIn <= 10 ? 2
+                        : 1;
+                    item.Quality = Math.Min(50, item.Quality + gain);
+                }
             }
             else
             {

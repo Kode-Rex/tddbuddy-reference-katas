@@ -37,4 +37,15 @@ public class BackstagePassTests
 
         item.Quality.Should().Be(13);
     }
+
+    [Fact]
+    public void Backstage_pass_quality_drops_to_zero_after_the_concert()
+    {
+        var item = new ItemBuilder().BackstagePass().WithQuality(20).WithSellIn(0).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(0);
+    }
 }
