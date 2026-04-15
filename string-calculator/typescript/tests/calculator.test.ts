@@ -24,4 +24,8 @@ describe('String Calculator', () => {
   it('custom single-char delimiter is declared in header', () => {
     expect(add('//;\n1;2')).toBe(3);
   });
+
+  it('negative number is rejected with listing message', () => {
+    expect(() => add('-1,2')).toThrow('negatives not allowed: -1');
+  });
 });
