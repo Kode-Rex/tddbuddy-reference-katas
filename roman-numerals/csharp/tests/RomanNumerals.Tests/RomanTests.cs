@@ -33,4 +33,10 @@ public class RomanTests
     {
         Roman.ToRoman(4).Should().Be("IV");
     }
+
+    [Fact]
+    public void Ten_is_X()
+    {
+        Roman.ToRoman(10).Should().Be("X");
+    }
 }
