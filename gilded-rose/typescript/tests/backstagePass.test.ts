@@ -39,4 +39,13 @@ describe('Backstage passes', () => {
 
     expect(item.quality).toBe(0);
   });
+
+  it('quality never exceeds fifty before the concert', () => {
+    const item = new ItemBuilder().backstagePass().withQuality(49).withSellIn(5).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.quality).toBe(50);
+  });
 });
