@@ -1,0 +1,11 @@
+# Age Calculator — C# Walkthrough
+
+This is an **algorithmic kata**: inputs are two `DateOnly` values (`birthdate` and `today`) and the output is an `int` — so there are no domain builders, no value types, and no collaborators to introduce. The reference lands as a single commit: `src/AgeCalculator/AgeCalculator.cs` exposes a static `Calculate(DateOnly birthdate, DateOnly today)` method that subtracts years, then knocks one off if the (month, day) pair has not yet reached the birthdate's (month, day) in the reference year. `tests/AgeCalculator.Tests/AgeCalculatorTests.cs` has one `[Fact]` per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec.
+
+**Reference date passed in, not read from the clock — deliberate.** The method takes `today` as a parameter rather than calling `DateTime.Today`. Ambient-clock access would make every birthday-boundary test a flake: "on her seventh birthday she is 7" can only be asserted when the reference date is an explicit input. Every age kata that tries to cheat on this ends up with `// Note: this test will start failing in 2031`. The F3-tier `bank-account` kata applies the same discipline with an injected `IClock`; at F1 the pattern collapses to "just pass the date in."
+
+**Inline literals — deliberate.** The `1` in `years - 1` and the month/day comparison stay inline rather than hiding behind `AgeAdjustment = 1` or a `BirthdayHasPassed` helper method. In F1 katas the function body fits on one screen and the literals *are* the rule — extracting names here would add syllables without meaning. F3 and larger modes prefer named constants; F1 deliberately doesn't.
+
+**Leap-day-in-non-leap-year falls out naturally.** A `2000-02-29` birthdate against `2001-02-28` compares `(2, 28) < (2, 29)` → `true`, so the age decrement fires and the leap baby is still 0 on Feb 28. Against `2001-03-01` the comparison is `(3, 1) < (2, 29)` → `false`, so the age increments. No special case for Feb 29 is needed; the (month, day) comparison captures the rule that leap-day birthdays "move to March 1" in non-leap years.
+
+**Future-birthdate guard.** `birthdate > today` throws `ArgumentException` with message `birthdate is after today` — byte-identical across all three languages. Without the guard the arithmetic would return a negative number, which is nonsensical for age.
