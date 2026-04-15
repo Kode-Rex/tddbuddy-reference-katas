@@ -40,4 +40,12 @@ describe('String Calculator', () => {
   it('delimiter may be any length in bracketed header', () => {
     expect(add('//[***]\n1***2***3')).toBe(6);
   });
+
+  it('multiple single-char delimiters are supported', () => {
+    expect(add('//[*][%]\n1*2%3')).toBe(6);
+  });
+
+  it('multiple multi-char delimiters are supported', () => {
+    expect(add('//[**][%%]\n1**2%%3')).toBe(6);
+  });
 });
