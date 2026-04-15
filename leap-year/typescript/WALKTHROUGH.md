@@ -1,0 +1,5 @@
+# Leap Year — TypeScript Walkthrough
+
+This is an **algorithmic kata**: the input is a `number` and the output is a `boolean`, so there are no domain builders, no value types, and no collaborators to introduce — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/leapYear.ts` exports a single `isLeapYear(year: number): boolean` that cascades the Gregorian rule from most-specific to most-general — divisible by `400` wins outright, divisible by `100` loses, otherwise divisible by `4` wins. `tests/leapYear.test.ts` has one `it()` per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec. Input validation concerns from the TDD Buddy prompt are intentionally out of scope — see the kata [`README.md`](../README.md).
+
+**Inline literals — deliberate.** The divisors `4`, `100`, `400` are kept inline rather than extracted as named constants. In F1 katas the function body fits on one screen and the divisors *are* the rule. F3 and larger modes prefer named constants; F1 deliberately doesn't.
