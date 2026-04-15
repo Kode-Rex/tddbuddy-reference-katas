@@ -28,4 +28,8 @@ describe('String Calculator', () => {
   it('negative number is rejected with listing message', () => {
     expect(() => add('-1,2')).toThrow('negatives not allowed: -1');
   });
+
+  it('multiple negatives are all listed in the message', () => {
+    expect(() => add('-1,-2,3')).toThrow('negatives not allowed: -1, -2');
+  });
 });
