@@ -36,4 +36,8 @@ describe('String Calculator', () => {
   it('numbers greater than 1000 are ignored', () => {
     expect(add('2,1001')).toBe(2);
   });
+
+  it('delimiter may be any length in bracketed header', () => {
+    expect(add('//[***]\n1***2***3')).toBe(6);
+  });
 });
