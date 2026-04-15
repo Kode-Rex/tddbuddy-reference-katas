@@ -33,4 +33,10 @@ public class CalculatorTests
     {
         Calculator.Add("1\n2,3").Should().Be(6);
     }
+
+    [Fact]
+    public void Custom_single_char_delimiter_is_declared_in_header()
+    {
+        Calculator.Add("//;\n1;2").Should().Be(3);
+    }
 }
