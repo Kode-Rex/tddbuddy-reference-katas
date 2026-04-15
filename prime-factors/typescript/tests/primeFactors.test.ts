@@ -40,4 +40,8 @@ describe('Prime Factors', () => {
   it('100 factors into two, two, five, five', () => {
     expect(generate(100)).toEqual([2, 2, 5, 5]);
   });
+
+  it('30030 factors into the first six primes', () => {
+    expect(generate(30030)).toEqual([2, 3, 5, 7, 11, 13]);
+  });
 });
