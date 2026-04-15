@@ -51,4 +51,10 @@ public class FactorsTests
     {
         Factors.Generate(12).Should().Equal(2, 2, 3);
     }
+
+    [Fact]
+    public void Fifteen_factors_into_three_and_five()
+    {
+        Factors.Generate(15).Should().Equal(3, 5);
+    }
 }
