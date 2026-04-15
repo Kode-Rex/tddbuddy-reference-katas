@@ -26,4 +26,15 @@ public class AgedItemTests
 
         item.Quality.Should().Be(12);
     }
+
+    [Fact]
+    public void Aged_item_quality_never_exceeds_fifty()
+    {
+        var item = new ItemBuilder().Aged().WithQuality(50).WithSellIn(5).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(50);
+    }
 }
