@@ -21,4 +21,13 @@ describe('Standard items', () => {
 
     expect(item.quality).toBe(8);
   });
+
+  it('quality never goes below zero', () => {
+    const item = new ItemBuilder().standard().withQuality(0).withSellIn(5).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.quality).toBe(0);
+  });
 });
