@@ -22,4 +22,8 @@ describe('Bowling Game', () => {
   it('perfect game scores 300', () => {
     expect(score(new Array(12).fill(10))).toBe(300);
   });
+
+  it('all spares scores 150', () => {
+    expect(score(new Array(21).fill(5))).toBe(150);
+  });
 });
