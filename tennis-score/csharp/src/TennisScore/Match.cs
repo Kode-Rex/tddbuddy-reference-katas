@@ -13,7 +13,9 @@ public class Match
 
     public string Score()
     {
-        if (_p1Points == 3 && _p2Points == 3) return "Deuce";
+        if (_p1Points >= 4 && _p1Points - _p2Points == 1) return "Advantage Player 1";
+        if (_p2Points >= 4 && _p2Points - _p1Points == 1) return "Advantage Player 2";
+        if (_p1Points >= 3 && _p1Points == _p2Points) return "Deuce";
         return $"{ScoreWord(_p1Points)}-{ScoreWord(_p2Points)}";
     }
 
