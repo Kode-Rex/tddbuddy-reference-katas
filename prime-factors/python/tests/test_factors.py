@@ -39,3 +39,7 @@ def test_fifteen_factors_into_three_and_five():
 
 def test_one_hundred_factors_into_two_two_five_five():
     assert generate(100) == [2, 2, 5, 5]
+
+
+def test_thirty_thousand_thirty_factors_into_the_first_six_primes():
+    assert generate(30030) == [2, 3, 5, 7, 11, 13]
