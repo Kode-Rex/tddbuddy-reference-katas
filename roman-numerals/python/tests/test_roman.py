@@ -7,3 +7,7 @@ def test_1_is_I():
 
 def test_2_is_II():
     assert to_roman(2) == "II"
+
+
+def test_3_is_III():
+    assert to_roman(3) == "III"
