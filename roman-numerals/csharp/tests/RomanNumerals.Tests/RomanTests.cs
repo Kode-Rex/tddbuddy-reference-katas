@@ -9,4 +9,10 @@ public class RomanTests
     {
         Roman.ToRoman(1).Should().Be("I");
     }
+
+    [Fact]
+    public void Two_is_II()
+    {
+        Roman.ToRoman(2).Should().Be("II");
+    }
 }
