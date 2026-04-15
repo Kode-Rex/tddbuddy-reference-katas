@@ -57,4 +57,10 @@ public class FactorsTests
     {
         Factors.Generate(15).Should().Equal(3, 5);
     }
+
+    [Fact]
+    public void One_hundred_factors_into_two_two_five_five()
+    {
+        Factors.Generate(100).Should().Equal(2, 2, 5, 5);
+    }
 }
