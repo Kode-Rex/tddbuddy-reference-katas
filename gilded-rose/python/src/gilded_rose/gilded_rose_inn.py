@@ -9,7 +9,8 @@ class GildedRoseInn:
     def update_inventory(self) -> None:
         for item in self.inventory.items:
             if item.category == Category.AGED:
-                item.quality += 1
+                gain = 2 if item.sell_in <= 0 else 1
+                item.quality += gain
             else:
                 degrade = 2 if item.sell_in <= 0 else 1
                 item.quality = max(0, item.quality - degrade)
