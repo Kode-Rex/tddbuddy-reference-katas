@@ -31,3 +31,7 @@ def test_nine_factors_into_two_threes():
 
 def test_twelve_factors_into_two_two_three():
     assert generate(12) == [2, 2, 3]
+
+
+def test_fifteen_factors_into_three_and_five():
+    assert generate(15) == [3, 5]
