@@ -17,4 +17,15 @@ public class MatchTests
         match.PointWonBy(1);
         match.Score().Should().Be("15-Love");
     }
+
+    [Fact]
+    public void Two_points_each_reads_thirty_thirty()
+    {
+        var match = new Match();
+        match.PointWonBy(1);
+        match.PointWonBy(2);
+        match.PointWonBy(1);
+        match.PointWonBy(2);
+        match.Score().Should().Be("30-30");
+    }
 }
