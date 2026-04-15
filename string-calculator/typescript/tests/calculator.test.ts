@@ -20,4 +20,8 @@ describe('String Calculator', () => {
   it('newline is also a delimiter', () => {
     expect(add('1\n2,3')).toBe(6);
   });
+
+  it('custom single-char delimiter is declared in header', () => {
+    expect(add('//;\n1;2')).toBe(3);
+  });
 });
