@@ -15,4 +15,10 @@ public class FactorsTests
     {
         Factors.Generate(2).Should().Equal(2);
     }
+
+    [Fact]
+    public void Three_is_its_own_only_prime_factor()
+    {
+        Factors.Generate(3).Should().Equal(3);
+    }
 }
