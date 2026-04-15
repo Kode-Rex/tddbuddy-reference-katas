@@ -12,4 +12,13 @@ describe('Conjured items', () => {
 
     expect(item.quality).toBe(8);
   });
+
+  it('lose four quality per day after the sell-by date', () => {
+    const item = new ItemBuilder().conjured().withQuality(10).withSellIn(0).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.quality).toBe(6);
+  });
 });
