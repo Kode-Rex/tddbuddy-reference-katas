@@ -15,6 +15,7 @@ public class GildedRoseInn
         {
             var degrade = item.SellIn <= 0 ? 2 : 1;
             item.Quality = Math.Max(0, item.Quality - degrade);
+            item.SellIn -= 1;
         }
     }
 }

@@ -37,4 +37,15 @@ public class StandardItemTests
 
         item.Quality.Should().Be(0);
     }
+
+    [Fact]
+    public void Standard_item_sell_in_decreases_by_one_each_day()
+    {
+        var item = new ItemBuilder().Standard().WithQuality(10).WithSellIn(5).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.SellIn.Should().Be(4);
+    }
 }
