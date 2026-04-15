@@ -8,8 +8,12 @@ class CardBuilder:
     """
 
     def __init__(self) -> None:
-        self._numbers = [[None for _ in range(CARD_SIZE)] for _ in range(CARD_SIZE)]
-        self._marks = [[False for _ in range(CARD_SIZE)] for _ in range(CARD_SIZE)]
+        self._numbers: list[list[int | None]] = [
+            [None for _ in range(CARD_SIZE)] for _ in range(CARD_SIZE)
+        ]
+        self._marks: list[list[bool]] = [
+            [False for _ in range(CARD_SIZE)] for _ in range(CARD_SIZE)
+        ]
         # Free space is blank and pre-marked on every card.
         self._marks[FREE_ROW][FREE_COLUMN] = True
 

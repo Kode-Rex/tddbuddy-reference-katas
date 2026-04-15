@@ -51,14 +51,6 @@ NumberGrid = List[List[Optional[int]]]
 MarkGrid = List[List[bool]]
 
 
-def _empty_numbers() -> NumberGrid:
-    return [[None for _ in range(CARD_SIZE)] for _ in range(CARD_SIZE)]
-
-
-def _empty_marks() -> MarkGrid:
-    return [[False for _ in range(CARD_SIZE)] for _ in range(CARD_SIZE)]
-
-
 class Card:
     def __init__(self, numbers: NumberGrid, marks: MarkGrid) -> None:
         """Test-folder constructor hook; production code should use a generator."""
