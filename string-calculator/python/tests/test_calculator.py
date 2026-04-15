@@ -1,3 +1,5 @@
+import pytest
+
 from string_calculator.calculator import add
 
 
@@ -23,3 +25,8 @@ def test_newline_is_also_a_delimiter():
 
 def test_custom_single_char_delimiter_is_declared_in_header():
     assert add("//;\n1;2") == 3
+
+
+def test_negative_number_is_rejected_with_listing_message():
+    with pytest.raises(ValueError, match="negatives not allowed: -1"):
+        add("-1,2")
