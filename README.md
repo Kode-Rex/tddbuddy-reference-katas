@@ -131,7 +131,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [String Calculator](string-calculator/) | ✅ | ✅ | ✅ | Pedagogy | Low→High | Kent Beck's canonical TDD teaching kata |
 | [Prime Factors](prime-factors/) | ✅ | ✅ | ✅ | Pedagogy | Low→High | Uncle Bob's triangulation masterclass |
 | [Bowling Game](bowling-game/) | ✅ | ✅ | ✅ | Pedagogy | Low→Middle | Frames emerge through refactor — the class that does not get written |
-| [Tennis Score](tennis-score/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→Middle | State machine refactored from if/else chain |
+| [Tennis Score](tennis-score/) | ✅ | ✅ | ✅ | Pedagogy | Low→Middle | State machine refactored from if/else chain |
 | [Roman Numerals](roman-numerals/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→High | Triangulation across expanding cases |
 | [Video Club Rental](video-club-rental/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Rich domain, multiple collaborators |
 | [Shopping Cart](shopping-cart/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Cart + line items + pricing strategies |
