@@ -20,4 +20,6 @@ class Match:
             self._p2_points += 1
 
     def score(self) -> str:
+        if self._p1_points == 3 and self._p2_points == 3:
+            return "Deuce"
         return f"{_score_word(self._p1_points)}-{_score_word(self._p2_points)}"
