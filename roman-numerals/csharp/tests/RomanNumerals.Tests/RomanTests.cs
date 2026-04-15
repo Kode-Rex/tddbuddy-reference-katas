@@ -81,4 +81,10 @@ public class RomanTests
     {
         Roman.ToRoman(1984).Should().Be("MCMLXXXIV");
     }
+
+    [Fact]
+    public void ThreeThousandNineHundredNinetyNine_is_MMMCMXCIX()
+    {
+        Roman.ToRoman(3999).Should().Be("MMMCMXCIX");
+    }
 }
