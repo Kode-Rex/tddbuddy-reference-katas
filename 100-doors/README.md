@@ -1,0 +1,5 @@
+# 100 Doors
+
+One hundred closed doors. One hundred passes. On pass `n`, toggle every `n`-th door. Return the door numbers that are open at the end.
+
+This kata ships in **Agent Full-Bake** mode at the F1 tier: an algorithmic kata with **no builders**. The input is an `int` (number of doors) and the output is a sequence of door numbers — the inputs and outputs *are* the domain, so there are no aggregates to construct, no value types to introduce, and no collaborators to inject. The reference uses the **simulation** approach (nested passes toggling boolean state) because the simulation matches the narrative of the problem. The walkthroughs name the **perfect-square insight** as a teaching note — a door `i` ends open iff `i` is a perfect square, because only perfect squares have an odd number of divisors. The closed-form `sqrt(i)-is-integer` implementation is a one-liner; we ship the simulation so the code reads like the spec. See [`SCENARIOS.md`](SCENARIOS.md) for the shared specification.
