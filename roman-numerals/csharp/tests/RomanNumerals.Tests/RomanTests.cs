@@ -69,4 +69,10 @@ public class RomanTests
     {
         Roman.ToRoman(900).Should().Be("CM");
     }
+
+    [Fact]
+    public void Thousand_is_M()
+    {
+        Roman.ToRoman(1000).Should().Be("M");
+    }
 }
