@@ -37,7 +37,7 @@ public sealed class Cart
     public void UpdateQuantity(string sku, int quantity)
     {
         var line = FindLine(sku)
-            ?? throw new InvalidOperationException($"No line item for SKU '{sku}'");
+            ?? throw new LineItemNotFoundException($"No line item for SKU '{sku}'");
         line.SetQuantity(new Quantity(quantity));
     }
 

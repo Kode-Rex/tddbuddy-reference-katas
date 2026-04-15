@@ -1,3 +1,4 @@
+import { LineItemNotFoundError } from './errors.js';
 import { LineItem } from './LineItem.js';
 import { Money } from './Money.js';
 import { Product } from './Product.js';
@@ -30,7 +31,7 @@ export class Cart {
   updateQuantity(sku: string, quantity: number): void {
     const line = this.findLine(sku);
     if (line === undefined) {
-      throw new Error(`No line item for SKU '${sku}'`);
+      throw new LineItemNotFoundError(`No line item for SKU '${sku}'`);
     }
     line.setQuantity(new Quantity(quantity));
   }

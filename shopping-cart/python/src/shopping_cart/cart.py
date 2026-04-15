@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 
+from .exceptions import LineItemNotFoundError
 from .line_item import LineItem
 from .money import Money
 from .product import Product
@@ -37,7 +38,7 @@ class Cart:
     def update_quantity(self, sku: str, quantity: int) -> None:
         line = self._find_line(sku)
         if line is None:
-            raise LookupError(f"No line item for SKU '{sku}'")
+            raise LineItemNotFoundError(f"No line item for SKU '{sku}'")
         line.set_quantity(Quantity(quantity))
 
     def total(self) -> Money:

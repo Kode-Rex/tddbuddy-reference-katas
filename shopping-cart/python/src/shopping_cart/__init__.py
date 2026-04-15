@@ -7,6 +7,7 @@ from .discount_policy import (
     NoDiscount,
     PercentOff,
 )
+from .exceptions import LineItemNotFoundError
 from .line_item import LineItem
 from .money import Money
 from .product import Product
@@ -19,6 +20,7 @@ __all__ = [
     "DiscountPolicy",
     "FixedOff",
     "LineItem",
+    "LineItemNotFoundError",
     "Money",
     "NoDiscount",
     "PercentOff",
