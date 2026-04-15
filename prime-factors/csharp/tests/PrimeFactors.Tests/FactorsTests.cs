@@ -45,4 +45,10 @@ public class FactorsTests
     {
         Factors.Generate(9).Should().Equal(3, 3);
     }
+
+    [Fact]
+    public void Twelve_factors_into_two_two_three()
+    {
+        Factors.Generate(12).Should().Equal(2, 2, 3);
+    }
 }
