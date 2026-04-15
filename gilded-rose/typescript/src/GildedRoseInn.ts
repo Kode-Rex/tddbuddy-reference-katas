@@ -20,6 +20,9 @@ export class GildedRoseInn {
             : 1;
           item.quality = Math.min(50, item.quality + gain);
         }
+      } else if (item.category === 'conjured') {
+        const degrade = item.sellIn <= 0 ? 4 : 2;
+        item.quality = Math.max(0, item.quality - degrade);
       } else {
         const degrade = item.sellIn <= 0 ? 2 : 1;
         item.quality = Math.max(0, item.quality - degrade);
