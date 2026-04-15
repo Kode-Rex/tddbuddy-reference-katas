@@ -26,4 +26,15 @@ public class LegendaryItemTests
 
         item.SellIn.Should().Be(5);
     }
+
+    [Fact]
+    public void Legendary_items_may_have_quality_above_fifty()
+    {
+        var item = new ItemBuilder().Legendary().Named("Sulfuras, Hand of Ragnaros").WithQuality(80).WithSellIn(5).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(80);
+    }
 }
