@@ -39,4 +39,10 @@ public class RomanTests
     {
         Roman.ToRoman(10).Should().Be("X");
     }
+
+    [Fact]
+    public void Nine_is_IX()
+    {
+        Roman.ToRoman(9).Should().Be("IX");
+    }
 }
