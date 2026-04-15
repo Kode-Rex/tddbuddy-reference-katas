@@ -43,3 +43,7 @@ def test_400_is_CD():
 
 def test_900_is_CM():
     assert to_roman(900) == "CM"
+
+
+def test_1000_is_M():
+    assert to_roman(1000) == "M"
