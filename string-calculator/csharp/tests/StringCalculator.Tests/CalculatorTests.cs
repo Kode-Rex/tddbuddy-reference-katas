@@ -9,4 +9,10 @@ public class CalculatorTests
     {
         Calculator.Add("").Should().Be(0);
     }
+
+    [Fact]
+    public void Single_number_returns_itself()
+    {
+        Calculator.Add("1").Should().Be(1);
+    }
 }
