@@ -27,3 +27,7 @@ def test_10_is_X():
 
 def test_9_is_IX():
     assert to_roman(9) == "IX"
+
+
+def test_40_is_XL():
+    assert to_roman(40) == "XL"
