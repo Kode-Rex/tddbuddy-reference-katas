@@ -54,3 +54,20 @@ def test_mixed_inventory_each_item_follows_its_own_category_rules_on_the_same_da
     assert legendary.quality == 80
     assert pass_.quality == 12
     assert conjured.quality == 8
+
+
+def test_multi_day_aging_ten_days_of_updates_applied_in_sequence_produce_correct_quality_progression():
+    item = (
+        ItemBuilder()
+        .standard()
+        .with_quality(20)
+        .with_sell_in(5)
+        .build()
+    )
+    inn = GildedRoseInn(Inventory([item]))
+
+    for _ in range(10):
+        inn.update_inventory()
+
+    assert item.quality == 5
+    assert item.sell_in == -5
