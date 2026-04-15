@@ -15,4 +15,10 @@ public class CalculatorTests
     {
         Calculator.Add("1").Should().Be(1);
     }
+
+    [Fact]
+    public void Two_numbers_return_their_sum()
+    {
+        Calculator.Add("1,2").Should().Be(3);
+    }
 }
