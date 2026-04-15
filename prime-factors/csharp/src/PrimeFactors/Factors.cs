@@ -5,12 +5,14 @@ public static class Factors
     public static IReadOnlyList<int> Generate(int n)
     {
         var factors = new List<int>();
-        while (n % 2 == 0)
+        for (var divisor = 2; n > 1; divisor++)
         {
-            factors.Add(2);
-            n /= 2;
+            while (n % divisor == 0)
+            {
+                factors.Add(divisor);
+                n /= divisor;
+            }
         }
-        if (n > 1) factors.Add(n);
         return factors;
     }
 }
