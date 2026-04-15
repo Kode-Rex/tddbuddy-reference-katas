@@ -24,4 +24,19 @@ public class MultiItemWorldTests
         pass.Quality.Should().Be(12);
         conjured.Quality.Should().Be(8);
     }
+
+    [Fact]
+    public void Multi_day_aging_ten_days_of_updates_applied_in_sequence_produce_correct_quality_progression()
+    {
+        var item = new ItemBuilder().Standard().WithQuality(20).WithSellIn(5).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        for (var day = 0; day < 10; day++)
+        {
+            inn.UpdateInventory();
+        }
+
+        item.Quality.Should().Be(5);
+        item.SellIn.Should().Be(-5);
+    }
 }
