@@ -13,4 +13,9 @@ describe('Bowling Game', () => {
     const rolls = [5, 5, 3, 0, ...new Array(16).fill(0)];
     expect(score(rolls)).toBe(16);
   });
+
+  it('one strike scores the strike bonus', () => {
+    const rolls = [10, 3, 4, ...new Array(16).fill(0)];
+    expect(score(rolls)).toBe(24);
+  });
 });
