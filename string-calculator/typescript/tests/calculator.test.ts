@@ -16,4 +16,8 @@ describe('String Calculator', () => {
   it('many numbers returns their sum', () => {
     expect(add('1,2,3,4')).toBe(10);
   });
+
+  it('newline is also a delimiter', () => {
+    expect(add('1\n2,3')).toBe(6);
+  });
 });
