@@ -39,4 +39,10 @@ public class FactorsTests
     {
         Factors.Generate(8).Should().Equal(2, 2, 2);
     }
+
+    [Fact]
+    public void Nine_factors_into_two_threes()
+    {
+        Factors.Generate(9).Should().Equal(3, 3);
+    }
 }
