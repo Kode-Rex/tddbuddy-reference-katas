@@ -140,6 +140,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [FizzBuzz Whiz](fizz-buzz-whiz/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Classic FizzBuzz; no builders, pure function |
 | [Leap Year](leap-year/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Divisible by 4 / 100 / 400 rule cascade |
 | [100 Doors](100-doors/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Simulation; perfect-square insight in walkthrough |
+| [Rock Paper Scissors](rock-paper-scissors/) | ✅ | ✅ | ✅ | Agent Full-Bake | High | Typed enums for plays and outcomes |
 | *(60+ more)* | — | — | — | Agent Full-Bake | Middle/High | See [`docs/plans/2026-04-14-remaining-katas.md`](docs/plans/2026-04-14-remaining-katas.md) |
 
 More katas will be added as the reference set grows. Algorithmic katas like Prime Factors and Roman Numerals appear here in **Pedagogy mode** — the algorithm-emerges-from-triangulation arc is itself the teaching point. Domain-heavy katas appear in **Agent Full-Bake mode** with builders and ubiquitous language. Straightforward one-liner solutions for every TDD Buddy kata in many languages live in the main [tddbuddy-solutions](https://github.com/Kode-Rex/tddbuddy-solutions) repo.
