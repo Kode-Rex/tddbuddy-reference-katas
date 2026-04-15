@@ -7,3 +7,7 @@ def test_one_has_no_prime_factors():
 
 def test_two_is_its_own_only_prime_factor():
     assert generate(2) == [2]
+
+
+def test_three_is_its_own_only_prime_factor():
+    assert generate(3) == [3]
