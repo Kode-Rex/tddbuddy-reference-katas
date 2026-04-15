@@ -9,3 +9,12 @@ def test_one_point_to_player_one_reads_fifteen_love():
     match = Match()
     match.point_won_by(1)
     assert match.score() == "15-Love"
+
+
+def test_two_points_each_reads_thirty_thirty():
+    match = Match()
+    match.point_won_by(1)
+    match.point_won_by(2)
+    match.point_won_by(1)
+    match.point_won_by(2)
+    assert match.score() == "30-30"
