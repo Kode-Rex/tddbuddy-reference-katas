@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 from .discount_policy import NO_DISCOUNT, DiscountPolicy
 from .money import Money
