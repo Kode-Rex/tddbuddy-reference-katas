@@ -75,4 +75,10 @@ public class RomanTests
     {
         Roman.ToRoman(1000).Should().Be("M");
     }
+
+    [Fact]
+    public void NineteenEightyFour_is_MCMLXXXIV()
+    {
+        Roman.ToRoman(1984).Should().Be("MCMLXXXIV");
+    }
 }
