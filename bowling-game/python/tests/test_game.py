@@ -11,3 +11,7 @@ def test_all_ones_scores_twenty():
 
 def test_one_spare_scores_the_spare_bonus():
     assert score([5, 5, 3, 0] + [0] * 16) == 16
+
+
+def test_one_strike_scores_the_strike_bonus():
+    assert score([10, 3, 4] + [0] * 16) == 24
