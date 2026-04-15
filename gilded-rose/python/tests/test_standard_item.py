@@ -19,3 +19,12 @@ def test_standard_items_lose_two_quality_per_day_after_the_sell_by_date():
     inn.update_inventory()
 
     assert item.quality == 8
+
+
+def test_standard_item_quality_never_goes_below_zero():
+    item = ItemBuilder().standard().with_quality(0).with_sell_in(5).build()
+    inn = GildedRoseInn(Inventory([item]))
+
+    inn.update_inventory()
+
+    assert item.quality == 0

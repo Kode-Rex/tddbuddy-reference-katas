@@ -8,4 +8,4 @@ class GildedRoseInn:
     def update_inventory(self) -> None:
         for item in self.inventory.items:
             degrade = 2 if item.sell_in <= 0 else 1
-            item.quality -= degrade
+            item.quality = max(0, item.quality - degrade)
