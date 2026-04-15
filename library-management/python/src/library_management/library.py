@@ -2,6 +2,11 @@ from __future__ import annotations
 
 from .book import Book
 from .clock import Clock
+from .exceptions import (
+    BookNotInCatalogError,
+    NoActiveLoanError,
+    NoCopiesAvailableError,
+)
 from .isbn import Isbn
 from .loan import Loan
 from .member import Member
@@ -90,7 +95,7 @@ class Library:
         if reserved_copy is not None:
             head = self._head_reservation_for(isbn)
             if head is None or head.member is not member:
-                raise RuntimeError(f"No copies of '{isbn}' are available")
+                raise NoCopiesAvailableError(f"No copies of '{isbn}' are available")
             self._reservations.remove(head)
             reserved_copy.mark_checked_out()
             reserved_loan = Loan(member, reserved_copy, today)
@@ -99,7 +104,7 @@ class Library:
 
         available = book.find_available_copy()
         if available is None:
-            raise RuntimeError(f"No copies of '{isbn}' are available")
+            raise NoCopiesAvailableError(f"No copies of '{isbn}' are available")
         available.mark_checked_out()
         loan = Loan(member, available, today)
         self._loans.append(loan)
@@ -114,7 +119,7 @@ class Library:
             None,
         )
         if loan is None:
-            raise RuntimeError(f"Member has no active loan of '{isbn}'")
+            raise NoActiveLoanError(f"Member has no active loan of '{isbn}'")
 
         today = self._clock.today()
         loan.close(today)
@@ -169,7 +174,7 @@ class Library:
     def _require_book(self, isbn: Isbn) -> Book:
         book = self._books.get(isbn.value)
         if book is None:
-            raise RuntimeError(f"Book '{isbn}' is not in the catalog")
+            raise BookNotInCatalogError(f"Book '{isbn}' is not in the catalog")
         return book
 
     def _book_title(self, isbn: Isbn) -> str:

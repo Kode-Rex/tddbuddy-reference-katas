@@ -1,5 +1,6 @@
 import { Book } from './Book.js';
 import type { Clock } from './Clock.js';
+import { BookNotInCatalogError, NoActiveLoanError, NoCopiesAvailableError } from './errors.js';
 import { Isbn } from './Isbn.js';
 import { Loan } from './Loan.js';
 import { Member } from './Member.js';
@@ -73,7 +74,7 @@ export class Library {
     if (reservedCopy) {
       const head = this.headReservationFor(isbn);
       if (!head || head.member !== member) {
-        throw new Error(`No copies of '${isbn}' are available`);
+        throw new NoCopiesAvailableError(`No copies of '${isbn}' are available`);
       }
       this.removeReservation(head);
       reservedCopy.markCheckedOut();
@@ -83,7 +84,7 @@ export class Library {
     }
 
     const available = book.findAvailableCopy();
-    if (!available) throw new Error(`No copies of '${isbn}' are available`);
+    if (!available) throw new NoCopiesAvailableError(`No copies of '${isbn}' are available`);
     available.markCheckedOut();
     const loan = new Loan(member, available, today);
     this._loans.push(loan);
@@ -94,7 +95,7 @@ export class Library {
     const idx = this._loans.findIndex(
       (l) => !l.isClosed && l.member === member && l.copy.isbn.equals(isbn),
     );
-    if (idx === -1) throw new Error(`Member has no active loan of '${isbn}'`);
+    if (idx === -1) throw new NoActiveLoanError(`Member has no active loan of '${isbn}'`);
     const loan = this._loans[idx]!;
 
     const today = this.clock.today();
@@ -158,7 +159,7 @@ export class Library {
 
   private requireBook(isbn: Isbn): Book {
     const book = this._books.get(isbn.value);
-    if (!book) throw new Error(`Book '${isbn}' is not in the catalog`);
+    if (!book) throw new BookNotInCatalogError(`Book '${isbn}' is not in the catalog`);
     return book;
   }
 

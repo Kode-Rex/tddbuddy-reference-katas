@@ -73,7 +73,7 @@ public class Library
             var head = HeadReservationFor(isbn);
             if (head is null || !ReferenceEquals(head.Member, member))
             {
-                throw new InvalidOperationException($"No copies of '{isbn}' are available");
+                throw new NoCopiesAvailableException($"No copies of '{isbn}' are available");
             }
             _reservations.Remove(head);
             reservedCopy.MarkCheckedOut();
@@ -83,7 +83,7 @@ public class Library
         }
 
         var available = book.FindAvailableCopy()
-            ?? throw new InvalidOperationException($"No copies of '{isbn}' are available");
+            ?? throw new NoCopiesAvailableException($"No copies of '{isbn}' are available");
 
         available.MarkCheckedOut();
         var loan = new Loan(member, available, today);
@@ -95,7 +95,7 @@ public class Library
     {
         var loan = _loans.FirstOrDefault(l =>
             !l.IsClosed && ReferenceEquals(l.Member, member) && l.Copy.Isbn.Equals(isbn))
-            ?? throw new InvalidOperationException($"Member has no active loan of '{isbn}'");
+            ?? throw new NoActiveLoanException($"Member has no active loan of '{isbn}'");
 
         var today = _clock.Today();
         loan.Close(today);
@@ -161,7 +161,7 @@ public class Library
     private Book RequireBook(Isbn isbn) =>
         _books.TryGetValue(isbn.Value, out var book)
             ? book
-            : throw new InvalidOperationException($"Book '{isbn}' is not in the catalog");
+            : throw new BookNotInCatalogException($"Book '{isbn}' is not in the catalog");
 
     private string BookTitle(Isbn isbn) =>
         _books.TryGetValue(isbn.Value, out var book) ? book.Title : isbn.Value;

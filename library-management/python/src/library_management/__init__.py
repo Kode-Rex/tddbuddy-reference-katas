@@ -2,6 +2,11 @@ from .book import Book
 from .clock import Clock
 from .copy import Copy
 from .copy_status import CopyStatus
+from .exceptions import (
+    BookNotInCatalogError,
+    NoActiveLoanError,
+    NoCopiesAvailableError,
+)
 from .isbn import Isbn
 from .library import Library
 from .loan import Loan, LOAN_PERIOD_DAYS, FINE_PER_DAY
@@ -12,6 +17,7 @@ from .reservation import Reservation, RESERVATION_EXPIRY_DAYS
 
 __all__ = [
     "Book",
+    "BookNotInCatalogError",
     "Clock",
     "Copy",
     "CopyStatus",
@@ -22,6 +28,8 @@ __all__ = [
     "FINE_PER_DAY",
     "Member",
     "Money",
+    "NoActiveLoanError",
+    "NoCopiesAvailableError",
     "Notifier",
     "Reservation",
     "RESERVATION_EXPIRY_DAYS",

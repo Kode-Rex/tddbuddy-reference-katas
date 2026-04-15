@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from library_management import CopyStatus, Isbn, LOAN_PERIOD_DAYS
+from library_management import CopyStatus, Isbn, LOAN_PERIOD_DAYS, NoCopiesAvailableError
 
 from .book_builder import BookBuilder
 from .library_builder import LibraryBuilder
@@ -42,5 +42,5 @@ def test_checking_out_when_no_copy_is_available_is_rejected():
         .with_book(BookBuilder().with_isbn(ISBN).with_copies(1)).build()
     )
     library.check_out(other, Isbn(ISBN))
-    with pytest.raises(RuntimeError):
+    with pytest.raises(NoCopiesAvailableError):
         library.check_out(member, Isbn(ISBN))

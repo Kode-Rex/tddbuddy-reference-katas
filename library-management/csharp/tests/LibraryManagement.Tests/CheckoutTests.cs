@@ -44,6 +44,6 @@ public class CheckoutTests
 
         var act = () => library.CheckOut(member, RefactoringIsbn);
 
-        act.Should().Throw<InvalidOperationException>();
+        act.Should().Throw<NoCopiesAvailableException>();
     }
 }
