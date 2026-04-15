@@ -35,3 +35,7 @@ def test_twelve_factors_into_two_two_three():
 
 def test_fifteen_factors_into_three_and_five():
     assert generate(15) == [3, 5]
+
+
+def test_one_hundred_factors_into_two_two_five_five():
+    assert generate(100) == [2, 2, 5, 5]
