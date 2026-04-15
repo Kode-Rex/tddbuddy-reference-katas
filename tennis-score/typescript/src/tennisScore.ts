@@ -8,7 +8,9 @@ export class Match {
   }
 
   score(): string {
-    if (this.p1Points === 3 && this.p2Points === 3) return 'Deuce';
+    if (this.p1Points >= 4 && this.p1Points - this.p2Points === 1) return 'Advantage Player 1';
+    if (this.p2Points >= 4 && this.p2Points - this.p1Points === 1) return 'Advantage Player 2';
+    if (this.p1Points >= 3 && this.p1Points === this.p2Points) return 'Deuce';
     return `${scoreWord(this.p1Points)}-${scoreWord(this.p2Points)}`;
   }
 }
