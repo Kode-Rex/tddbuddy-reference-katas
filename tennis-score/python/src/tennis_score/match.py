@@ -20,6 +20,10 @@ class Match:
             self._p2_points += 1
 
     def score(self) -> str:
-        if self._p1_points == 3 and self._p2_points == 3:
+        if self._p1_points >= 4 and self._p1_points - self._p2_points == 1:
+            return "Advantage Player 1"
+        if self._p2_points >= 4 and self._p2_points - self._p1_points == 1:
+            return "Advantage Player 2"
+        if self._p1_points >= 3 and self._p1_points == self._p2_points:
             return "Deuce"
         return f"{_score_word(self._p1_points)}-{_score_word(self._p2_points)}"
