@@ -33,4 +33,8 @@ describe('toRoman', () => {
   it('40 is XL', () => {
     expect(toRoman(40)).toBe('XL');
   });
+
+  it('90 is XC', () => {
+    expect(toRoman(90)).toBe('XC');
+  });
 });
