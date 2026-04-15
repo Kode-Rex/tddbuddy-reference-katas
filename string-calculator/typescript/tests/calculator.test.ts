@@ -32,4 +32,8 @@ describe('String Calculator', () => {
   it('multiple negatives are all listed in the message', () => {
     expect(() => add('-1,-2,3')).toThrow('negatives not allowed: -1, -2');
   });
+
+  it('numbers greater than 1000 are ignored', () => {
+    expect(add('2,1001')).toBe(2);
+  });
 });

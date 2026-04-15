@@ -8,5 +8,5 @@ export function add(numbers: string): number {
   if (negatives.length > 0) {
     throw new Error(`negatives not allowed: ${negatives.join(', ')}`);
   }
-  return parsed.reduce((sum, n) => sum + n, 0);
+  return parsed.filter((n) => n <= 1000).reduce((sum, n) => sum + n, 0);
 }
