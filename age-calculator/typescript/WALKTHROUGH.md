@@ -1,0 +1,11 @@
+# Age Calculator — TypeScript Walkthrough
+
+This is an **algorithmic kata**: inputs are two `Date` values (`birthdate` and `today`) and the output is a `number` — so there are no domain builders, no value types, and no collaborators to introduce. The reference lands as a single commit: `src/ageCalculator.ts` exports `calculate(birthdate, today): number` which subtracts years and then knocks one off if `today`'s (month, day) pair has not yet reached `birthdate`'s (month, day) in the reference year. `tests/ageCalculator.test.ts` has one `it()` per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec.
+
+**UTC Date discipline — deliberate.** JavaScript's `Date` is a single UTC instant rendered in the host's local time zone; construct via `Date.UTC(...)` and read back via `getUTCFullYear()` / `getUTCMonth()` / `getUTCDate()` so the returned date's *calendar components* always match the intended year/month/day regardless of where the code runs. The test-side `utc(y, m, d)` helper mirrors this discipline. Reading via the local `getMonth()` / `getDate()` accessors would drift by a day in non-UTC host zones — the exact failure mode that makes age-calculation bugs hard to reproduce.
+
+**Reference date passed in, not read from the clock — deliberate.** The function takes `today` as a parameter rather than calling `Date.now()`. Ambient-clock access would make every birthday-boundary test a flake: "on her seventh birthday she is 7" can only be asserted when the reference date is an explicit input.
+
+**The month\*100 + day packing** is one readable way to compare (month, day) pairs as a single scalar without allocating a tuple. `undefined` arithmetic is impossible here — `getUTCMonth()` and `getUTCDate()` always return numbers. Inline; no named helper. F1-mode discipline: when the body fits on one screen, extracting `birthdayHasPassed(...)` adds syllables without meaning.
+
+**Future-birthdate guard.** `birthdate.getTime() > today.getTime()` throws `Error` with message `birthdate is after today` — byte-identical with C# and Python. Use `getTime()` rather than `>` on `Date` instances to compare numerically and unambiguously across engines.
