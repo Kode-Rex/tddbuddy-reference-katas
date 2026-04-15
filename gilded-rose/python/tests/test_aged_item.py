@@ -28,3 +28,12 @@ def test_aged_item_quality_never_exceeds_fifty():
     inn.update_inventory()
 
     assert item.quality == 50
+
+
+def test_aged_item_sell_in_decreases_by_one_each_day():
+    item = ItemBuilder().aged().with_quality(10).with_sell_in(5).build()
+    inn = GildedRoseInn(Inventory([item]))
+
+    inn.update_inventory()
+
+    assert item.sell_in == 4
