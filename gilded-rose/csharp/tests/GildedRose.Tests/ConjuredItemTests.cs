@@ -26,4 +26,15 @@ public class ConjuredItemTests
 
         item.Quality.Should().Be(6);
     }
+
+    [Fact]
+    public void Conjured_item_quality_never_goes_below_zero()
+    {
+        var item = new ItemBuilder().Conjured().WithQuality(1).WithSellIn(5).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(0);
+    }
 }
