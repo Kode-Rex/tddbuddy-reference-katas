@@ -13,7 +13,8 @@ public class GildedRoseInn
     {
         foreach (var item in Inventory.Items)
         {
-            item.Quality -= 1;
+            var degrade = item.SellIn <= 0 ? 2 : 1;
+            item.Quality -= degrade;
         }
     }
 }

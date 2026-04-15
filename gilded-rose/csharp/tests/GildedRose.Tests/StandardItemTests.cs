@@ -15,4 +15,15 @@ public class StandardItemTests
 
         item.Quality.Should().Be(9);
     }
+
+    [Fact]
+    public void Standard_items_lose_two_quality_per_day_after_the_sell_by_date()
+    {
+        var item = new ItemBuilder().Standard().WithQuality(10).WithSellIn(0).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(8);
+    }
 }
