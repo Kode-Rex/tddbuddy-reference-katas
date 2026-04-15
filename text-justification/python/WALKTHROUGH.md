@@ -1,0 +1,11 @@
+# Text Justification — Python Walkthrough
+
+This is an **algorithmic string-transform kata**: the input is a string plus an integer width, the output is a `list[str]`, and there are no aggregates, value types, or collaborators — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/text_justification/text_justification.py` defines `justify(text: str, width: int) -> list[str]`. A greedy line-packer accumulates words until the next word would push the line past `width`, then calls `_justify_line` to distribute the padding. The last line is emitted via `" ".join(line_words)` — left-aligned, single-spaced, not right-padded. The package `__init__.py` re-exports `justify` so tests import it as `from text_justification import justify`. `tests/test_text_justification.py` has one function per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec.
+
+**Padding distribution — `divmod`, left-heavy remainder.** The spec pads gaps evenly with the remainder landing on the left. `base_spaces, extras = divmod(padding, gaps)` is the idiomatic Python split; the first `extras` gaps each take one additional space. This is the standard LeetCode-68 shape; `divmod` names both quantities in a single call without introducing a helper.
+
+**Tokenization via `str.split()` with no arguments.** Called with no separator, `str.split()` splits on runs of any Unicode whitespace *and* discards empty tokens — a single API call that handles scenarios 1, 2, and 7 (empty, whitespace-only, and multi-space inputs). This is a happy case where the Python standard library's default behavior is exactly the rule.
+
+**Single-word lines and oversize words.** `_justify_line` branches once on `len(line_words) == 1`: if the word is shorter than `width` it right-pads with `" " * (width - len(only))`; if it meets or exceeds `width` it is emitted unmodified, allowed to overflow rather than being split mid-word. The branch is expressed inline because it is the rule.
+
+**Inline literals — deliberate.** The whitespace set is delegated to `str.split()`'s default, and the space character used for padding is `" "` inline in `" " * spaces` and `" ".join(line_words)`. Naming `SPACE = " "` would substitute a constant name for a character that *is* the rule. F1 katas treat the literal rules as the rule itself.
