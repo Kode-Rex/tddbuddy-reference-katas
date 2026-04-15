@@ -67,4 +67,16 @@ public class CalculatorTests
     {
         Calculator.Add("//[***]\n1***2***3").Should().Be(6);
     }
+
+    [Fact]
+    public void Multiple_single_char_delimiters_are_supported()
+    {
+        Calculator.Add("//[*][%]\n1*2%3").Should().Be(6);
+    }
+
+    [Fact]
+    public void Multiple_multi_char_delimiters_are_supported()
+    {
+        Calculator.Add("//[**][%%]\n1**2%%3").Should().Be(6);
+    }
 }
