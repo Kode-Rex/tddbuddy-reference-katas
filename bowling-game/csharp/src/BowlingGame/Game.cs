@@ -4,6 +4,11 @@ public static class Game
 {
     public static int Score(IReadOnlyList<int> rolls)
     {
-        return 0;
+        var total = 0;
+        foreach (var pins in rolls)
+        {
+            total += pins;
+        }
+        return total;
     }
 }
