@@ -12,4 +12,13 @@ describe('Legendary items', () => {
 
     expect(item.quality).toBe(80);
   });
+
+  it('sell-in never changes', () => {
+    const item = new ItemBuilder().legendary().named('Sulfuras, Hand of Ragnaros').withQuality(80).withSellIn(5).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.sellIn).toBe(5);
+  });
 });
