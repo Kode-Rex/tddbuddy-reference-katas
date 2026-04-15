@@ -1,11 +1,8 @@
 def say(n: int) -> str:
-    divisible_by_three = n % 3 == 0
-    divisible_by_five = n % 5 == 0
-
-    if divisible_by_three and divisible_by_five:
+    if n % 15 == 0:
         return "FizzBuzz"
-    if divisible_by_three:
+    if n % 3 == 0:
         return "Fizz"
-    if divisible_by_five:
+    if n % 5 == 0:
         return "Buzz"
     return str(n)

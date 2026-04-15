@@ -1,3 +1,5 @@
 # Fizz Buzz Whiz — Python Walkthrough
 
 This is an **algorithmic kata**: the input is an `int` and the output is a `str`, so there are no domain builders, no value types, and no collaborators to introduce — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/fizz_buzz_whiz/fizz_buzz_whiz.py` defines `say(n: int) -> str` that checks divisibility by 15, then 3, then 5, and otherwise returns `str(n)`. The package `__init__.py` re-exports `say` so tests import it as `from fizz_buzz_whiz import say`. `tests/test_fizz_buzz_whiz.py` has one function per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec. The Whiz (prime) bonus from the TDD Buddy prompt is intentionally out of scope — see the kata [`README.md`](../README.md).
+
+**Inline literals — deliberate.** The divisors `3`, `5`, `15` are kept inline rather than extracted as named constants. In F1 katas the function body fits on one screen and the divisors *are* the rule. F3 and larger modes prefer named constants; F1 deliberately doesn't.

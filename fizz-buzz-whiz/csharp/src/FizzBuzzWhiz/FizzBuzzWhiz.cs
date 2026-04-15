@@ -6,12 +6,9 @@ public static class FizzBuzzWhiz
 {
     public static string Say(int n)
     {
-        var divisibleByThree = n % 3 == 0;
-        var divisibleByFive = n % 5 == 0;
-
-        if (divisibleByThree && divisibleByFive) return "FizzBuzz";
-        if (divisibleByThree) return "Fizz";
-        if (divisibleByFive) return "Buzz";
+        if (n % 15 == 0) return "FizzBuzz";
+        if (n % 3 == 0) return "Fizz";
+        if (n % 5 == 0) return "Buzz";
         return n.ToString(CultureInfo.InvariantCulture);
     }
 }

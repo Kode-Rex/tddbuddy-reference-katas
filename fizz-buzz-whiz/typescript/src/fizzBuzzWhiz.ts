@@ -1,9 +1,6 @@
 export function say(n: number): string {
-  const divisibleByThree = n % 3 === 0;
-  const divisibleByFive = n % 5 === 0;
-
-  if (divisibleByThree && divisibleByFive) return 'FizzBuzz';
-  if (divisibleByThree) return 'Fizz';
-  if (divisibleByFive) return 'Buzz';
+  if (n % 15 === 0) return 'FizzBuzz';
+  if (n % 3 === 0) return 'Fizz';
+  if (n % 5 === 0) return 'Buzz';
   return String(n);
 }

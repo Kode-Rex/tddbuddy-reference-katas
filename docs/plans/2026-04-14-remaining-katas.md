@@ -287,7 +287,14 @@ For a 10-scenario pedagogy kata, expect **~20 commits per language** (roughly 2x
 
 ### Template F1 — Full-Bake, no builders (25 katas)
 
-**Reference model:** no pre-existing F1 kata yet. Scaffolding follows Tier-3 conventions (see Bank Account) — just omit the builder.
+**Reference model:** `fizz-buzz-whiz/` (complete). Scaffolding follows the Tier-3 conventions (see `bank-account/`) — just omit the builder.
+
+**F1-specific style conventions** (codified from fizz-buzz-whiz):
+
+- **Inline literals in the SUT** when the function body fits on one screen and the literals *are* the rule. F1's opposite-of-Pedagogy stance (use named constants) applies only when the name adds meaning — not when extracting `FIZZ_DIVISOR = 3` just restates "three" twice. Each F1 walkthrough should include one sentence explicitly documenting this choice so downstream authors don't drift.
+- **One source file per language, one test file.** If the algorithm splits naturally (e.g. `urlParts/parse.ts` + `urlParts/format.ts`), two files are acceptable — but if you're reaching for three, step back; you may be in F2 territory.
+- **Walkthroughs are a single paragraph.** No design-rationale sections. Point at `SCENARIOS.md` and name anything language-specific that matters (e.g. `CultureInfo.InvariantCulture` for C# locale-safety on int→string).
+- **Test class/describe names should match the exported surface**, not the namespace. `describe('say', …)` or `describe('fizzBuzzWhiz', …)` — not `describe('FizzBuzzWhiz.say', …)` unless that namespace actually exists at runtime.
 
 **Commit shape:** one commit per language. Implementation, tests, and walkthrough can all be in that single commit.
 
