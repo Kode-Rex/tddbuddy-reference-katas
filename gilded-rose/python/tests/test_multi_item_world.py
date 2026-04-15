@@ -1,0 +1,56 @@
+from gilded_rose import GildedRoseInn, Inventory
+
+from .item_builder import ItemBuilder
+
+
+def test_mixed_inventory_each_item_follows_its_own_category_rules_on_the_same_day():
+    standard = (
+        ItemBuilder()
+        .standard()
+        .named("Elixir of the Mongoose")
+        .with_quality(10)
+        .with_sell_in(5)
+        .build()
+    )
+    aged = (
+        ItemBuilder()
+        .aged()
+        .named("Aged Brie")
+        .with_quality(10)
+        .with_sell_in(5)
+        .build()
+    )
+    legendary = (
+        ItemBuilder()
+        .legendary()
+        .named("Sulfuras, Hand of Ragnaros")
+        .with_quality(80)
+        .with_sell_in(5)
+        .build()
+    )
+    pass_ = (
+        ItemBuilder()
+        .backstage_pass()
+        .named("Backstage passes to a TAFKAL80ETC concert")
+        .with_quality(10)
+        .with_sell_in(7)
+        .build()
+    )
+    conjured = (
+        ItemBuilder()
+        .conjured()
+        .named("Conjured Mana Cake")
+        .with_quality(10)
+        .with_sell_in(5)
+        .build()
+    )
+
+    inn = GildedRoseInn(Inventory([standard, aged, legendary, pass_, conjured]))
+
+    inn.update_inventory()
+
+    assert standard.quality == 9
+    assert aged.quality == 11
+    assert legendary.quality == 80
+    assert pass_.quality == 12
+    assert conjured.quality == 8
