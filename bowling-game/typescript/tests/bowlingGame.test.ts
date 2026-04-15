@@ -8,4 +8,9 @@ describe('Bowling Game', () => {
   it('all ones scores twenty', () => {
     expect(score(new Array(20).fill(1))).toBe(20);
   });
+
+  it('one spare scores the spare bonus', () => {
+    const rolls = [5, 5, 3, 0, ...new Array(16).fill(0)];
+    expect(score(rolls)).toBe(16);
+  });
 });
