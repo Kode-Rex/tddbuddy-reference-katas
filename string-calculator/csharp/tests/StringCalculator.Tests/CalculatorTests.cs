@@ -39,4 +39,12 @@ public class CalculatorTests
     {
         Calculator.Add("//;\n1;2").Should().Be(3);
     }
+
+    [Fact]
+    public void Negative_number_is_rejected_with_listing_message()
+    {
+        var act = () => Calculator.Add("-1,2");
+        act.Should().Throw<System.ArgumentException>()
+            .WithMessage("negatives not allowed: -1");
+    }
 }
