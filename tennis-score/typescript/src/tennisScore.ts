@@ -8,18 +8,13 @@ export class Match {
   }
 
   score(): string {
-    let p1Word: string;
-    if (this.p1Points === 0) p1Word = 'Love';
-    else if (this.p1Points === 1) p1Word = '15';
-    else if (this.p1Points === 2) p1Word = '30';
-    else p1Word = '40';
-
-    let p2Word: string;
-    if (this.p2Points === 0) p2Word = 'Love';
-    else if (this.p2Points === 1) p2Word = '15';
-    else if (this.p2Points === 2) p2Word = '30';
-    else p2Word = '40';
-
-    return `${p1Word}-${p2Word}`;
+    return `${scoreWord(this.p1Points)}-${scoreWord(this.p2Points)}`;
   }
+}
+
+function scoreWord(points: number): string {
+  if (points === 0) return 'Love';
+  if (points === 1) return '15';
+  if (points === 2) return '30';
+  return '40';
 }
