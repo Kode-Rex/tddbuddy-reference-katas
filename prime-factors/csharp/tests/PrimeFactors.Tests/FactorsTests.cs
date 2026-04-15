@@ -21,4 +21,10 @@ public class FactorsTests
     {
         Factors.Generate(3).Should().Equal(3);
     }
+
+    [Fact]
+    public void Four_factors_into_two_twos()
+    {
+        Factors.Generate(4).Should().Equal(2, 2);
+    }
 }
