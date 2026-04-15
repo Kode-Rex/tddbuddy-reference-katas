@@ -135,7 +135,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [Roman Numerals](roman-numerals/) | ✅ | ✅ | ✅ | Pedagogy | Low→High | Table of (value, symbol) pairs beats special cases |
 | [Video Club Rental](video-club-rental/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Rich domain, multiple collaborators |
 | [Shopping Cart](shopping-cart/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Cart + line items + pricing strategies (Strategy pattern) |
-| [Library Management](library-management/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Multi-entity domain, reservation queues |
+| [Library Management](library-management/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Multi-entity domain, reservation queues |
 | [Poker Hands](poker-hands/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Ranking + comparison; builders make hand literals readable |
 | *(60+ more)* | — | — | — | Agent Full-Bake | Middle/High | See [`docs/plans/2026-04-14-remaining-katas.md`](docs/plans/2026-04-14-remaining-katas.md) |
 
