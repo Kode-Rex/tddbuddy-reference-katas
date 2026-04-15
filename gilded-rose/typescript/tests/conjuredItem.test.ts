@@ -21,4 +21,13 @@ describe('Conjured items', () => {
 
     expect(item.quality).toBe(6);
   });
+
+  it('quality never goes below zero', () => {
+    const item = new ItemBuilder().conjured().withQuality(1).withSellIn(5).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    inn.updateInventory();
+
+    expect(item.quality).toBe(0);
+  });
 });
