@@ -33,4 +33,10 @@ public class FactorsTests
     {
         Factors.Generate(6).Should().Equal(2, 3);
     }
+
+    [Fact]
+    public void Eight_factors_into_three_twos()
+    {
+        Factors.Generate(8).Should().Equal(2, 2, 2);
+    }
 }
