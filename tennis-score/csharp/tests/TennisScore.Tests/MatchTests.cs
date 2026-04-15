@@ -40,4 +40,17 @@ public class MatchTests
         }
         match.Score().Should().Be("Deuce");
     }
+
+    [Fact]
+    public void Four_three_reads_advantage_player_one()
+    {
+        var match = new Match();
+        for (var i = 0; i < 3; i++)
+        {
+            match.PointWonBy(1);
+            match.PointWonBy(2);
+        }
+        match.PointWonBy(1);
+        match.Score().Should().Be("Advantage Player 1");
+    }
 }
