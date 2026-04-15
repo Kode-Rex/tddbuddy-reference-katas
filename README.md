@@ -128,7 +128,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 |------|----|----|----|------|------|-------|
 | [Gilded Rose](gilded-rose/) | ✅ | ✅ | ✅ | Specification | Low | Commit-per-scenario; builders from day one; legacy-style domain rules |
 | [Bank Account](bank-account/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Money value type, injected clock, AccountBuilder |
-| [String Calculator](string-calculator/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→High | Kent Beck's canonical TDD teaching kata |
+| [String Calculator](string-calculator/) | ✅ | ✅ | ✅ | Pedagogy | Low→High | Kent Beck's canonical TDD teaching kata |
 | [Prime Factors](prime-factors/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→High | Uncle Bob's triangulation masterclass |
 | [Bowling Game](bowling-game/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→Middle | Frames emerge through refactor |
 | [Tennis Score](tennis-score/) | 🚧 | 🚧 | 🚧 | Pedagogy | Low→Middle | State machine refactored from if/else chain |
