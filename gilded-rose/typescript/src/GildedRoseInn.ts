@@ -5,6 +5,9 @@ export class GildedRoseInn {
 
   updateInventory(): void {
     for (const item of this.inventory.items) {
+      if (item.category === 'legendary') {
+        continue;
+      }
       if (item.category === 'aged') {
         const gain = item.sellIn <= 0 ? 2 : 1;
         item.quality = Math.min(50, item.quality + gain);
