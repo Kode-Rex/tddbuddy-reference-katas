@@ -63,4 +63,10 @@ public class FactorsTests
     {
         Factors.Generate(100).Should().Equal(2, 2, 5, 5);
     }
+
+    [Fact]
+    public void Thirty_thousand_thirty_factors_into_the_first_six_primes()
+    {
+        Factors.Generate(30030).Should().Equal(2, 3, 5, 7, 11, 13);
+    }
 }
