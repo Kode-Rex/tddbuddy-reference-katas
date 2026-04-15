@@ -18,3 +18,11 @@ def test_two_points_each_reads_thirty_thirty():
     match.point_won_by(1)
     match.point_won_by(2)
     assert match.score() == "30-30"
+
+
+def test_three_points_each_reads_deuce():
+    match = Match()
+    for _ in range(3):
+        match.point_won_by(1)
+        match.point_won_by(2)
+    assert match.score() == "Deuce"
