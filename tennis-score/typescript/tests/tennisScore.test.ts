@@ -10,4 +10,13 @@ describe('Tennis Score', () => {
     match.pointWonBy(1);
     expect(match.score()).toBe('15-Love');
   });
+
+  it('two points each reads 30-30', () => {
+    const match = new Match();
+    match.pointWonBy(1);
+    match.pointWonBy(2);
+    match.pointWonBy(1);
+    match.pointWonBy(2);
+    expect(match.score()).toBe('30-30');
+  });
 });
