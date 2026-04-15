@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace StringCalculator;
 
 internal static class DelimiterParser
@@ -14,6 +16,22 @@ internal static class DelimiterParser
         var headerEnd = input.IndexOf('\n');
         var header = input.Substring(2, headerEnd - 2);
         var body = input.Substring(headerEnd + 1);
-        return (new[] { header }, body);
+
+        string[] delimiters;
+        if (header.StartsWith("["))
+        {
+            var matches = Regex.Matches(header, @"\[([^\]]+)\]");
+            delimiters = new string[matches.Count];
+            for (var i = 0; i < matches.Count; i++)
+            {
+                delimiters[i] = matches[i].Groups[1].Value;
+            }
+        }
+        else
+        {
+            delimiters = new[] { header };
+        }
+
+        return (delimiters, body);
     }
 }

@@ -61,4 +61,10 @@ public class CalculatorTests
     {
         Calculator.Add("2,1001").Should().Be(2);
     }
+
+    [Fact]
+    public void Delimiter_may_be_any_length_in_bracketed_header()
+    {
+        Calculator.Add("//[***]\n1***2***3").Should().Be(6);
+    }
 }
