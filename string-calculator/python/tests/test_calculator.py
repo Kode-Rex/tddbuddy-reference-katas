@@ -30,3 +30,8 @@ def test_custom_single_char_delimiter_is_declared_in_header():
 def test_negative_number_is_rejected_with_listing_message():
     with pytest.raises(ValueError, match="negatives not allowed: -1"):
         add("-1,2")
+
+
+def test_multiple_negatives_are_all_listed_in_the_message():
+    with pytest.raises(ValueError, match=r"negatives not allowed: -1, -2"):
+        add("-1,-2,3")
