@@ -28,3 +28,12 @@ def test_backstage_pass_quality_increases_by_three_when_concert_is_five_days_or_
     inn.update_inventory()
 
     assert item.quality == 13
+
+
+def test_backstage_pass_quality_drops_to_zero_after_the_concert():
+    item = ItemBuilder().backstage_pass().with_quality(20).with_sell_in(0).build()
+    inn = GildedRoseInn(Inventory([item]))
+
+    inn.update_inventory()
+
+    assert item.quality == 0

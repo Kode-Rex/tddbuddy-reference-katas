@@ -14,13 +14,16 @@ class GildedRoseInn:
                 gain = 2 if item.sell_in <= 0 else 1
                 item.quality = min(50, item.quality + gain)
             elif item.category == Category.BACKSTAGE_PASS:
-                if item.sell_in <= 5:
-                    gain = 3
-                elif item.sell_in <= 10:
-                    gain = 2
+                if item.sell_in <= 0:
+                    item.quality = 0
                 else:
-                    gain = 1
-                item.quality = min(50, item.quality + gain)
+                    if item.sell_in <= 5:
+                        gain = 3
+                    elif item.sell_in <= 10:
+                        gain = 2
+                    else:
+                        gain = 1
+                    item.quality = min(50, item.quality + gain)
             else:
                 degrade = 2 if item.sell_in <= 0 else 1
                 item.quality = max(0, item.quality - degrade)
