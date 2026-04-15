@@ -6,4 +6,5 @@ class GildedRoseInn:
         self.inventory = inventory
 
     def update_inventory(self) -> None:
-        pass
+        for item in self.inventory.items:
+            item.quality -= 1
