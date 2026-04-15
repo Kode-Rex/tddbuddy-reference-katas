@@ -1,0 +1,8 @@
+import { describe, it, expect } from 'vitest';
+import { toRoman } from '../src/romanNumerals';
+
+describe('toRoman', () => {
+  it('1 is I', () => {
+    expect(toRoman(1)).toBe('I');
+  });
+});
