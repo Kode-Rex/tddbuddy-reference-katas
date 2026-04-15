@@ -51,3 +51,7 @@ def test_1000_is_M():
 
 def test_1984_is_MCMLXXXIV():
     assert to_roman(1984) == "MCMLXXXIV"
+
+
+def test_3999_is_MMMCMXCIX():
+    assert to_roman(3999) == "MMMCMXCIX"
