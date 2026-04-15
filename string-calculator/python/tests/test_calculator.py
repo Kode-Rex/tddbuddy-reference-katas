@@ -43,3 +43,11 @@ def test_numbers_greater_than_1000_are_ignored():
 
 def test_delimiter_may_be_any_length_in_bracketed_header():
     assert add("//[***]\n1***2***3") == 6
+
+
+def test_multiple_single_char_delimiters_are_supported():
+    assert add("//[*][%]\n1*2%3") == 6
+
+
+def test_multiple_multi_char_delimiters_are_supported():
+    assert add("//[**][%%]\n1**2%%3") == 6
