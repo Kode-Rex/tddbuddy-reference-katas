@@ -133,7 +133,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [Bowling Game](bowling-game/) | ✅ | ✅ | ✅ | Pedagogy | Low→Middle | Frames emerge through refactor — the class that does not get written |
 | [Tennis Score](tennis-score/) | ✅ | ✅ | ✅ | Pedagogy | Low→Middle | State machine refactored from if/else chain |
 | [Roman Numerals](roman-numerals/) | ✅ | ✅ | ✅ | Pedagogy | Low→High | Table of (value, symbol) pairs beats special cases |
-| [Video Club Rental](video-club-rental/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Rich domain, multiple collaborators |
+| [Video Club Rental](video-club-rental/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Rich domain, multiple collaborators |
 | [Shopping Cart](shopping-cart/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Cart + line items + pricing strategies |
 | [Library Management](library-management/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Multi-entity domain, reservation queues |
 | [Poker Hands](poker-hands/) | 🚧 | 🚧 | 🚧 | Agent Full-Bake | Middle | Ranking + comparison; builders make hand literals readable |
