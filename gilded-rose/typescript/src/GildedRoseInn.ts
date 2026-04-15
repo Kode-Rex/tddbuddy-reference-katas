@@ -5,8 +5,12 @@ export class GildedRoseInn {
 
   updateInventory(): void {
     for (const item of this.inventory.items) {
-      const degrade = item.sellIn <= 0 ? 2 : 1;
-      item.quality = Math.max(0, item.quality - degrade);
+      if (item.category === 'aged') {
+        item.quality += 1;
+      } else {
+        const degrade = item.sellIn <= 0 ? 2 : 1;
+        item.quality = Math.max(0, item.quality - degrade);
+      }
       item.sellIn -= 1;
     }
   }
