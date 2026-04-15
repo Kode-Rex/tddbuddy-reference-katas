@@ -53,4 +53,8 @@ describe('toRoman', () => {
   it('1984 is MCMLXXXIV', () => {
     expect(toRoman(1984)).toBe('MCMLXXXIV');
   });
+
+  it('3999 is MMMCMXCIX', () => {
+    expect(toRoman(3999)).toBe('MMMCMXCIX');
+  });
 });
