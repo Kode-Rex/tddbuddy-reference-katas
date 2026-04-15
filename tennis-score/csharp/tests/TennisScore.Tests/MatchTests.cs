@@ -66,4 +66,20 @@ public class MatchTests
         match.PointWonBy(1);
         match.Score().Should().Be("Game Player 1");
     }
+
+    [Fact]
+    public void Six_four_in_games_reads_set_player_one()
+    {
+        var match = new Match();
+        // Alternate nine games (five to P1, four to P2) then a tenth to P1 → 6-4.
+        for (var i = 0; i < 4; i++) { PlayGame(match, 1); PlayGame(match, 2); }
+        PlayGame(match, 1);
+        PlayGame(match, 1);
+        match.Score().Should().Be("Set Player 1");
+    }
+
+    private static void PlayGame(Match match, int winner)
+    {
+        for (var p = 0; p < 4; p++) match.PointWonBy(winner);
+    }
 }

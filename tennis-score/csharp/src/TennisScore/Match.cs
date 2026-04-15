@@ -4,21 +4,37 @@ public class Match
 {
     private int _p1Points;
     private int _p2Points;
+    private int _p1Games;
+    private int _p2Games;
+    private int? _gameJustWonBy;
+    private int? _setJustWonBy;
 
     public void PointWonBy(int player)
     {
+        _gameJustWonBy = null;
+        _setJustWonBy = null;
+
         if (player == 1) _p1Points++;
         else _p2Points++;
+
+        var (p1, p2) = ScoreStates();
+        if (p1 == ScoreState.Game) { _p1Games++; _p1Points = 0; _p2Points = 0; _gameJustWonBy = 1; }
+        else if (p2 == ScoreState.Game) { _p2Games++; _p1Points = 0; _p2Points = 0; _gameJustWonBy = 2; }
+
+        if (_p1Games >= 6 && _p1Games - _p2Games >= 2) { _setJustWonBy = 1; _gameJustWonBy = null; }
+        else if (_p2Games >= 6 && _p2Games - _p1Games >= 2) { _setJustWonBy = 2; _gameJustWonBy = null; }
     }
 
     public string Score()
     {
-        var (p1, p2) = ScoreStates();
+        if (_setJustWonBy == 1) return "Set Player 1";
+        if (_setJustWonBy == 2) return "Set Player 2";
+        if (_gameJustWonBy == 1) return "Game Player 1";
+        if (_gameJustWonBy == 2) return "Game Player 2";
 
+        var (p1, p2) = ScoreStates();
         if (p1 == ScoreState.Advantage) return "Advantage Player 1";
         if (p2 == ScoreState.Advantage) return "Advantage Player 2";
-        if (p1 == ScoreState.Game) return "Game Player 1";
-        if (p2 == ScoreState.Game) return "Game Player 2";
         if (p1 == ScoreState.Deuce) return "Deuce";
         return $"{Word(p1)}-{Word(p2)}";
     }
