@@ -51,4 +51,10 @@ public class RomanTests
     {
         Roman.ToRoman(40).Should().Be("XL");
     }
+
+    [Fact]
+    public void Ninety_is_XC()
+    {
+        Roman.ToRoman(90).Should().Be("XC");
+    }
 }
