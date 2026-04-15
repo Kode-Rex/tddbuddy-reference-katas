@@ -1,0 +1,5 @@
+# Conway's Sequence — TypeScript Walkthrough
+
+This is an **algorithmic kata**: inputs and outputs are digit strings, so there are no domain builders, no value types, and no collaborators to introduce — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/conwaysSequence.ts` exports `nextTerm(term)` — a single left-to-right pass that counts each maximal run and appends `<length><digit>` — and `lookAndSay(seed, iterations)` which applies `nextTerm` `iterations` times, returning the seed unchanged at zero and throwing a plain `Error` on negative counts (byte-identical message across languages; type is idiomatic per language). `tests/conwaysSequence.test.ts` has one `it()` per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec.
+
+**Inline literals — deliberate.** The nested-loop pattern fits on one screen and there are no magic numbers worth naming — `runLength` and `digit` already carry the meaning. F3 and larger modes prefer named constants; F1 deliberately doesn't.
