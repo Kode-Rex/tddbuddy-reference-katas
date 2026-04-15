@@ -1,0 +1,7 @@
+# 100 Doors — TypeScript Walkthrough
+
+This is an **algorithmic kata**: the input is a `number` and the output is a `readonly number[]` of door numbers, so there are no domain builders, no value types, and no collaborators to introduce — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/hundredDoors.ts` exports `openDoors(numDoors: number): readonly number[]` implemented as a **simulation** — an outer loop over passes `1..numDoors`, an inner loop toggling every `pass`-th door, then a final sweep collecting the 1-indexed open doors. The simulation matches the problem's narrative so the code reads like the spec. `tests/hundredDoors.test.ts` has one `it()` per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec.
+
+**Teaching note — perfect-square insight.** A door `i` is toggled once per divisor, and only perfect squares have an odd divisor count (divisors pair up except for `sqrt(i)`). The closed-form implementation is a one-liner: collect `i` for `1..numDoors` where `Math.sqrt(i)` is an integer. We ship the simulation instead because it mirrors the problem statement — the insight is named here rather than encoded in the code.
+
+**Inline literals — deliberate.** The algorithm has no magic numbers to name; passes and doors both range over `1..numDoors`. F1 kata policy: inline literals in the SUT when the function body fits on one screen and a named constant would just restate the value.
