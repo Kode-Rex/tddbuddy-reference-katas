@@ -1,0 +1,5 @@
+# Conway's Sequence — Python Walkthrough
+
+This is an **algorithmic kata**: inputs and outputs are digit strings, so there are no domain builders, no value types, and no collaborators to introduce — the inputs and outputs *are* the domain. The reference lands as a single commit: `src/conways_sequence/conways_sequence.py` defines `next_term(term)` — a single left-to-right pass that counts each maximal run and appends `f"{run_length}{digit}"` into a list that is `"".join`-ed — and `look_and_say(seed, iterations)` which applies `next_term` `iterations` times, returning the seed unchanged at zero and raising `ValueError` on negative counts. The package `__init__.py` re-exports both functions so tests import `from conways_sequence import next_term, look_and_say`. `tests/test_conways_sequence.py` has one function per scenario in [`../SCENARIOS.md`](../SCENARIOS.md); each test name reads as a sentence from that spec.
+
+**Inline literals — deliberate.** The nested-loop pattern fits on one screen and there are no magic numbers worth naming — `run_length` and `digit` already carry the meaning. F3 and larger modes prefer named constants; F1 deliberately doesn't.
