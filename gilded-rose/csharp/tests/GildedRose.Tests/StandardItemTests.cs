@@ -26,4 +26,15 @@ public class StandardItemTests
 
         item.Quality.Should().Be(8);
     }
+
+    [Fact]
+    public void Standard_item_quality_never_goes_below_zero()
+    {
+        var item = new ItemBuilder().Standard().WithQuality(0).WithSellIn(5).Build();
+        var inn = new GildedRoseInn(new Inventory(new[] { item }));
+
+        inn.UpdateInventory();
+
+        item.Quality.Should().Be(0);
+    }
 }

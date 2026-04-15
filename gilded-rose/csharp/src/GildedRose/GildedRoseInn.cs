@@ -14,7 +14,7 @@ public class GildedRoseInn
         foreach (var item in Inventory.Items)
         {
             var degrade = item.SellIn <= 0 ? 2 : 1;
-            item.Quality -= degrade;
+            item.Quality = Math.Max(0, item.Quality - degrade);
         }
     }
 }
