@@ -36,6 +36,11 @@ public class GildedRoseInn
                     item.Quality = Math.Min(50, item.Quality + gain);
                 }
             }
+            else if (item.Category == Category.Conjured)
+            {
+                var degrade = item.SellIn <= 0 ? 4 : 2;
+                item.Quality = Math.Max(0, item.Quality - degrade);
+            }
             else
             {
                 var degrade = item.SellIn <= 0 ? 2 : 1;
