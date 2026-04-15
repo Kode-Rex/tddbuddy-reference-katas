@@ -15,3 +15,7 @@ def test_one_spare_scores_the_spare_bonus():
 
 def test_one_strike_scores_the_strike_bonus():
     assert score([10, 3, 4] + [0] * 16) == 24
+
+
+def test_perfect_game_scores_three_hundred():
+    assert score([10] * 12) == 300
