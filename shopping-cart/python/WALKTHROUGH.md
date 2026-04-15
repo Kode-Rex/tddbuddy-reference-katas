@@ -24,9 +24,9 @@ Each policy is `@dataclass(frozen=True)` — immutable, hashable, printable for 
 
 Same motivation: value-based equality, immutability, and `__post_init__` enforcement that rejects zero and negative values. The three "updating quantity is rejected" scenarios therefore raise `ValueError` from the value type's constructor.
 
-### `Cart.update_quantity` Raises `LookupError` for Missing SKUs
+### `Cart.update_quantity` Raises `LineItemNotFoundError` for Missing SKUs
 
-`ValueError` is the idiomatic choice when the argument shape is wrong; `LookupError` when a key isn't found. The spec doesn't exercise the missing-SKU path directly but the guard documents intent and costs nothing.
+`ValueError` is still the idiomatic choice when an argument's shape is wrong (zero/negative quantity). But "no line for this SKU" is a domain rejection, not a value-shape problem — so it raises a domain-named `LineItemNotFoundError` that tests can catch meaningfully and that shows up in the stack trace. The spec doesn't exercise the missing-SKU path directly but the guard documents intent and costs nothing.
 
 ### Named Constants
 

@@ -66,7 +66,7 @@ See `tests/ShoppingCart.Tests/ProductBuilder.cs`, `tests/ShoppingCart.Tests/Cart
 
 The deposit/withdraw API in Bank Account returns `bool` because "was this accepted?" is a meaningful runtime question — a UI might accept a deposit and dim a button if rejected. Here, zero-or-negative quantities arrive through `Quantity`'s own constructor, which is a programmer error, not a runtime condition. `ArgumentOutOfRangeException` matches what .NET convention expects for "you passed a value my contract forbids."
 
-`UpdateQuantity` for a missing SKU throws `InvalidOperationException` — the method's precondition ("there is a line for this SKU") was violated. Scenarios don't exercise the missing-SKU path directly; guarding anyway costs nothing and documents intent.
+`UpdateQuantity` for a missing SKU throws `LineItemNotFoundException` — a domain-named exception so tests and callers can catch the meaningful type rather than a generic `InvalidOperationException`, and a reader sees the domain in the stack trace. Scenarios don't exercise the missing-SKU path directly; guarding anyway costs nothing and documents intent.
 
 ## What's Deliberately NOT Modeled
 
