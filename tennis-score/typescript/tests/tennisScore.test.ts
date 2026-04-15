@@ -49,4 +49,17 @@ describe('Tennis Score', () => {
     match.pointWonBy(1);
     expect(match.score()).toBe('Game Player 1');
   });
+
+  it('6-4 in games reads Set Player 1', () => {
+    const match = new Match();
+    for (let i = 0; i < 4; i++) { playGame(match, 1); playGame(match, 2); }
+    playGame(match, 1);
+    playGame(match, 1);
+    expect(match.score()).toBe('Set Player 1');
+  });
+
 });
+
+function playGame(match: Match, winner: 1 | 2): void {
+  for (let p = 0; p < 4; p++) match.pointWonBy(winner);
+}
