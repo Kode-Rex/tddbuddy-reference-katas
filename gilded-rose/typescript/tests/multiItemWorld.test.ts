@@ -21,4 +21,16 @@ describe('Multi-item worlds', () => {
     expect(pass.quality).toBe(12);
     expect(conjured.quality).toBe(8);
   });
+
+  it('multi-day aging: ten days of updates applied in sequence produce correct quality progression', () => {
+    const item = new ItemBuilder().standard().withQuality(20).withSellIn(5).build();
+    const inn = new GildedRoseInn(new Inventory([item]));
+
+    for (let day = 0; day < 10; day++) {
+      inn.updateInventory();
+    }
+
+    expect(item.quality).toBe(5);
+    expect(item.sellIn).toBe(-5);
+  });
 });
