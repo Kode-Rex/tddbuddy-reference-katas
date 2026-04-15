@@ -100,7 +100,7 @@ The walkthrough doc links each named step to its commit so the reader can check 
 | Kata | C# | TypeScript | Python | Gear | Notes |
 |------|----|-----------|--------|------|-------|
 | [Gilded Rose](gilded-rose/) | ✅ | ✅ | ✅ | Low | Classic refactoring + rich domain rules; one commit per scenario |
-| [Bank Account](bank-account/) | ✅ | ✅ | 🚧 | Middle | State + invariants; scenarios shipped together with design |
+| [Bank Account](bank-account/) | ✅ | ✅ | ✅ | Middle | State + invariants; scenarios shipped together with design |
 | [Video Club Rental](video-club-rental/) | 🚧 | 🚧 | 🚧 | — | Rich domain, multiple collaborators |
 | [Shopping Cart](shopping-cart/) | 🚧 | 🚧 | 🚧 | — | Cart + line items + pricing strategies |
 | [Library Management](library-management/) | 🚧 | 🚧 | 🚧 | — | Multi-entity domain, reservation queues |
