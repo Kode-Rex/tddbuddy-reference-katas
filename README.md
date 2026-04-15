@@ -11,6 +11,27 @@ Teaching implementations of selected [TDD Buddy](https://www.tddbuddy.com) katas
 
 These aren't the smallest solutions that pass the tests. They're the solutions that demonstrate how to make tests serve as the product surface of your codebase — the artifact that humans, new hires, and AI agents all operate against.
 
+## Gears — Bridging TDD and BDD
+
+A misconception that dogs TDD discussions: "TDD means tiny red-green-refactor cycles, one assertion at a time." That's one gear. TDD is many gears.
+
+Kent Beck's framing: you **shift gears** based on confidence.
+
+- **Low gear** — fake-it, triangulation, one assertion at a time. Use this when the territory is unfamiliar, the design is uncertain, or a bug is hiding and you need the smallest reliable step.
+- **Middle gear** — one scenario per cycle. A test drives a complete behavior, not a single branch. Most of a mature codebase lives here.
+- **High gear** — write the whole obvious implementation. Used when the path is clear, the pattern is familiar from neighboring code, or you're porting a well-specified solution to a new language.
+
+**This is where TDD meets BDD.** BDD asks you to write executable specifications at the level of *behavior*, not *branches*. That's middle/high gear. It doesn't replace TDD — it's the gear you shift into once the domain is understood well enough that each scenario *is* a single step.
+
+Every kata in this repo shows both:
+
+- The **Gilded Rose** walkthrough is deliberately in low gear — one commit per scenario, red verified before green — so the TDD cycle is visible. Read it to see the rhythm.
+- Later katas are shipped in higher gear — the domain design is already understood, so a full implementation plus its tests land together, with the walkthrough explaining *why the design came out that shape*. Read those for how the techniques scale.
+
+**The techniques don't change between gears.** Test data builders, ubiquitous language, domain types, mocks-as-specifications — all apply identically at every tempo. What changes is how many scenarios you take in one stride.
+
+Picking the wrong gear is its own failure mode. Low gear on a solved problem is theatre. High gear on an unfamiliar domain is reckless. The skill is knowing when to shift.
+
 ## Why This Repo Exists
 
 The [TDD Buddy blog](https://www.tddbuddy.com/blog) argues — across a three-part arc — that the bar for TDD has moved. Agents shifted the audience for tests from humans-with-context to agents-without, and that raised what "good tests" means:
@@ -76,9 +97,14 @@ The walkthrough doc links each named step to its commit so the reader can check 
 
 ## Katas Included (Growing Over Time)
 
-| Kata | C# | TypeScript | Python | Notes |
-|------|----|-----------|--------|-------|
-| [Gilded Rose](gilded-rose/) | 🚧 | 🚧 | 🚧 | First reference kata — classic refactoring + rich domain rules |
+| Kata | C# | TypeScript | Python | Gear | Notes |
+|------|----|-----------|--------|------|-------|
+| [Gilded Rose](gilded-rose/) | ✅ | ✅ | ✅ | Low | Classic refactoring + rich domain rules; one commit per scenario |
+| [Bank Account](bank-account/) | ✅ | ✅ | 🚧 | Middle | State + invariants; scenarios shipped together with design |
+| [Video Club Rental](video-club-rental/) | 🚧 | 🚧 | 🚧 | — | Rich domain, multiple collaborators |
+| [Shopping Cart](shopping-cart/) | 🚧 | 🚧 | 🚧 | — | Cart + line items + pricing strategies |
+| [Library Management](library-management/) | 🚧 | 🚧 | 🚧 | — | Multi-entity domain, reservation queues |
+| [Poker Hands](poker-hands/) | 🚧 | 🚧 | 🚧 | — | Ranking + comparison; builders make hand literals readable |
 
 More katas will be added as the reference set grows. Not every kata in the TDD Buddy catalog will get this treatment — only those where scenario-heavy, domain-rich design makes builders and ubiquitous language genuinely pay off. Algorithmic katas (FizzBuzz, Prime Factors, Roman Numerals) are covered by the main [tddbuddy-solutions](https://github.com/Kode-Rex/tddbuddy-solutions) repo as straightforward solutions.
 
