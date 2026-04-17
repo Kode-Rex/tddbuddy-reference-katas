@@ -1,5 +1,4 @@
 import pytest
-from decimal import Decimal
 
 from heavy_metal_bake_sale import (
     BakeSale,
