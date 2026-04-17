@@ -181,6 +181,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [Bank OCR](bank-ocr/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | 3×3 digit OCR with checksum validation |
 | [Game of Life](game-of-life/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Conway's GoL; set-based infinite grid + GridBuilder |
 | [Parking Lot](parking-lot/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Vehicle parking with spot allocation + time-based fees |
+| [Social Network](social-network/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Users, posts, timelines, following, and walls with NetworkBuilder |
 | *(60+ more)* | — | — | — | Agent Full-Bake | Middle/High | See [`docs/plans/2026-04-14-remaining-katas.md`](docs/plans/2026-04-14-remaining-katas.md) |
 
 More katas will be added as the reference set grows. Algorithmic katas like Prime Factors and Roman Numerals appear here in **Pedagogy mode** — the algorithm-emerges-from-triangulation arc is itself the teaching point. Domain-heavy katas appear in **Agent Full-Bake mode** with builders and ubiquitous language. Straightforward one-liner solutions for every TDD Buddy kata in many languages live in the main [tddbuddy-solutions](https://github.com/Kode-Rex/tddbuddy-solutions) repo.
