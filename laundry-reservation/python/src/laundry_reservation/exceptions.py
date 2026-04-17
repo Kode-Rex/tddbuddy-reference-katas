@@ -1,0 +1,2 @@
+class DuplicateReservationError(Exception):
+    pass
