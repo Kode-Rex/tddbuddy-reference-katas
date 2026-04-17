@@ -1,0 +1,2 @@
+class OrderIncompleteError(Exception):
+    pass

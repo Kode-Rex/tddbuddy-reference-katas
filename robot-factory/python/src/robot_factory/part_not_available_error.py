@@ -1,0 +1,2 @@
+class PartNotAvailableError(Exception):
+    pass
