@@ -193,6 +193,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [Maze Walker](maze-walker/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | BFS pathfinding on grid maze; MazeBuilder + WalkerBuilder |
 | [Snake Game](snake-game/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Classic Snake on bounded grid; BoardBuilder + SnakeBuilder, injectable FoodSpawner |
 | [Zombie Survivor](zombie-survivor/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Multi-step survival game; SurvivorBuilder + HistoryBuilder, domain exceptions, event history, skill trees |
+| [CSV Query](csv-query/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | CSV parsing + chainable query pipeline; RowBuilder + QueryBuilder, UnknownColumnException |
 | *(60+ more)* | — | — | — | Agent Full-Bake | Middle/High | See [`docs/plans/2026-04-14-remaining-katas.md`](docs/plans/2026-04-14-remaining-katas.md) |
 
 More katas will be added as the reference set grows. Algorithmic katas like Prime Factors and Roman Numerals appear here in **Pedagogy mode** — the algorithm-emerges-from-triangulation arc is itself the teaching point. Domain-heavy katas appear in **Agent Full-Bake mode** with builders and ubiquitous language. Straightforward one-liner solutions for every TDD Buddy kata in many languages live in the main [tddbuddy-solutions](https://github.com/Kode-Rex/tddbuddy-solutions) repo.
