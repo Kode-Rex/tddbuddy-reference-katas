@@ -1,0 +1,30 @@
+namespace RobotFactory;
+
+public enum PartOption
+{
+    // Head
+    StandardVision,
+    InfraredVision,
+    NightVision,
+
+    // Body
+    Square,
+    Round,
+    Triangular,
+    Rectangular,
+
+    // Arms
+    Hands,
+    Pinchers,
+    BoxingGloves,
+
+    // Movement
+    Wheels,
+    Legs,
+    Tracks,
+
+    // Power
+    Solar,
+    RechargeableBattery,
+    Biomass
+}
