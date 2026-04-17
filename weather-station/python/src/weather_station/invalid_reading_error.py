@@ -1,0 +1,2 @@
+class InvalidReadingError(Exception):
+    pass

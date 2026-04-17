@@ -1,0 +1,2 @@
+class NoReadingsError(Exception):
+    pass
