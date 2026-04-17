@@ -1,5 +1,3 @@
-from typing import Callable
-
 from snake_game.position import Position
 from snake_game.direction import Direction
 from snake_game.snake import Snake
