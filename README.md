@@ -184,6 +184,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [Social Network](social-network/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Users, posts, timelines, following, and walls with NetworkBuilder |
 | [Heavy Metal Bake Sale](heavy-metal-bake-sale/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Inventory pricing with stock management + change calculation |
 | [Supermarket Pricing](supermarket-pricing/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Five pricing strategies (unit, multi-buy, BOGOF, weighted, combo) |
+| [Weather Station](weather-station/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Station aggregate, reading validation, statistics, alert thresholds |
 | *(60+ more)* | — | — | — | Agent Full-Bake | Middle/High | See [`docs/plans/2026-04-14-remaining-katas.md`](docs/plans/2026-04-14-remaining-katas.md) |
 
 More katas will be added as the reference set grows. Algorithmic katas like Prime Factors and Roman Numerals appear here in **Pedagogy mode** — the algorithm-emerges-from-triangulation arc is itself the teaching point. Domain-heavy katas appear in **Agent Full-Bake mode** with builders and ubiquitous language. Straightforward one-liner solutions for every TDD Buddy kata in many languages live in the main [tddbuddy-solutions](https://github.com/Kode-Rex/tddbuddy-solutions) repo.
