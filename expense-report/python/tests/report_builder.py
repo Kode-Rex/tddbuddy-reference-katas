@@ -23,7 +23,7 @@ class ReportBuilder:
         self._expenses.append(item)
         return self
 
-    def with_expense_from(self, configure: Callable[[ExpenseItemBuilder], None]) -> ReportBuilder:
+    def with_expense_from(self, configure: Callable[[ExpenseItemBuilder], object]) -> ReportBuilder:
         builder = ExpenseItemBuilder()
         configure(builder)
         self._expenses.append(builder.build())
