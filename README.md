@@ -188,6 +188,7 @@ Mode tells you what the kata teaches; gear tells you the rhythm of its commits.
 | [Robot Factory](robot-factory/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Supplier collaboration, cheapest-part selection, RobotOrderBuilder + SupplierBuilder |
 | [Expense Report](expense-report/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Spending policy, state machine, ReportBuilder + ExpenseItemBuilder |
 | [Event Sourcing](event-sourcing/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | Event-sourced bank account, aggregate rebuild, temporal queries, EventBuilder + AccountBuilder |
+| [Laundry Reservation](laundry-reservation/) | ✅ | ✅ | ✅ | Agent Full-Bake | Middle | IoT laundry booking; test-double kata with six collaborators, ReservationServiceBuilder |
 | *(60+ more)* | — | — | — | Agent Full-Bake | Middle/High | See [`docs/plans/2026-04-14-remaining-katas.md`](docs/plans/2026-04-14-remaining-katas.md) |
 
 More katas will be added as the reference set grows. Algorithmic katas like Prime Factors and Roman Numerals appear here in **Pedagogy mode** — the algorithm-emerges-from-triangulation arc is itself the teaching point. Domain-heavy katas appear in **Agent Full-Bake mode** with builders and ubiquitous language. Straightforward one-liner solutions for every TDD Buddy kata in many languages live in the main [tddbuddy-solutions](https://github.com/Kode-Rex/tddbuddy-solutions) repo.
