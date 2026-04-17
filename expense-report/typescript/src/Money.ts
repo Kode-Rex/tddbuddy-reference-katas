@@ -1,0 +1,13 @@
+export class Money {
+  constructor(public readonly amount: number) {}
+  static readonly zero = new Money(0);
+  get isPositive(): boolean { return this.amount > 0; }
+  plus(other: Money): Money { return new Money(this.amount + other.amount); }
+  minus(other: Money): Money { return new Money(this.amount - other.amount); }
+  greaterThan(other: Money): boolean { return this.amount > other.amount; }
+  equals(other: Money): boolean { return this.amount === other.amount; }
+
+  format(): string {
+    return this.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+}
