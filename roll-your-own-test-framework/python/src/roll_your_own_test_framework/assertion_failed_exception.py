@@ -1,0 +1,2 @@
+class AssertionFailedException(Exception):
+    pass
