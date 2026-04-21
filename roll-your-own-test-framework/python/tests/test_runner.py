@@ -1,5 +1,3 @@
-import pytest
-
 from roll_your_own_test_framework import TestRunner, TestStatus
 from tests.test_suite_builder import TestSuiteBuilder
 
